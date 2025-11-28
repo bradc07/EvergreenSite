@@ -146,7 +146,8 @@
       transition: height 1.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .availability-stat .status-label {
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 600;
       margin-top: 8px;
       color: var(--muted);
     }
@@ -654,16 +655,19 @@
       // If sold out, return 0%
       if (label === 'Sold out') return 0;
 
-      // If we have exact quantity
+      // Use categorical heights for clear visual distinction
+      // This makes low numbers much more visible and distinct
       if (typeof qty === 'number') {
-        const maxCapacity = 55; // Our actual camp capacity
-        const percentage = Math.min((qty / maxCapacity) * 100, 100);
-        return percentage;
+        if (qty === 0) return 0;        // Sold out
+        if (qty <= 2) return 25;        // Nearly gone! (1-2 places)
+        if (qty <= 5) return 40;        // Very few left (3-5 places)
+        if (qty <= 10) return 55;       // Limited (6-10 places)
+        if (qty <= 20) return 70;       // Moderate (11-20 places)
+        return 85;                      // Good availability (21+ places)
       }
 
       // Default for "Limited" when we don't have exact numbers
-      // Assume it's around 30% capacity
-      return 30;
+      return 55;
     }
 
     function getBarColorClass(label, qty) {
