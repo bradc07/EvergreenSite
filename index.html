@@ -739,9 +739,16 @@
         urgencyLabel.textContent = 'Sold Out';
         urgencyLabel.style.display = 'inline-block';
       } else if (typeof qty === 'number') {
-        placesNum.textContent = qty;
-        placesText.textContent = qty === 1 ? 'place left' : 'places left';
+        // Hybrid approach: show "Limited" for > 7, exact number for 1-7
+        if (qty > 7) {
+          placesNum.textContent = 'Limited';
+          placesText.textContent = 'places available';
+        } else {
+          placesNum.textContent = qty;
+          placesText.textContent = qty === 1 ? 'place left' : 'places left';
+        }
 
+        // Color coding based on actual quantity
         if (qty <= 5) {
           badge.classList.add('critical');
           placesNum.classList.add('critical');
