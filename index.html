@@ -150,16 +150,16 @@
       margin-top: 8px;
       color: var(--muted);
     }
+    .scroll-animate.is-visible .bar-fill {
+      height: var(--bar-height, 30%);
+    }
     .scroll-animate.is-visible .bar-fill.ok {
-      height: 15%; 
       background-color: #bff4dd;
     }
     .scroll-animate.is-visible .bar-fill.warn {
-      height: 10%; 
       background-color: #ffe7b6;
     }
     .scroll-animate.is-visible .bar-fill.bad {
-      height: 0%; 
       background-color: #ffd7de;
     }
     .status-label.ok { color: #bff4dd; }
@@ -650,10 +650,32 @@
       return {};
     }
     
-    function tagClassFor(label){
-      if(label==='Sold out') return 'bad';
-      if(/\d+\s+left/.test(label)) return 'ok';
-      return 'warn';
+    function calculateBarHeight(label, qty) {
+      // If sold out, return 0%
+      if (label === 'Sold out') return 0;
+
+      // If we have exact quantity
+      if (typeof qty === 'number') {
+        const maxCapacity = 55; // Our actual camp capacity
+        const percentage = Math.min((qty / maxCapacity) * 100, 100);
+        return percentage;
+      }
+
+      // Default for "Limited" when we don't have exact numbers
+      // Assume it's around 30% capacity
+      return 30;
+    }
+
+    function getBarColorClass(label, qty) {
+      if (label === 'Sold out') return 'bad';
+
+      if (typeof qty === 'number') {
+        if (qty <= 5) return 'bad';     // Nearly sold out
+        if (qty <= 15) return 'warn';   // Filling up
+        return 'ok';                     // Good availability
+      }
+
+      return 'warn'; // Default for "Limited" - assume moderate availability
     }
 
     async function availabilityFor(url){
@@ -794,22 +816,30 @@
         const statBlock=document.getElementById('stat-'+r.rid);
         const statBar=statBlock.querySelector('.bar-fill');
         const statusLabel=statBlock.querySelector('.status-label');
-        
+
         const result=await availabilityFor(r.url);
-        const statusClass=tagClassFor(result.label);
-        
+        const statusClass=getBarColorClass(result.label, result.qty);
+
         r.status=result.label;
-        
+        r.qty=result.qty;
+
         if(result.label==='Sold out'){
-          btn.textContent='Sold Out'; 
+          btn.textContent='Sold Out';
           btn.setAttribute('aria-disabled','true');
           btn.style.opacity='.45';
           btn.style.pointerEvents='none';
           btn.href='#';
         }
-        
-        statBlock.classList.add(statusClass); 
+
+        statBlock.className='availability-stat';
+        statBlock.classList.add(statusClass);
+        statBar.className='bar-fill';
         statBar.classList.add(statusClass);
+
+        // Set dynamic height based on actual availability
+        const barHeight=calculateBarHeight(result.label, result.qty);
+        statBar.style.setProperty('--bar-height', barHeight+'%');
+
         statusLabel.textContent=result.label;
         statusLabel.className='status-label '+statusClass;
       });
@@ -833,17 +863,18 @@
           const statBlock=document.getElementById('stat-'+r.rid);
           const statBar=statBlock.querySelector('.bar-fill');
           const statusLabel=statBlock.querySelector('.status-label');
-          
-          statBlock.className='availability-stat'; 
+
+          statBlock.className='availability-stat';
           statBar.className='bar-fill';
           statusLabel.textContent='Checking…';
           statusLabel.className='status-label checking';
-          
+
           const result=await availabilityFor(r.url);
-          const statusClass=tagClassFor(result.label);
-          
+          const statusClass=getBarColorClass(result.label, result.qty);
+
           r.status=result.label;
-          
+          r.qty=result.qty;
+
           if(result.label==='Sold out'){
             btn.textContent='Sold Out';
             btn.setAttribute('aria-disabled','true');
@@ -857,9 +888,14 @@
             btn.style.pointerEvents='auto';
             btn.href=r.url;
           }
-          
+
           statBlock.classList.add(statusClass);
           statBar.classList.add(statusClass);
+
+          // Set dynamic height based on actual availability
+          const barHeight=calculateBarHeight(result.label, result.qty);
+          statBar.style.setProperty('--bar-height', barHeight+'%');
+
           statusLabel.textContent=result.label;
           statusLabel.className='status-label '+statusClass;
         });
