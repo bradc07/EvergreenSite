@@ -263,6 +263,20 @@
     </div>
   </section>
 
+  <!-- SOCIAL PROOF HIGHLIGHT - Add this BEFORE the reel section -->
+  <section class="wrap" style="padding:16px 0 10px">
+    <div class="glass scroll-animate" style="padding:20px;text-align:center">
+      <div class="muted" style="font-size:14px;margin-bottom:8px">Trusted by parents across South London</div>
+      <div class="quote" style="font-size:18px;max-width:70ch;margin:0 auto">
+        "On picking him up after his first day, I was greeted with a beaming smile followed by, 'I had the best day ever!'"
+      </div>
+      <div style="margin-top:12px;display:flex;gap:6px;justify-content:center;align-items:center">
+        <span style="color:#ffd93d;font-size:20px">★★★★★</span>
+        <span class="muted" style="font-size:13px">Rated excellent by families</span>
+      </div>
+    </div>
+  </section>
+
   <!-- VIDEO / REEL SECTION -->
   <section id="reel" class="wrap" style="padding:16px 0 10px">
     <div class="glass scroll-animate" style="padding:20px">
