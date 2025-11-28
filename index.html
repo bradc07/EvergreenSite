@@ -103,77 +103,128 @@
     .scroll-animate.delay-1 { transition-delay: 0.2s; }
     .scroll-animate.delay-2 { transition-delay: 0.3s; }
     
-    /* Availability Bar Styles */
-    @keyframes flash-red-bg {
-      0%, 100% { background-color: rgba(244,63,94,.22); }
-      50% { background-color: rgba(244,63,94,.5); }
-    }
-    @keyframes flash-red-label {
-      0%, 100% { color: #ffd7de; }
-      50% { color: #fff; }
-    }
-    .availability-stat {
+    /* Availability Badge Styles */
+    .availability-badge {
       text-align: center;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 12px;
+      padding: 16px 12px;
       transition: all 0.3s ease;
-    }
-    .availability-stat:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.35);
-    }
-    .availability-stat .day-label {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .availability-stat .bar-container {
-      height: 100px;
-      width: 100%;
-      background-color: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 8px;
+      position: relative;
       overflow: hidden;
-      transform: rotate(180deg);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,.1);
     }
-    .availability-stat .bar-fill {
-      height: 100%; 
-      width: 100%;
-      background-color: var(--accent);
-      transition: height 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    .availability-badge:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.3);
     }
-    .availability-stat .status-label {
+    .availability-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent);
+      transition: all 0.4s ease;
+    }
+    .availability-badge.critical::before {
+      background: #ff6b6b;
+      animation: pulse-glow 2s infinite;
+    }
+    .availability-badge.low::before {
+      background: #ffd93d;
+    }
+    .availability-badge.good::before {
+      background: #6bcf7f;
+    }
+    .availability-badge.sold-out::before {
+      background: #ff4757;
+    }
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 10px currentColor;
+      }
+      50% {
+        opacity: 0.7;
+        box-shadow: 0 0 20px currentColor;
+      }
+    }
+    .day-badge-label {
       font-size: 14px;
       font-weight: 600;
-      margin-top: 8px;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .places-remaining {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    .places-remaining.critical {
+      color: #ff6b6b;
+      animation: number-pulse 1.5s ease-in-out infinite;
+    }
+    .places-remaining.low {
+      color: #ffd93d;
+    }
+    .places-remaining.good {
+      color: #6bcf7f;
+    }
+    .places-remaining.sold-out {
+      color: #ff4757;
+    }
+    @keyframes number-pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+    .places-text {
+      font-size: 13px;
       color: var(--muted);
+      font-weight: 500;
     }
-    .scroll-animate.is-visible .bar-fill {
-      height: var(--bar-height, 30%);
-    }
-    .scroll-animate.is-visible .bar-fill.ok {
-      background-color: #bff4dd;
-    }
-    .scroll-animate.is-visible .bar-fill.warn {
-      background-color: #ffe7b6;
-    }
-    .scroll-animate.is-visible .bar-fill.bad {
-      background-color: #ffd7de;
-    }
-    .status-label.ok { color: #bff4dd; }
-    .status-label.warn { color: #ffe7b6; }
-    .status-label.bad { 
-      color: #ffd7de; 
+    .urgency-label {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .scroll-animate.is-visible .availability-stat.bad {
-      animation: flash-red-bg 0.8s 1.5s 2; 
+    .urgency-label.critical {
+      background: rgba(255,107,107,.2);
+      color: #ffb3b3;
+      border: 1px solid rgba(255,107,107,.3);
+      animation: shake 0.5s 2s 2;
     }
-    .scroll-animate.is-visible .status-label.bad {
-      animation: flash-red-label 0.8s 1.5s 2;
+    .urgency-label.low {
+      background: rgba(255,217,61,.15);
+      color: #ffe89d;
+      border: 1px solid rgba(255,217,61,.25);
+    }
+    .urgency-label.good {
+      background: rgba(107,207,127,.15);
+      color: #b3e7bd;
+      border: 1px solid rgba(107,207,127,.25);
+    }
+    .urgency-label.sold-out {
+      background: rgba(255,71,87,.2);
+      color: #ffa3ab;
+      border: 1px solid rgba(255,71,87,.3);
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
     }
 
     /* Hero */
@@ -650,25 +701,6 @@
       if(/\blimited\s*(availability|stock)\b|\blow\s*stock\b/.test(t)) return {limited:true};
       return {};
     }
-    
-    function calculateBarHeight(label, qty) {
-      // If sold out, return 0%
-      if (label === 'Sold out') return 0;
-
-      // Use categorical heights for clear visual distinction
-      // This makes low numbers much more visible and distinct
-      if (typeof qty === 'number') {
-        if (qty === 0) return 0;        // Sold out
-        if (qty <= 2) return 25;        // Nearly gone! (1-2 places)
-        if (qty <= 5) return 40;        // Very few left (3-5 places)
-        if (qty <= 10) return 55;       // Limited (6-10 places)
-        if (qty <= 20) return 70;       // Moderate (11-20 places)
-        return 85;                      // Good availability (21+ places)
-      }
-
-      // Default for "Limited" when we don't have exact numbers
-      return 55;
-    }
 
     function getBarColorClass(label, qty) {
       if (label === 'Sold out') return 'bad';
@@ -680,6 +712,64 @@
       }
 
       return 'warn'; // Default for "Limited" - assume moderate availability
+    }
+
+    function updateBadge(rid, result) {
+      const badge = document.getElementById('badge-' + rid);
+      if (!badge) return;
+
+      const placesNum = badge.querySelector('.places-remaining');
+      const placesText = badge.querySelector('.places-text');
+      const urgencyLabel = badge.querySelector('.urgency-label');
+
+      const qty = result.qty || 0;
+
+      // Remove all classes first
+      badge.className = 'availability-badge scroll-animate';
+      placesNum.className = 'places-remaining';
+      urgencyLabel.className = 'urgency-label';
+      urgencyLabel.style.display = 'none';
+
+      if (result.label === 'Sold out' || qty === 0) {
+        badge.classList.add('sold-out');
+        placesNum.classList.add('sold-out');
+        placesNum.textContent = '0';
+        placesText.textContent = 'places left';
+        urgencyLabel.classList.add('sold-out');
+        urgencyLabel.textContent = 'Sold Out';
+        urgencyLabel.style.display = 'inline-block';
+      } else if (typeof qty === 'number') {
+        placesNum.textContent = qty;
+        placesText.textContent = qty === 1 ? 'place left' : 'places left';
+
+        if (qty <= 5) {
+          badge.classList.add('critical');
+          placesNum.classList.add('critical');
+          urgencyLabel.classList.add('critical');
+          urgencyLabel.textContent = 'Almost Gone!';
+          urgencyLabel.style.display = 'inline-block';
+        } else if (qty <= 15) {
+          badge.classList.add('low');
+          placesNum.classList.add('low');
+          urgencyLabel.classList.add('low');
+          urgencyLabel.textContent = 'Filling Fast';
+          urgencyLabel.style.display = 'inline-block';
+        } else {
+          badge.classList.add('good');
+          placesNum.classList.add('good');
+          urgencyLabel.classList.add('good');
+          urgencyLabel.textContent = 'Available';
+          urgencyLabel.style.display = 'inline-block';
+        }
+      } else {
+        // Unknown quantity - show "Limited"
+        placesNum.textContent = '?';
+        placesText.textContent = 'places';
+        badge.classList.add('low');
+        urgencyLabel.classList.add('low');
+        urgencyLabel.textContent = 'Limited';
+        urgencyLabel.style.display = 'inline-block';
+      }
     }
 
     async function availabilityFor(url){
@@ -720,17 +810,16 @@
         status:'Checking…'
       }));
 
-      // Preview bars
+      // Preview badges
       let previewHTML='';
       rows.forEach(r=>{
         const shortDate=r.date.split(' ').slice(0,3).join(' ');
         previewHTML+=`
-          <div class="availability-stat" id="stat-${r.rid}">
-            <div class="day-label">${shortDate}</div>
-            <div class="bar-container">
-              <div class="bar-fill"></div>
-            </div>
-            <div class="status-label checking">Checking…</div>
+          <div class="availability-badge scroll-animate" id="badge-${r.rid}">
+            <div class="day-badge-label">${shortDate}</div>
+            <div class="places-remaining">--</div>
+            <div class="places-text">checking...</div>
+            <div class="urgency-label" style="display:none"></div>
           </div>
         `;
       });
@@ -817,16 +906,16 @@
       rows.forEach(async r=>{
         const card=document.getElementById(r.rid);
         const btn=card.querySelector('[data-book]');
-        const statBlock=document.getElementById('stat-'+r.rid);
-        const statBar=statBlock.querySelector('.bar-fill');
-        const statusLabel=statBlock.querySelector('.status-label');
 
         const result=await availabilityFor(r.url);
-        const statusClass=getBarColorClass(result.label, result.qty);
 
         r.status=result.label;
         r.qty=result.qty;
 
+        // Update badge display
+        updateBadge(r.rid, result);
+
+        // Update booking button
         if(result.label==='Sold out'){
           btn.textContent='Sold Out';
           btn.setAttribute('aria-disabled','true');
@@ -834,18 +923,6 @@
           btn.style.pointerEvents='none';
           btn.href='#';
         }
-
-        statBlock.className='availability-stat';
-        statBlock.classList.add(statusClass);
-        statBar.className='bar-fill';
-        statBar.classList.add(statusClass);
-
-        // Set dynamic height based on actual availability
-        const barHeight=calculateBarHeight(result.label, result.qty);
-        statBar.style.setProperty('--bar-height', barHeight+'%');
-
-        statusLabel.textContent=result.label;
-        statusLabel.className='status-label '+statusClass;
       });
       
       document.getElementById('hideSold').addEventListener('change',e=>{
@@ -864,21 +941,29 @@
         rows.forEach(async r=>{
           const card=document.getElementById(r.rid);
           const btn=card.querySelector('[data-book]');
-          const statBlock=document.getElementById('stat-'+r.rid);
-          const statBar=statBlock.querySelector('.bar-fill');
-          const statusLabel=statBlock.querySelector('.status-label');
+          const badge=document.getElementById('badge-'+r.rid);
 
-          statBlock.className='availability-stat';
-          statBar.className='bar-fill';
-          statusLabel.textContent='Checking…';
-          statusLabel.className='status-label checking';
+          // Reset badge to checking state
+          if(badge){
+            const placesNum=badge.querySelector('.places-remaining');
+            const placesText=badge.querySelector('.places-text');
+            const urgencyLabel=badge.querySelector('.urgency-label');
+            badge.className='availability-badge scroll-animate';
+            placesNum.className='places-remaining';
+            placesNum.textContent='--';
+            placesText.textContent='checking...';
+            urgencyLabel.style.display='none';
+          }
 
           const result=await availabilityFor(r.url);
-          const statusClass=getBarColorClass(result.label, result.qty);
 
           r.status=result.label;
           r.qty=result.qty;
 
+          // Update badge display
+          updateBadge(r.rid, result);
+
+          // Update booking button
           if(result.label==='Sold out'){
             btn.textContent='Sold Out';
             btn.setAttribute('aria-disabled','true');
@@ -892,16 +977,6 @@
             btn.style.pointerEvents='auto';
             btn.href=r.url;
           }
-
-          statBlock.classList.add(statusClass);
-          statBar.classList.add(statusClass);
-
-          // Set dynamic height based on actual availability
-          const barHeight=calculateBarHeight(result.label, result.qty);
-          statBar.style.setProperty('--bar-height', barHeight+'%');
-
-          statusLabel.textContent=result.label;
-          statusLabel.className='status-label '+statusClass;
         });
       });
     })();
