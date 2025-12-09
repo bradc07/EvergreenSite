@@ -329,8 +329,10 @@
       justify-content:space-between;
     }
     
-    .faq{border:1px solid var(--line);border-radius:16px;background:var(--card);border-left:3px solid var(--accent)}
-    .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--ink);font-weight:500}
+    .faq{border:1px solid var(--line);border-radius:16px;background:var(--card)}
+    .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-weight:500;font-size:15px;background:transparent;border:none}
+    .faq-btn:hover{color:var(--ink)}
+    .faq.open .faq-btn{color:var(--ink)}
     .faq-body{padding:0 16px 16px 16px;display:none}.faq.open .faq-body{display:block}
 
     /* Schedule cards - warm left border for time-based info */
@@ -447,83 +449,6 @@
       .trust-stat-number{font-size:24px}
     }
 
-    /* Pricing summary card */
-    .pricing-summary{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:32px;
-      flex-wrap:wrap;
-      text-align:center;
-    }
-    .pricing-item{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-    .pricing-amount{
-      font-size:32px;
-      font-weight:800;
-      color:var(--warm);
-    }
-    .pricing-label{
-      font-size:14px;
-      color:var(--muted);
-      margin-top:4px;
-    }
-    .pricing-divider{
-      width:1px;
-      height:40px;
-      background:var(--line);
-    }
-    @media(max-width:600px){
-      .pricing-summary{gap:20px}
-      .pricing-amount{font-size:26px}
-      .pricing-divider{display:none}
-    }
-
-    /* Waitlist modal */
-    .waitlist-modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.55);
-      z-index:200;
-    }
-    .waitlist-modal.is-open{display:flex;}
-    .waitlist-modal-box{
-      background:rgba(7,42,36,.96);
-      border-radius:18px;
-      border:1px solid var(--line);
-      padding:24px;
-      max-width:400px;
-      width:90%;
-      box-shadow:0 20px 40px rgba(0,0,0,.45);
-    }
-    .waitlist-input{
-      width:100%;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
-      font-size:15px;
-      margin-bottom:12px;
-    }
-    .waitlist-input:focus{
-      outline:none;
-      border-color:var(--accent);
-    }
-    .waitlist-input::placeholder{color:var(--muted);opacity:0.7}
-    .waitlist-success{
-      display:none;
-      text-align:center;
-      padding:20px 0;
-    }
-    .waitlist-success.show{display:block}
-    .waitlist-form.hidden{display:none}
   </style>
   
   <section id="home" class="hero">
@@ -578,29 +503,6 @@
           <div class="trust-stat-label">Full day included</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Pricing Summary -->
-  <section class="wrap" style="padding:8px 0 16px;border:none">
-    <div class="card scroll-animate" style="padding:20px 24px">
-      <div class="pricing-summary">
-        <div class="pricing-item">
-          <div class="pricing-amount">£72</div>
-          <div class="pricing-label">Standard day<br><span style="font-size:12px;opacity:0.8">8:30 am – 4:00 pm</span></div>
-        </div>
-        <div class="pricing-divider"></div>
-        <div class="pricing-item">
-          <div class="pricing-amount">+£12</div>
-          <div class="pricing-label">Early drop-off<br><span style="font-size:12px;opacity:0.8">from 7:30 am</span></div>
-        </div>
-        <div class="pricing-divider"></div>
-        <div class="pricing-item">
-          <div class="pricing-amount">+£18</div>
-          <div class="pricing-label">Late pick-up<br><span style="font-size:12px;opacity:0.8">until 5:30 pm</span></div>
-        </div>
-      </div>
-      <p class="muted" style="text-align:center;margin:14px 0 0;font-size:13px">Tax-Free Childcare vouchers accepted</p>
     </div>
   </section>
 
@@ -867,29 +769,6 @@
       <div class="age-modal-actions">
         <button type="button" id="ageConfirmNo" class="btn btn-ghost">Cancel</button>
         <button type="button" id="ageConfirmYes" class="btn btn-fill">I confirm and continue</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="waitlistModal" class="waitlist-modal" aria-hidden="true">
-    <div class="waitlist-modal-box">
-      <div class="waitlist-form">
-        <h3 class="age-modal-title">Join the waitlist</h3>
-        <p class="age-modal-text" id="waitlistDateText">
-          Get notified if a place becomes available for <strong id="waitlistDate"></strong>.
-        </p>
-        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="Your email address" required>
-        <input type="text" class="waitlist-input" id="waitlistName" placeholder="Your name (optional)">
-        <div class="age-modal-actions" style="justify-content:stretch">
-          <button type="button" id="waitlistCancel" class="btn btn-ghost" style="flex:1">Cancel</button>
-          <button type="button" id="waitlistSubmit" class="btn btn-fill" style="flex:1">Join waitlist</button>
-        </div>
-      </div>
-      <div class="waitlist-success">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" style="margin-bottom:12px"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
-        <h3 class="age-modal-title">You're on the list!</h3>
-        <p class="age-modal-text" style="margin-bottom:0">We'll email you if a place opens up for <strong id="waitlistDateConfirm"></strong>.</p>
-        <button type="button" id="waitlistClose" class="btn btn-ghost" style="margin-top:16px">Close</button>
       </div>
     </div>
   </div>
@@ -1204,74 +1083,14 @@
 
         // Update booking button
         if(result.label==='Sold out'){
-          btn.textContent='Join Waitlist';
-          btn.removeAttribute('data-book');
-          btn.setAttribute('data-waitlist', r.date);
-          btn.style.opacity='1';
-          btn.style.pointerEvents='auto';
+          btn.textContent='Sold Out';
+          btn.setAttribute('aria-disabled','true');
+          btn.style.opacity='.45';
+          btn.style.pointerEvents='none';
           btn.href='#';
-          btn.style.borderColor='rgba(255,107,107,.4)';
-          btn.style.color='#ffb3b3';
         }
       });
 
-      // Waitlist modal functionality
-      const waitlistModal=document.getElementById('waitlistModal');
-      const waitlistForm=waitlistModal.querySelector('.waitlist-form');
-      const waitlistSuccess=waitlistModal.querySelector('.waitlist-success');
-      const waitlistDateEl=document.getElementById('waitlistDate');
-      const waitlistDateConfirm=document.getElementById('waitlistDateConfirm');
-      const waitlistEmail=document.getElementById('waitlistEmail');
-      const waitlistName=document.getElementById('waitlistName');
-      let currentWaitlistDate='';
-
-      function openWaitlistModal(date){
-        currentWaitlistDate=date;
-        waitlistDateEl.textContent=date;
-        waitlistForm.classList.remove('hidden');
-        waitlistSuccess.classList.remove('show');
-        waitlistEmail.value='';
-        waitlistName.value='';
-        waitlistModal.classList.add('is-open');
-        waitlistModal.setAttribute('aria-hidden','false');
-        waitlistEmail.focus();
-      }
-
-      function closeWaitlistModal(){
-        waitlistModal.classList.remove('is-open');
-        waitlistModal.setAttribute('aria-hidden','true');
-      }
-
-      document.getElementById('waitlistCancel').addEventListener('click',closeWaitlistModal);
-      document.getElementById('waitlistClose').addEventListener('click',closeWaitlistModal);
-      waitlistModal.addEventListener('click',e=>{if(e.target===waitlistModal)closeWaitlistModal();});
-
-      document.getElementById('waitlistSubmit').addEventListener('click',function(){
-        const email=waitlistEmail.value.trim();
-        if(!email||!email.includes('@')){
-          waitlistEmail.style.borderColor='#ff6b6b';
-          waitlistEmail.focus();
-          return;
-        }
-        // Store waitlist locally (in production, send to server)
-        const waitlistData=JSON.parse(localStorage.getItem('evg-waitlist')||'[]');
-        waitlistData.push({date:currentWaitlistDate,email,name:waitlistName.value.trim(),timestamp:Date.now()});
-        localStorage.setItem('evg-waitlist',JSON.stringify(waitlistData));
-
-        waitlistDateConfirm.textContent=currentWaitlistDate;
-        waitlistForm.classList.add('hidden');
-        waitlistSuccess.classList.add('show');
-      });
-
-      // Attach waitlist click handlers
-      document.addEventListener('click',function(e){
-        const btn=e.target.closest('[data-waitlist]');
-        if(btn){
-          e.preventDefault();
-          openWaitlistModal(btn.getAttribute('data-waitlist'));
-        }
-      });
-      
       document.getElementById('hideSold').addEventListener('change',e=>{
         const hide=e.target.checked;
         rows.forEach(r=>{
@@ -1312,24 +1131,17 @@
 
           // Update booking button
           if(result.label==='Sold out'){
-            btn.textContent='Join Waitlist';
-            btn.removeAttribute('data-book');
-            btn.setAttribute('data-waitlist', r.date);
-            btn.style.opacity='1';
-            btn.style.pointerEvents='auto';
+            btn.textContent='Sold Out';
+            btn.setAttribute('aria-disabled','true');
+            btn.style.opacity='.45';
+            btn.style.pointerEvents='none';
             btn.href='#';
-            btn.style.borderColor='rgba(255,107,107,.4)';
-            btn.style.color='#ffb3b3';
           } else {
             btn.textContent='Book';
-            btn.removeAttribute('data-waitlist');
-            btn.setAttribute('data-book','true');
-            btn.setAttribute('data-url',r.url);
+            btn.removeAttribute('aria-disabled');
             btn.style.opacity='1';
             btn.style.pointerEvents='auto';
             btn.href=r.url;
-            btn.style.borderColor='';
-            btn.style.color='';
           }
         });
       });
