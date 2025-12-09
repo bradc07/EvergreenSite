@@ -46,6 +46,8 @@
       --cta-ink:#082A24;
       --hdr:0px;
       --accent:#7FD9B3;
+      --warm:#F0C674;
+      --warm-muted:#D4A84B;
       font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--ink); background:var(--bg); line-height:1.45;
     }
@@ -78,10 +80,16 @@
     .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;transition:all 0.3s ease}
     .card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
     .muted{color:var(--muted);line-height:1.5}
-    
+
+    /* Section labels - small category text above headings */
+    .label{color:var(--accent);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em}
+
+    /* Price styling */
+    .price{color:var(--warm);font-weight:700}
+
     .h1{font-weight:800;line-height:1.02;font-size:clamp(40px,7vw,82px);margin:0;text-shadow:0 2px 8px rgba(0,0,0,.15);letter-spacing:-0.02em}
     .h2{font-weight:700;line-height:1.06;font-size:clamp(28px,5vw,50px);margin:0;letter-spacing:-0.015em;margin-bottom:8px}
-    .h3{font-weight:700;font-size:20px;margin:2px 0 0;letter-spacing:-0.01em;margin-bottom:4px}
+    .h3{font-weight:700;font-size:20px;margin:2px 0 0;letter-spacing:-0.01em;margin-bottom:4px;color:var(--ink)}
     
     /* Scroll Animation Styles */
     .scroll-animate {
@@ -240,12 +248,20 @@
       justify-content:space-between;
     }
     
-    .faq{border:1px solid var(--line);border-radius:16px;background:var(--card)}
-    .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+    .faq{border:1px solid var(--line);border-radius:16px;background:var(--card);border-left:3px solid var(--accent)}
+    .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--ink);font-weight:500}
     .faq-body{padding:0 16px 16px 16px;display:none}.faq.open .faq-body{display:block}
+
+    /* Schedule cards - warm left border for time-based info */
+    .card-schedule{border-left:3px solid var(--warm)}
+    .card-schedule .muted:first-child{color:var(--warm);font-weight:600}
     .quote{font-size:16px;line-height:1.6;font-style:italic}
     .cite{font-size:14px;color:var(--muted);margin-top:6px}
-    #testimonials .card{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.25)}
+    #testimonials .card{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.25);border-top:3px solid var(--warm)}
+
+    /* Feature cards with accent top border */
+    .card-feature{border-top:3px solid var(--accent)}
+    .card-feature .h3{color:var(--accent)}
     .reel-video{cursor:pointer}
     #reel .card{box-shadow:0 8px 24px rgba(0,0,0,.2)}
     /* Focus states for accessibility */
@@ -351,7 +367,7 @@
     <div class="glass scroll-animate" style="padding:24px">
       <div class="grid cols-2" style="align-items:center">
         <div class="scroll-animate scroll-slide-left">
-          <div class="muted">Transparency</div>
+          <div class="label">Transparency</div>
           <h2 class="h2" style="margin-top:6px">Daily reels on Instagram</h2>
           <p class="muted" style="margin-top:10px;max-width:55ch">
             We want to bring you as close to the camp experience as possible. We post daily videos so you can see exactly what the children are learning, creating, and playing.
@@ -389,18 +405,18 @@
 
   <section class="wrap" style="padding:24px 0">
     <div class="grid cols-3">
-      <div class="card scroll-animate">
-        <div class="muted">Education</div>
+      <div class="card card-feature scroll-animate">
+        <div class="label">Education</div>
         <div class="h3">Learning that sticks</div>
         <p class="muted" style="margin-top:6px">Short daily sessions in English and maths keep skills sharp through games and active challenges.</p>
       </div>
-      <div class="card scroll-animate delay-1">
-        <div class="muted">Sportsmanship</div>
+      <div class="card card-feature scroll-animate delay-1">
+        <div class="label">Sportsmanship</div>
         <div class="h3">Strong teams and kind hearts</div>
         <p class="muted" style="margin-top:6px">Coached play builds confidence, turn taking and fair play while children make friends.</p>
       </div>
-      <div class="card scroll-animate delay-2">
-        <div class="muted">Coding and logic</div>
+      <div class="card card-feature scroll-animate delay-2">
+        <div class="label">Coding and logic</div>
         <div class="h3">Hands on problem solving</div>
         <p class="muted" style="margin-top:6px">Cubetto coding robots and puzzle based games grow sequencing, reasoning and creativity.</p>
       </div>
@@ -411,7 +427,7 @@
     <div class="glass" style="padding:22px">
       <div class="grid cols-2" style="align-items:center">
         <div class="scroll-animate scroll-slide-left">
-          <div class="muted">About Evergreen</div>
+          <div class="label">About Evergreen</div>
           <h2 class="h2" style="margin-top:6px">Led by teachers Emma and Bradley Clay</h2>
           <p class="muted" style="margin-top:10px;max-width:60ch">
             We are experienced primary teachers who design calm, purposeful days where children feel safe, seen and inspired. Our camps blend creativity, English and maths refreshers, coached sport and screen free coding with Cubetto. Staff are DBS checked and trained in first aid and safeguarding. We run in the woodland and all-weather spaces at Herne Hill School in South London.
@@ -432,25 +448,25 @@
   <section id="day" class="wrap" style="padding:12px 0 26px">
     <div class="glass scroll-animate" style="padding:24px;text-align:center">
       <div>
-        <div class="muted">A day at Evergreen</div>
+        <div class="label">A day at Evergreen</div>
         <h2 class="h2" style="margin-top:6px">What a typical day looks like</h2>
-        <p class="muted" style="margin-top:8px">Early drop off 7:30 am to 8:30 am for £12. Late pick up 4:00 pm to 5:30 pm for £18.</p>
+        <p class="muted" style="margin-top:8px">Early drop off 7:30 am to 8:30 am for <span class="price">£12</span>. Late pick up 4:00 pm to 5:30 pm for <span class="price">£18</span>.</p>
       </div>
       <div class="card" style="display:inline-block;margin-top:16px"><div class="h3">Early drop off</div><p class="muted" style="margin-top:4px">7:30 am to 8:30 am</p></div>
-      <div style="margin-top:26px"><div class="chip" style="font-weight:600">Morning</div></div>
+      <div style="margin-top:26px"><div class="chip" style="font-weight:600;background:rgba(127,217,179,.15);border-color:var(--accent);color:var(--accent)">Morning</div></div>
       <div class="grid cols-3" style="margin-top:16px;justify-items:center">
-        <div class="card" style="width:100%"><div class="muted">8:30 to 9:00</div><div class="h3">Welcome and settling in</div><p class="muted">Soft start and morning activities</p></div>
-        <div class="card" style="width:100%"><div class="muted">9:00 to 10:15</div><div class="h3">Creativity time</div><p class="muted">Art and construction projects</p></div>
-        <div class="card" style="width:100%"><div class="muted">10:15 to 10:30</div><div class="h3">Snack</div><p class="muted">Nut free and sesame free</p></div>
-        <div class="card" style="width:100%"><div class="muted">10:30 to 11:10</div><div class="h3">English or maths</div><p class="muted">Short focused session</p></div>
-        <div class="card" style="width:100%"><div class="muted">11:10 to 12:30</div><div class="h3">Team sports and group games</div><p class="muted">Coached play and sportsmanship</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">8:30 to 9:00</div><div class="h3">Welcome and settling in</div><p class="muted">Soft start and morning activities</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">9:00 to 10:15</div><div class="h3">Creativity time</div><p class="muted">Art and construction projects</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">10:15 to 10:30</div><div class="h3">Snack</div><p class="muted">Nut free and sesame free</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">10:30 to 11:10</div><div class="h3">English or maths</div><p class="muted">Short focused session</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">11:10 to 12:30</div><div class="h3">Team sports and group games</div><p class="muted">Coached play and sportsmanship</p></div>
       </div>
-      <div style="margin-top:26px"><div class="chip" style="font-weight:600">Afternoon</div></div>
+      <div style="margin-top:26px"><div class="chip" style="font-weight:600;background:rgba(240,198,116,.15);border-color:var(--warm);color:var(--warm)">Afternoon</div></div>
       <div class="grid cols-3" style="margin-top:16px;justify-items:center">
-        <div class="card" style="width:100%"><div class="muted">12:30 to 1:30</div><div class="h3">Lunch and social time</div><p class="muted">Picnic style and fully supervised</p></div>
-        <div class="card" style="width:100%"><div class="muted">1:30 to 2:10</div><div class="h3">Outdoor play</div><p class="muted">Woodland and nature area</p></div>
-        <div class="card" style="width:100%"><div class="muted">2:10 to 3:45</div><div class="h3">Coding with Cubetto and logic games</div><p class="muted">Hands on problem solving</p></div>
-        <div class="card" style="width:100%"><div class="muted">3:45 to 4:00</div><div class="h3">Story and farewell</div><p class="muted">Calm close and collection</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">12:30 to 1:30</div><div class="h3">Lunch and social time</div><p class="muted">Picnic style and fully supervised</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">1:30 to 2:10</div><div class="h3">Outdoor play</div><p class="muted">Woodland and nature area</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">2:10 to 3:45</div><div class="h3">Coding with Cubetto and logic games</div><p class="muted">Hands on problem solving</p></div>
+        <div class="card card-schedule" style="width:100%"><div class="muted">3:45 to 4:00</div><div class="h3">Story and farewell</div><p class="muted">Calm close and collection</p></div>
       </div>
       <div class="card" style="display:inline-block;margin-top:16px"><div class="h3">Late pick up</div><p class="muted" style="margin-top:4px">4:00 pm to 5:30 pm</p></div>
     </div>
@@ -459,7 +475,7 @@
   <section id="availability-preview" class="wrap" style="padding:12px 0 28px">
     <div class="glass scroll-animate" style="padding:20px">
       <div style="text-align: center; margin-bottom: 18px;">
-        <div class="muted">Live Availability</div>
+        <div class="label">Live Availability</div>
         <h2 class="h2" style="margin-top:6px">Christmas Camp</h2>
       </div>
       <div id="availabilityPreviewBody" class="grid cols-5">
@@ -471,7 +487,7 @@
     <div class="glass scroll-animate" style="padding:20px">
       <div class="grid cols-2" style="align-items:end">
         <div>
-          <div class="muted">Confirm Your Dates</div>
+          <div class="label">Confirm Your Dates</div>
           <h2 class="h2" style="margin-top:6px">Booking</h2>
           <p class="muted" style="margin-top:8px">Please select your required days below.</p>
         </div>
@@ -506,7 +522,7 @@
     <div class="glass" style="padding:22px">
       <div class="grid cols-2">
         <div class="scroll-animate scroll-slide-left">
-          <div class="muted">Safety and care</div>
+          <div class="label">Safety and care</div>
           <h2 class="h2" style="margin-top:6px">Practical information for a smooth day</h2>
           <ul class="muted" style="margin:10px 0 0 18px">
             <li>Nut free and sesame free site. Please check snacks carefully.</li>
@@ -529,12 +545,12 @@
 
   <section id="policy" class="wrap" style="padding:8px 0 24px">
     <div class="glass scroll-animate" style="padding:22px">
-      <div class="muted">Policy</div>
+      <div class="label">Policy</div>
       <h2 class="h2" style="margin-top:6px">Cancellation policy</h2>
       <p class="muted" style="margin-top:8px;max-width:80ch">
         If you need to cancel, please email
         <a href="mailto:info@evergreenkids.co.uk" style="color:#c7f0e0;text-decoration:underline">info@evergreenkids.co.uk</a>.
-        We will release your place back onto the website. A refund is issued if the place is repurchased and is subject to a £5 admin charge.
+        We will release your place back onto the website. A refund is issued if the place is repurchased and is subject to a <span class="price">£5</span> admin charge.
         Early drop off and late pick up are non-refundable as these are very hard to resell.
       </p>
     </div>
@@ -568,13 +584,13 @@
         <div class="faq-body muted">Yes. Book and pay as normal to secure your place then send your voucher payment. We will refund the original.</div></div>
       <div class="faq scroll-animate"><button class="faq-btn" type="button">What are the extended care options?
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Early drop off 7:30 am to 8:30 am for £12. Late pick up 4:00 pm to 5:30 pm for £18.</div></div>
+        <div class="faq-body muted">Early drop off 7:30 am to 8:30 am for <span class="price">£12</span>. Late pick up 4:00 pm to 5:30 pm for <span class="price">£18</span>.</div></div>
       <div class="faq scroll-animate delay-1"><button class="faq-btn" type="button">How are children grouped?
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
         <div class="faq-body muted">Reception group and a mixed group for Years 1 to 3.</div></div>
       <div class="faq scroll-animate"><button class="faq-btn" type="button">What is your cancellation policy?
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Email us to cancel. We refund if your place is repurchased, minus a £5 admin charge. Early and late sessions are non-refundable. <a href="#policy" style="color:#c7f0e0;text-decoration:underline">Read the full policy</a>.</div></div>
+        <div class="faq-body muted">Email us to cancel. We refund if your place is repurchased, minus a <span class="price">£5</span> admin charge. Early and late sessions are non-refundable. <a href="#policy" style="color:#c7f0e0;text-decoration:underline">Read the full policy</a>.</div></div>
     </div>
   </section>
 
@@ -838,7 +854,7 @@
         bookingGridHTML+=`
           <div class="card booking-card" id="${r.rid}">
             <div style="font-weight: 600; font-size: 15px; color: var(--ink);">${r.date}</div>
-            <div style="font-size: 14px; color: var(--muted); margin-top: 4px;">${r.time} • ${r.price}</div>
+            <div style="font-size: 14px; margin-top: 4px;"><span class="muted">${r.time}</span> • <span class="price">${r.price}</span></div>
             <a class="btn btn-ghost" data-book data-url="${r.url}" href="${r.url}" style="margin-top: 12px; width: 100%; justify-content: center;">Book</a>
           </div>
         `;
