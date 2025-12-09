@@ -1,8 +1,5 @@
-<!-- EVERGREEN • Full page (Reception to Year 3) • Squarespace embed -->
 <section id="evg-site">
-  <!-- Viewport -->
   <script>(function(){if(!document.querySelector('meta[name="viewport"]')){const m=document.createElement('meta');m.name='viewport';m.content='width=device-width,initial-scale=1';document.head.appendChild(m);}})();</script>
-  <!-- SEO -->
   <script>
     (function(){
       const title="Evergreen Kids Camp — Holiday camps for Reception to Year 3, South London";
@@ -41,14 +38,14 @@
     #evg-site{
       --bg:#072A24;
       --ink:#F4FFF8;
-      --muted:#BFE7D6;
+      --muted:#C7F0E0;
       --line:rgba(255,255,255,.2);
       --chip:rgba(255,255,255,.06);
       --card:rgba(255,255,255,.05);
-      --cta:#DFF4EA;
+      --cta:#E8F8F0;
       --cta-ink:#082A24;
       --hdr:0px;
-      --accent:#93e1c0;
+      --accent:#7FD9B3;
       font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--ink); background:var(--bg); line-height:1.45;
     }
@@ -56,10 +53,11 @@
     .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
     /* Light border around each main section */
     #evg-site section.wrap{
-      border:1px solid rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.1);
       border-radius:24px;
-      margin:16px auto;
+      margin:24px auto;
     }
+    .hero.wrap{border:none}
     .grid{display:grid;gap:18px}
     .cols-2{grid-template-columns:1fr}
     .cols-3{grid-template-columns:1fr}
@@ -69,20 +67,21 @@
     @media(min-width:900px){.cols-5{grid-template-columns:repeat(5, 1fr);gap:18px;}}
     
     @media(min-width:900px){.cols-2{grid-template-columns:1.15fr .85fr}.cols-3{grid-template-columns:1fr 1fr 1fr}}
-    .btn{display:inline-flex;align-items:center;gap:8px;border-radius:16px;padding:12px 18px;border:1px solid var(--line);text-decoration:none}
-    .btn-fill{background:var(--cta);color:var(--cta-ink);box-shadow:0 6px 14px rgba(223,244,234,.18)}
-    .btn-fill:hover{filter:brightness(.96)}
-    .btn-ghost{background:transparent;color:var(--ink)}
-    .btn-ghost:hover{background:rgba(255,255,255,.06)}
-    .chip{display:inline-flex;align-items:center;border-radius:999px;padding:8px 12px;border:1px solid var(--line);background:var(--chip);backdrop-filter:blur(8px);font-size:14px}
+    .btn{display:inline-flex;align-items:center;gap:8px;border-radius:16px;padding:12px 18px;border:1px solid var(--line);text-decoration:none;font-weight:600;transition:all 0.2s ease}
+    .btn-fill{background:linear-gradient(135deg, #DFF4EA 0%, #BFE7D6 100%);color:var(--cta-ink);box-shadow:0 4px 14px rgba(223,244,234,.3), 0 2px 4px rgba(0,0,0,.1);transform:translateY(0)}
+    .btn-fill:hover{filter:brightness(1.05);box-shadow:0 6px 20px rgba(223,244,234,.4), 0 3px 6px rgba(0,0,0,.12);transform:translateY(-1px)}
+    .btn-ghost{background:transparent;color:var(--ink);transition:all 0.2s ease}
+    .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+    .chip{display:inline-flex;align-items:center;border-radius:999px;padding:6px 14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);font-size:13px;font-weight:500}
     .chip-date{font-weight:600}
-    .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:22px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-    .muted{color:var(--muted)}
+    .glass{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);border-radius:22px;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;transition:all 0.3s ease}
+    .card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .muted{color:var(--muted);line-height:1.5}
     
-    .h1{font-weight:800;line-height:1.02;font-size:clamp(40px,7vw,82px);margin:0}
-    .h2{font-weight:700;line-height:1.06;font-size:clamp(28px,5vw,50px);margin:0}
-    .h3{font-weight:700;font-size:20px;margin:2px 0 0}
+    .h1{font-weight:800;line-height:1.02;font-size:clamp(40px,7vw,82px);margin:0;text-shadow:0 2px 8px rgba(0,0,0,.15);letter-spacing:-0.02em}
+    .h2{font-weight:700;line-height:1.06;font-size:clamp(28px,5vw,50px);margin:0;letter-spacing:-0.015em;margin-bottom:8px}
+    .h3{font-weight:700;font-size:20px;margin:2px 0 0;letter-spacing:-0.01em;margin-bottom:4px}
     
     /* Scroll Animation Styles */
     .scroll-animate {
@@ -101,70 +100,128 @@
     .scroll-animate.delay-1 { transition-delay: 0.2s; }
     .scroll-animate.delay-2 { transition-delay: 0.3s; }
     
-    /* Availability Bar Styles */
-    @keyframes flash-red-bg {
-      0%, 100% { background-color: rgba(244,63,94,.22); }
-      50% { background-color: rgba(244,63,94,.5); }
-    }
-    @keyframes flash-red-label {
-      0%, 100% { color: #ffd7de; }
-      50% { color: #fff; }
-    }
-    .availability-stat {
+    /* Availability Badge Styles */
+    .availability-badge {
       text-align: center;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 12px;
+      padding: 16px 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .availability-stat .day-label {
+    .availability-badge:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.3);
+    }
+    .availability-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent);
+      transition: all 0.4s ease;
+    }
+    .availability-badge.critical::before {
+      background: #ff6b6b;
+      animation: pulse-glow 2s infinite;
+    }
+    .availability-badge.low::before {
+      background: #ffd93d;
+    }
+    .availability-badge.good::before {
+      background: #6bcf7f;
+    }
+    .availability-badge.sold-out::before {
+      background: #ff4757;
+    }
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 10px currentColor;
+      }
+      50% {
+        opacity: 0.7;
+        box-shadow: 0 0 20px currentColor;
+      }
+    }
+    .day-badge-label {
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      color: var(--ink);
     }
-    .availability-stat .bar-container {
-      height: 120px;
-      width: 100%;
-      background-color: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      transform: rotate(180deg);
+    .places-remaining {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+      color: var(--accent);
     }
-    .availability-stat .bar-fill {
-      height: 100%; 
-      width: 100%;
-      background-color: var(--accent);
-      transition: height 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    .places-remaining.critical {
+      color: #ff6b6b;
+      animation: number-pulse 1.5s ease-in-out infinite;
     }
-    .availability-stat .status-label {
+    .places-remaining.low {
+      color: #ffd93d;
+    }
+    .places-remaining.good {
+      color: #6bcf7f;
+    }
+    .places-remaining.sold-out {
+      color: #ff4757;
+    }
+    @keyframes number-pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+    .places-text {
       font-size: 13px;
-      margin-top: 8px;
       color: var(--muted);
+      font-weight: 500;
     }
-    .scroll-animate.is-visible .bar-fill.ok {
-      height: 15%; 
-      background-color: #bff4dd;
-    }
-    .scroll-animate.is-visible .bar-fill.warn {
-      height: 10%; 
-      background-color: #ffe7b6;
-    }
-    .scroll-animate.is-visible .bar-fill.bad {
-      height: 0%; 
-      background-color: #ffd7de;
-    }
-    .status-label.ok { color: #bff4dd; }
-    .status-label.warn { color: #ffe7b6; }
-    .status-label.bad { 
-      color: #ffd7de; 
+    .urgency-label {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .scroll-animate.is-visible .availability-stat.bad {
-      animation: flash-red-bg 0.8s 1.5s 2; 
+    .urgency-label.critical {
+      background: rgba(255,107,107,.2);
+      color: #ffb3b3;
+      border: 1px solid rgba(255,107,107,.3);
+      animation: shake 0.5s 2s 2;
     }
-    .scroll-animate.is-visible .status-label.bad {
-      animation: flash-red-label 0.8s 1.5s 2;
+    .urgency-label.low {
+      background: rgba(255,217,61,.15);
+      color: #ffe89d;
+      border: 1px solid rgba(255,217,61,.25);
+    }
+    .urgency-label.good {
+      background: rgba(107,207,127,.15);
+      color: #b3e7bd;
+      border: 1px solid rgba(107,207,127,.25);
+    }
+    .urgency-label.sold-out {
+      background: rgba(255,71,87,.2);
+      color: #ffa3ab;
+      border: 1px solid rgba(255,71,87,.3);
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
     }
 
     /* Hero */
@@ -186,16 +243,37 @@
     .faq{border:1px solid var(--line);border-radius:16px;background:var(--card)}
     .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
     .faq-body{padding:0 16px 16px 16px;display:none}.faq.open .faq-body{display:block}
-    .quote{font-size:18px}
+    .quote{font-size:16px;line-height:1.6;font-style:italic}
     .cite{font-size:14px;color:var(--muted);margin-top:6px}
+    #testimonials .card{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.25)}
+    .reel-video{cursor:pointer}
+    #reel .card{box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    /* Focus states for accessibility */
+    .btn:focus-visible,
+    .faq-btn:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    /* Loading states */
+    .status-label.checking::after {
+      content: '...';
+      animation: ellipsis 1.5s infinite;
+    }
+    @keyframes ellipsis {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
     /* Sticky CTA on mobile */
     .sticky-book{position:fixed;left:0;right:0;bottom:12px;z-index:70;display:none;justify-content:center}
     .sticky-book .inner{display:inline-flex;gap:10px;background:rgba(7,42,36,.85);backdrop-filter:blur(8px);border:1px solid var(--line);padding:10px 12px;border-radius:999px}
     .sticky-show .sticky-book{display:flex}
     @media(max-width:700px){
-      .wrap{padding:0 14px}
+      .wrap{padding:0 16px}
       .hero .wrap{padding:0 12px}
-      .btn{width:100%;justify-content:center}
+      .card{padding:14px}
+      .btn{width:100%;justify-content:center;padding:14px 20px}
       .pillbar{flex-wrap:wrap;justify-content:center}
     }
 
@@ -237,7 +315,6 @@
     }
   </style>
   
-  <!-- HERO -->
   <section id="home" class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap hero-inner" style="padding:22px 0 34px">
@@ -247,9 +324,16 @@
       <div class="glass scroll-animate delay-1" style="margin-top:14px;padding:22px">
         <p class="muted" style="margin:0 0 6px">Enjoy the calm of</p>
         <h1 class="h1">Evergreen</h1>
+        
         <p class="muted" style="max-width:60ch;margin:10px 0 0">
           Holiday camps for children in Reception to Year 3. Daily activities and adventures in a calm, nurturing environment led by experienced teachers.
         </p>
+
+        <div style="display:flex;align-items:center;gap:12px;margin:14px 0;padding:10px 14px;background:rgba(127, 217, 179, 0.1);border:1px solid rgba(127, 217, 179, 0.2);border-radius:12px;width:fit-content">
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD9B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+           <span style="font-size:14px;color:#dff4ea;font-weight:500;line-height:1.3">Trusted by <strong>430+ families</strong> since Feb 2024</span>
+        </div>
+
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
           <span class="chip">South London</span><span class="chip">Small groups</span><span class="chip">Experienced teachers</span>
           <span class="chip">Ofsted registered</span><span class="chip">Nut free and sesame free</span><span class="chip">Coding with Cubetto</span>
@@ -263,36 +347,46 @@
     </div>
   </section>
 
-  <!-- VIDEO / REEL SECTION -->
   <section id="reel" class="wrap" style="padding:16px 0 10px">
-    <div class="glass scroll-animate" style="padding:20px">
+    <div class="glass scroll-animate" style="padding:24px">
       <div class="grid cols-2" style="align-items:center">
         <div class="scroll-animate scroll-slide-left">
-          <div class="muted">See Evergreen in action</div>
-          <h2 class="h2" style="margin-top:6px">A day at camp in 30 seconds</h2>
+          <div class="muted">Transparency</div>
+          <h2 class="h2" style="margin-top:6px">Daily reels on Instagram</h2>
+          <p class="muted" style="margin-top:10px;max-width:55ch">
+            We want to bring you as close to the camp experience as possible. We post daily videos so you can see exactly what the children are learning, creating, and playing.
+          </p>
+          <div style="margin-top:20px">
+            <a href="https://www.instagram.com/evergreen.kids.dulwich/" target="_blank" class="btn btn-ghost" style="padding-left:14px;padding-right:14px">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              Follow @evergreen.kids.dulwich
+            </a>
+          </div>
         </div>
         <div class="scroll-animate scroll-slide-right delay-1">
-          <div class="card" style="padding:0;overflow:hidden;border-radius:18px">
+          <div class="card" style="padding:0;overflow:hidden;border-radius:18px;margin-top:10px">
             <div style="position:relative;width:100%;padding-top:56.25%;background:#000">
-              <video
-                class="reel-video"
-                muted
-                playsinline
-                preload="auto"
-                loop
-                controls
+              <video 
+                class="reel-video" 
+                muted 
+                playsinline 
+                preload="auto" 
+                loop 
+                controls 
                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
               >
                 <source src="https://www.evergreenkids.co.uk/s/Evergreen-Website-POV-Final.mp4" type="video/mp4">
               </video>
             </div>
           </div>
+          <div style="text-align:center;margin-top:12px;font-size:13px" class="muted">
+            <span style="opacity:0.7">Watch a typical day in 30 seconds</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
   <section class="wrap" style="padding:24px 0">
     <div class="grid cols-3">
       <div class="card scroll-animate">
@@ -313,7 +407,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about" class="wrap" style="padding:8px 0 26px">
     <div class="glass" style="padding:22px">
       <div class="grid cols-2" style="align-items:center">
@@ -329,13 +422,13 @@
           <p class="muted" style="margin-top:6px">Warm welcome. Educational. Varied activities. Plenty of joy and friendship.</p>
           <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
             <span class="chip">DBS checked staff</span><span class="chip">Paediatric first aid</span><span class="chip">KCSIE aligned</span>
+            <span class="chip">Herne Hill School</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DAY -->
   <section id="day" class="wrap" style="padding:12px 0 26px">
     <div class="glass scroll-animate" style="padding:24px;text-align:center">
       <div>
@@ -363,7 +456,6 @@
     </div>
   </section>
   
-  <!-- Live Availability Section -->
   <section id="availability-preview" class="wrap" style="padding:12px 0 28px">
     <div class="glass scroll-animate" style="padding:20px">
       <div style="text-align: center; margin-bottom: 18px;">
@@ -371,12 +463,10 @@
         <h2 class="h2" style="margin-top:6px">Christmas Camp</h2>
       </div>
       <div id="availabilityPreviewBody" class="grid cols-5">
-        <!-- JS will generate 5 stat blocks here -->
-      </div>
+        </div>
     </div>
   </section>
   
-  <!-- BOOK -->
   <section id="book" class="wrap" style="padding:12px 0 28px">
     <div class="glass scroll-animate" style="padding:20px">
       <div class="grid cols-2" style="align-items:end">
@@ -391,15 +481,13 @@
         </div>
       </div>
       <div id="bookingGridBody" class="grid cols-5" style="margin-top:14px">
-        <!-- JS will generate 5 booking cards here -->
-      </div>
+        </div>
       <p class="muted" style="margin-top:10px;font-size:13px">
         We accept Tax-Free Childcare vouchers. Book as normal and we will refund your payment when the voucher arrives.
       </p>
     </div>
   </section>
 
-  <!-- FUTURE DATES -->
   <section id="future" class="wrap" style="padding:0 0 24px">
     <div class="card scroll-animate">
       <div class="h3" style="margin-bottom:12px">Future camp dates</div>
@@ -414,7 +502,6 @@
     </div>
   </section>
 
-  <!-- SAFETY & CARE -->
   <section id="safety" class="wrap" style="padding:8px 0 24px">
     <div class="glass" style="padding:22px">
       <div class="grid cols-2">
@@ -440,7 +527,6 @@
     </div>
   </section>
 
-  <!-- CANCELLATION -->
   <section id="policy" class="wrap" style="padding:8px 0 24px">
     <div class="glass scroll-animate" style="padding:22px">
       <div class="muted">Policy</div>
@@ -454,7 +540,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section id="testimonials" class="wrap" style="padding:8px 0 24px">
     <h2 class="h2 scroll-animate" style="text-align:center;margin-bottom:18px">What Parents Say</h2>
     <div class="grid cols-3">
@@ -473,7 +558,6 @@
     </div>
   </section>
 
-  <!-- FAQ -->
   <section id="faq" class="wrap" style="padding:4px 0 24px">
     <div class="grid cols-2">
       <div class="faq scroll-animate"><button class="faq-btn" type="button">What should my child bring?
@@ -494,7 +578,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="wrap" style="padding:10px 0 24px">
     <div class="grid cols-2">
       <div class="glass scroll-animate scroll-slide-left" style="padding:20px">
@@ -518,7 +601,6 @@
     <div style="display:flex;gap:12px"><a href="#home" style="color:inherit">Home</a><a href="#about" style="color:inherit">About</a><a href="#day" style="color:inherit">Day</a><a href="#availability-preview" style="color:inherit">Book</a><a href="#safety" style="color:inherit">Safety</a><a href="#faq" style="color:inherit">FAQ</a><a href="#contact" style="color:inherit">Contact</a></div>
   </footer>
 
-  <!-- Age confirmation modal -->
   <div id="ageConfirmModal" class="age-modal" aria-hidden="true">
     <div class="age-modal-box">
       <h3 class="age-modal-title">Before you book</h3>
@@ -532,7 +614,6 @@
     </div>
   </div>
 
-  <!-- Sticky mobile CTA -->
   <div class="sticky-book" aria-hidden="true">
     <div class="inner">
       <a class="btn btn-fill" href="#availability-preview">Book now</a>
@@ -620,11 +701,82 @@
       if(/\blimited\s*(availability|stock)\b|\blow\s*stock\b/.test(t)) return {limited:true};
       return {};
     }
-    
-    function tagClassFor(label){
-      if(label==='Sold out') return 'bad';
-      if(/\d+\s+left/.test(label)) return 'ok';
-      return 'warn';
+
+    function getBarColorClass(label, qty) {
+      if (label === 'Sold out') return 'bad';
+
+      if (typeof qty === 'number') {
+        if (qty <= 5) return 'bad';     // Nearly sold out
+        if (qty <= 15) return 'warn';   // Filling up
+        return 'ok';                     // Good availability
+      }
+
+      return 'warn'; // Default for "Limited" - assume moderate availability
+    }
+
+    function updateBadge(rid, result) {
+      const badge = document.getElementById('badge-' + rid);
+      if (!badge) return;
+
+      const placesNum = badge.querySelector('.places-remaining');
+      const placesText = badge.querySelector('.places-text');
+      const urgencyLabel = badge.querySelector('.urgency-label');
+
+      const qty = result.qty || 0;
+
+      // Remove all classes first
+      badge.className = 'availability-badge scroll-animate';
+      placesNum.className = 'places-remaining';
+      urgencyLabel.className = 'urgency-label';
+      urgencyLabel.style.display = 'none';
+
+      if (result.label === 'Sold out' || qty === 0) {
+        badge.classList.add('sold-out');
+        placesNum.classList.add('sold-out');
+        placesNum.textContent = '0';
+        placesText.textContent = 'places left';
+        urgencyLabel.classList.add('sold-out');
+        urgencyLabel.textContent = 'Sold Out';
+        urgencyLabel.style.display = 'inline-block';
+      } else if (typeof qty === 'number') {
+        // Hybrid approach: show "Limited" for > 7, exact number for 1-7
+        if (qty > 7) {
+          placesNum.textContent = 'Limited';
+          placesText.textContent = 'places available';
+        } else {
+          placesNum.textContent = qty;
+          placesText.textContent = qty === 1 ? 'place left' : 'places left';
+        }
+
+        // Color coding based on actual quantity
+        if (qty <= 5) {
+          badge.classList.add('critical');
+          placesNum.classList.add('critical');
+          urgencyLabel.classList.add('critical');
+          urgencyLabel.textContent = 'Almost Gone!';
+          urgencyLabel.style.display = 'inline-block';
+        } else if (qty <= 15) {
+          badge.classList.add('low');
+          placesNum.classList.add('low');
+          urgencyLabel.classList.add('low');
+          urgencyLabel.textContent = 'Filling Fast';
+          urgencyLabel.style.display = 'inline-block';
+        } else {
+          badge.classList.add('good');
+          placesNum.classList.add('good');
+          urgencyLabel.classList.add('good');
+          urgencyLabel.textContent = 'Available';
+          urgencyLabel.style.display = 'inline-block';
+        }
+      } else {
+        // Unknown quantity - show "Limited"
+        placesNum.textContent = '?';
+        placesText.textContent = 'places';
+        badge.classList.add('low');
+        urgencyLabel.classList.add('low');
+        urgencyLabel.textContent = 'Limited';
+        urgencyLabel.style.display = 'inline-block';
+      }
     }
 
     async function availabilityFor(url){
@@ -665,17 +817,16 @@
         status:'Checking…'
       }));
 
-      // Preview bars
+      // Preview badges
       let previewHTML='';
       rows.forEach(r=>{
         const shortDate=r.date.split(' ').slice(0,3).join(' ');
         previewHTML+=`
-          <div class="availability-stat" id="stat-${r.rid}">
-            <div class="day-label">${shortDate}</div>
-            <div class="bar-container">
-              <div class="bar-fill"></div>
-            </div>
-            <div class="status-label checking">Checking…</div>
+          <div class="availability-badge scroll-animate" id="badge-${r.rid}">
+            <div class="day-badge-label">${shortDate}</div>
+            <div class="places-remaining">--</div>
+            <div class="places-text">checking...</div>
+            <div class="urgency-label" style="display:none"></div>
           </div>
         `;
       });
@@ -762,27 +913,23 @@
       rows.forEach(async r=>{
         const card=document.getElementById(r.rid);
         const btn=card.querySelector('[data-book]');
-        const statBlock=document.getElementById('stat-'+r.rid);
-        const statBar=statBlock.querySelector('.bar-fill');
-        const statusLabel=statBlock.querySelector('.status-label');
-        
+
         const result=await availabilityFor(r.url);
-        const statusClass=tagClassFor(result.label);
-        
+
         r.status=result.label;
-        
+        r.qty=result.qty;
+
+        // Update badge display
+        updateBadge(r.rid, result);
+
+        // Update booking button
         if(result.label==='Sold out'){
-          btn.textContent='Sold Out'; 
+          btn.textContent='Sold Out';
           btn.setAttribute('aria-disabled','true');
           btn.style.opacity='.45';
           btn.style.pointerEvents='none';
           btn.href='#';
         }
-        
-        statBlock.classList.add(statusClass); 
-        statBar.classList.add(statusClass);
-        statusLabel.textContent=result.label;
-        statusLabel.className='status-label '+statusClass;
       });
       
       document.getElementById('hideSold').addEventListener('change',e=>{
@@ -801,20 +948,29 @@
         rows.forEach(async r=>{
           const card=document.getElementById(r.rid);
           const btn=card.querySelector('[data-book]');
-          const statBlock=document.getElementById('stat-'+r.rid);
-          const statBar=statBlock.querySelector('.bar-fill');
-          const statusLabel=statBlock.querySelector('.status-label');
-          
-          statBlock.className='availability-stat'; 
-          statBar.className='bar-fill';
-          statusLabel.textContent='Checking…';
-          statusLabel.className='status-label checking';
-          
+          const badge=document.getElementById('badge-'+r.rid);
+
+          // Reset badge to checking state
+          if(badge){
+            const placesNum=badge.querySelector('.places-remaining');
+            const placesText=badge.querySelector('.places-text');
+            const urgencyLabel=badge.querySelector('.urgency-label');
+            badge.className='availability-badge scroll-animate';
+            placesNum.className='places-remaining';
+            placesNum.textContent='--';
+            placesText.textContent='checking...';
+            urgencyLabel.style.display='none';
+          }
+
           const result=await availabilityFor(r.url);
-          const statusClass=tagClassFor(result.label);
-          
+
           r.status=result.label;
-          
+          r.qty=result.qty;
+
+          // Update badge display
+          updateBadge(r.rid, result);
+
+          // Update booking button
           if(result.label==='Sold out'){
             btn.textContent='Sold Out';
             btn.setAttribute('aria-disabled','true');
@@ -828,11 +984,6 @@
             btn.style.pointerEvents='auto';
             btn.href=r.url;
           }
-          
-          statBlock.classList.add(statusClass);
-          statBar.classList.add(statusClass);
-          statusLabel.textContent=result.label;
-          statusLabel.className='status-label '+statusClass;
         });
       });
     })();
