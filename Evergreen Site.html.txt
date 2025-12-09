@@ -17,6 +17,87 @@
       setMeta("description",desc);
       setMeta("og:title",title,'meta[property="og:title"]');
       setMeta("og:description",desc,'meta[property="og:description"]');
+
+      // Add structured data (LocalBusiness + Event)
+      const localBusiness={
+        "@context":"https://schema.org",
+        "@type":"ChildCare",
+        "name":"Evergreen Kids Camp",
+        "description":desc,
+        "url":"https://www.evergreenkids.co.uk",
+        "telephone":["07411625794","07903415439"],
+        "email":"info@evergreenkids.co.uk",
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":"Herne Hill School, 127 Herne Hill",
+          "addressLocality":"London",
+          "postalCode":"SE24 9LY",
+          "addressCountry":"GB"
+        },
+        "geo":{
+          "@type":"GeoCoordinates",
+          "latitude":51.4512,
+          "longitude":-0.0912
+        },
+        "priceRange":"£72 per day",
+        "openingHours":"Mo-Fr 07:30-17:30",
+        "aggregateRating":{
+          "@type":"AggregateRating",
+          "ratingValue":"5",
+          "reviewCount":"430"
+        }
+      };
+
+      const events=[
+        {date:"2025-12-15",name:"Monday 15 Dec"},
+        {date:"2025-12-16",name:"Tuesday 16 Dec"},
+        {date:"2025-12-17",name:"Wednesday 17 Dec"},
+        {date:"2025-12-18",name:"Thursday 18 Dec"},
+        {date:"2025-12-19",name:"Friday 19 Dec"}
+      ].map(e=>({
+        "@context":"https://schema.org",
+        "@type":"Event",
+        "name":"Evergreen Kids Christmas Camp - "+e.name,
+        "description":"Holiday camp for children Reception to Year 3. Education, sports, and coding activities.",
+        "startDate":e.date+"T08:30:00",
+        "endDate":e.date+"T16:00:00",
+        "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus":"https://schema.org/EventScheduled",
+        "location":{
+          "@type":"Place",
+          "name":"Herne Hill School",
+          "address":{
+            "@type":"PostalAddress",
+            "streetAddress":"127 Herne Hill",
+            "addressLocality":"London",
+            "postalCode":"SE24 9LY",
+            "addressCountry":"GB"
+          }
+        },
+        "organizer":{
+          "@type":"Organization",
+          "name":"Evergreen Kids Camp",
+          "url":"https://www.evergreenkids.co.uk"
+        },
+        "offers":{
+          "@type":"Offer",
+          "price":"72",
+          "priceCurrency":"GBP",
+          "availability":"https://schema.org/InStock",
+          "validFrom":"2025-01-01",
+          "url":"https://www.evergreenkids.co.uk"
+        }
+      }));
+
+      // Inject structured data
+      function addJsonLd(data){
+        const script=document.createElement('script');
+        script.type='application/ld+json';
+        script.textContent=JSON.stringify(data);
+        document.head.appendChild(script);
+      }
+      addJsonLd(localBusiness);
+      events.forEach(addJsonLd);
     })();
   </script>
   <style>
@@ -291,6 +372,8 @@
       .card{padding:14px}
       .btn{width:100%;justify-content:center;padding:14px 20px}
       .pillbar{flex-wrap:wrap;justify-content:center}
+      /* Schedule cards single column on mobile */
+      #day .cols-3{grid-template-columns:1fr}
     }
 
     /* Age confirmation modal */
@@ -329,6 +412,118 @@
       justify-content:flex-end;
       flex-wrap:wrap;
     }
+
+    /* Trust banner */
+    .trust-banner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:24px;
+      flex-wrap:wrap;
+      padding:16px 20px;
+      background:linear-gradient(135deg, rgba(127,217,179,.12) 0%, rgba(240,198,116,.08) 100%);
+      border:1px solid rgba(127,217,179,.25);
+      border-radius:16px;
+    }
+    .trust-stat{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-align:left;
+    }
+    .trust-stat-number{
+      font-size:28px;
+      font-weight:800;
+      color:var(--warm);
+      line-height:1;
+    }
+    .trust-stat-label{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.3;
+    }
+    @media(max-width:600px){
+      .trust-banner{gap:16px;padding:14px 16px}
+      .trust-stat-number{font-size:24px}
+    }
+
+    /* Pricing summary card */
+    .pricing-summary{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:32px;
+      flex-wrap:wrap;
+      text-align:center;
+    }
+    .pricing-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .pricing-amount{
+      font-size:32px;
+      font-weight:800;
+      color:var(--warm);
+    }
+    .pricing-label{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+    .pricing-divider{
+      width:1px;
+      height:40px;
+      background:var(--line);
+    }
+    @media(max-width:600px){
+      .pricing-summary{gap:20px}
+      .pricing-amount{font-size:26px}
+      .pricing-divider{display:none}
+    }
+
+    /* Waitlist modal */
+    .waitlist-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.55);
+      z-index:200;
+    }
+    .waitlist-modal.is-open{display:flex;}
+    .waitlist-modal-box{
+      background:rgba(7,42,36,.96);
+      border-radius:18px;
+      border:1px solid var(--line);
+      padding:24px;
+      max-width:400px;
+      width:90%;
+      box-shadow:0 20px 40px rgba(0,0,0,.45);
+    }
+    .waitlist-input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.08);
+      color:var(--ink);
+      font-size:15px;
+      margin-bottom:12px;
+    }
+    .waitlist-input:focus{
+      outline:none;
+      border-color:var(--accent);
+    }
+    .waitlist-input::placeholder{color:var(--muted);opacity:0.7}
+    .waitlist-success{
+      display:none;
+      text-align:center;
+      padding:20px 0;
+    }
+    .waitlist-success.show{display:block}
+    .waitlist-form.hidden{display:none}
   </style>
   
   <section id="home" class="hero">
@@ -345,11 +540,7 @@
           Holiday camps for children in Reception to Year 3. Daily activities and adventures in a calm, nurturing environment led by experienced teachers.
         </p>
 
-        <div style="display:flex;align-items:center;gap:12px;margin:14px 0;padding:10px 14px;background:rgba(127, 217, 179, 0.1);border:1px solid rgba(127, 217, 179, 0.2);border-radius:12px;width:fit-content">
-           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD9B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-           <span style="font-size:14px;color:#dff4ea;font-weight:500;line-height:1.3">Trusted by <strong>430+ families</strong> since Feb 2024</span>
-        </div>
-
+        
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
           <span class="chip">South London</span><span class="chip">Small groups</span><span class="chip">Experienced teachers</span>
           <span class="chip">Ofsted registered</span><span class="chip">Nut free and sesame free</span><span class="chip">Coding with Cubetto</span>
@@ -360,6 +551,56 @@
         </div>
         <p class="muted" style="margin:10px 0 0;font-size:14px">Standard day 8:30 am to 4:00 pm. Extended care available.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Trust & Pricing Banner -->
+  <section class="wrap" style="padding:0 0 8px;border:none">
+    <div class="trust-banner scroll-animate">
+      <div class="trust-stat">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <div>
+          <div class="trust-stat-number">430+</div>
+          <div class="trust-stat-label">Families since Feb 2024</div>
+        </div>
+      </div>
+      <div class="trust-stat">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+        <div>
+          <div class="trust-stat-number">Ofsted</div>
+          <div class="trust-stat-label">Registered provider</div>
+        </div>
+      </div>
+      <div class="trust-stat">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <div>
+          <div class="trust-stat-number">7.5 hrs</div>
+          <div class="trust-stat-label">Full day included</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Summary -->
+  <section class="wrap" style="padding:8px 0 16px;border:none">
+    <div class="card scroll-animate" style="padding:20px 24px">
+      <div class="pricing-summary">
+        <div class="pricing-item">
+          <div class="pricing-amount">£72</div>
+          <div class="pricing-label">Standard day<br><span style="font-size:12px;opacity:0.8">8:30 am – 4:00 pm</span></div>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-item">
+          <div class="pricing-amount">+£12</div>
+          <div class="pricing-label">Early drop-off<br><span style="font-size:12px;opacity:0.8">from 7:30 am</span></div>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-item">
+          <div class="pricing-amount">+£18</div>
+          <div class="pricing-label">Late pick-up<br><span style="font-size:12px;opacity:0.8">until 5:30 pm</span></div>
+        </div>
+      </div>
+      <p class="muted" style="text-align:center;margin:14px 0 0;font-size:13px">Tax-Free Childcare vouchers accepted</p>
     </div>
   </section>
 
@@ -626,6 +867,29 @@
       <div class="age-modal-actions">
         <button type="button" id="ageConfirmNo" class="btn btn-ghost">Cancel</button>
         <button type="button" id="ageConfirmYes" class="btn btn-fill">I confirm and continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="waitlistModal" class="waitlist-modal" aria-hidden="true">
+    <div class="waitlist-modal-box">
+      <div class="waitlist-form">
+        <h3 class="age-modal-title">Join the waitlist</h3>
+        <p class="age-modal-text" id="waitlistDateText">
+          Get notified if a place becomes available for <strong id="waitlistDate"></strong>.
+        </p>
+        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="Your email address" required>
+        <input type="text" class="waitlist-input" id="waitlistName" placeholder="Your name (optional)">
+        <div class="age-modal-actions" style="justify-content:stretch">
+          <button type="button" id="waitlistCancel" class="btn btn-ghost" style="flex:1">Cancel</button>
+          <button type="button" id="waitlistSubmit" class="btn btn-fill" style="flex:1">Join waitlist</button>
+        </div>
+      </div>
+      <div class="waitlist-success">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" style="margin-bottom:12px"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
+        <h3 class="age-modal-title">You're on the list!</h3>
+        <p class="age-modal-text" style="margin-bottom:0">We'll email you if a place opens up for <strong id="waitlistDateConfirm"></strong>.</p>
+        <button type="button" id="waitlistClose" class="btn btn-ghost" style="margin-top:16px">Close</button>
       </div>
     </div>
   </div>
@@ -940,11 +1204,71 @@
 
         // Update booking button
         if(result.label==='Sold out'){
-          btn.textContent='Sold Out';
-          btn.setAttribute('aria-disabled','true');
-          btn.style.opacity='.45';
-          btn.style.pointerEvents='none';
+          btn.textContent='Join Waitlist';
+          btn.removeAttribute('data-book');
+          btn.setAttribute('data-waitlist', r.date);
+          btn.style.opacity='1';
+          btn.style.pointerEvents='auto';
           btn.href='#';
+          btn.style.borderColor='rgba(255,107,107,.4)';
+          btn.style.color='#ffb3b3';
+        }
+      });
+
+      // Waitlist modal functionality
+      const waitlistModal=document.getElementById('waitlistModal');
+      const waitlistForm=waitlistModal.querySelector('.waitlist-form');
+      const waitlistSuccess=waitlistModal.querySelector('.waitlist-success');
+      const waitlistDateEl=document.getElementById('waitlistDate');
+      const waitlistDateConfirm=document.getElementById('waitlistDateConfirm');
+      const waitlistEmail=document.getElementById('waitlistEmail');
+      const waitlistName=document.getElementById('waitlistName');
+      let currentWaitlistDate='';
+
+      function openWaitlistModal(date){
+        currentWaitlistDate=date;
+        waitlistDateEl.textContent=date;
+        waitlistForm.classList.remove('hidden');
+        waitlistSuccess.classList.remove('show');
+        waitlistEmail.value='';
+        waitlistName.value='';
+        waitlistModal.classList.add('is-open');
+        waitlistModal.setAttribute('aria-hidden','false');
+        waitlistEmail.focus();
+      }
+
+      function closeWaitlistModal(){
+        waitlistModal.classList.remove('is-open');
+        waitlistModal.setAttribute('aria-hidden','true');
+      }
+
+      document.getElementById('waitlistCancel').addEventListener('click',closeWaitlistModal);
+      document.getElementById('waitlistClose').addEventListener('click',closeWaitlistModal);
+      waitlistModal.addEventListener('click',e=>{if(e.target===waitlistModal)closeWaitlistModal();});
+
+      document.getElementById('waitlistSubmit').addEventListener('click',function(){
+        const email=waitlistEmail.value.trim();
+        if(!email||!email.includes('@')){
+          waitlistEmail.style.borderColor='#ff6b6b';
+          waitlistEmail.focus();
+          return;
+        }
+        // Store waitlist locally (in production, send to server)
+        const waitlistData=JSON.parse(localStorage.getItem('evg-waitlist')||'[]');
+        waitlistData.push({date:currentWaitlistDate,email,name:waitlistName.value.trim(),timestamp:Date.now()});
+        localStorage.setItem('evg-waitlist',JSON.stringify(waitlistData));
+
+        waitlistDateConfirm.textContent=currentWaitlistDate;
+        waitlistForm.classList.add('hidden');
+        waitlistSuccess.classList.add('show');
+      });
+
+      // Attach waitlist click handlers
+      document.addEventListener('click',function(e){
+        const btn=e.target.closest('[data-waitlist]');
+        if(btn){
+          e.preventDefault();
+          openWaitlistModal(btn.getAttribute('data-waitlist'));
         }
       });
       
@@ -988,17 +1312,24 @@
 
           // Update booking button
           if(result.label==='Sold out'){
-            btn.textContent='Sold Out';
-            btn.setAttribute('aria-disabled','true');
-            btn.style.opacity='.45';
-            btn.style.pointerEvents='none';
+            btn.textContent='Join Waitlist';
+            btn.removeAttribute('data-book');
+            btn.setAttribute('data-waitlist', r.date);
+            btn.style.opacity='1';
+            btn.style.pointerEvents='auto';
             btn.href='#';
+            btn.style.borderColor='rgba(255,107,107,.4)';
+            btn.style.color='#ffb3b3';
           } else {
             btn.textContent='Book';
-            btn.removeAttribute('aria-disabled');
+            btn.removeAttribute('data-waitlist');
+            btn.setAttribute('data-book','true');
+            btn.setAttribute('data-url',r.url);
             btn.style.opacity='1';
             btn.style.pointerEvents='auto';
             btn.href=r.url;
+            btn.style.borderColor='';
+            btn.style.color='';
           }
         });
       });
