@@ -835,7 +835,7 @@
             };
 
             function handleAddToCart() {
-                // Build summary of selected items with URLs
+                // Build summary of selected items
                 const selectedItems = [];
 
                 dayCheckboxes.forEach(checkbox => {
@@ -845,83 +845,61 @@
                     const config = DAY_CONFIG[dayKey];
 
                     // Add day
-                    selectedItems.push({
-                        name: config.name,
-                        price: 72,
-                        url: config.dayUrl
-                    });
+                    selectedItems.push({ name: config.name, price: 72 });
 
                     // Check for early
                     const earlyBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="early"]`);
                     if (earlyBox && earlyBox.checked) {
-                        selectedItems.push({
-                            name: `Early Drop-off - ${config.name}`,
-                            price: 12,
-                            url: config.earlyUrl
-                        });
+                        selectedItems.push({ name: `Early Drop-off`, price: 12, parent: config.name });
                     }
 
                     // Check for late
                     const lateBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="late"]`);
                     if (lateBox && lateBox.checked) {
-                        selectedItems.push({
-                            name: `Late Pick-up - ${config.name}`,
-                            price: 18,
-                            url: config.lateUrl
-                        });
+                        selectedItems.push({ name: `Late Pick-up`, price: 18, parent: config.name });
                     }
                 });
 
                 if (selectedItems.length === 0) return;
 
-                // Build modal HTML with popup buttons and guide
+                // Build clean shopping list
                 const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-                const itemsHTML = selectedItems.map((item, index) =>
-                    `<li class="flex items-center justify-between py-3 ${index < selectedItems.length - 1 ? 'border-b border-stone-100' : ''}" id="item-${index}">
-                        <div class="flex items-center gap-3 flex-1">
-                            <span class="w-5 h-5 rounded-full border-2 border-stone-300 flex items-center justify-center text-xs item-check" id="check-${index}"></span>
-                            <div>
-                                <span class="text-stone-700 text-sm block">${item.name}</span>
-                                <span class="text-stone-400 text-xs">£${item.price}</span>
-                            </div>
+                const itemsHTML = selectedItems.map(item =>
+                    `<li class="flex items-center justify-between py-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="text-stone-700 text-sm">${item.name}${item.parent ? ` <span class="text-stone-400">(${item.parent})</span>` : ''}</span>
                         </div>
-                        <button onclick="openProductPopup('${item.url}', ${index})" class="bg-emerald-700 text-white text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-emerald-800 transition">
-                            Add
-                        </button>
+                        <span class="text-stone-500 text-sm">£${item.price}</span>
                     </li>`
                 ).join('');
 
                 const modalHTML = `
                     <div id="booking-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000] p-4">
                         <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-auto shadow-2xl">
-                            <div class="p-5 border-b border-stone-100">
-                                <h3 class="text-xl font-semibold text-stone-900 mb-3">Your Selection</h3>
-
-                                <!-- Step by step guide -->
-                                <div class="bg-emerald-50 rounded-xl p-4 text-sm">
-                                    <p class="font-semibold text-emerald-800 mb-2">How to complete your booking:</p>
-                                    <ol class="text-emerald-700 space-y-1 text-xs">
-                                        <li class="flex gap-2"><span class="font-bold">1.</span> Click "Add" for each item below</li>
-                                        <li class="flex gap-2"><span class="font-bold">2.</span> In the popup, click the green "Add to Cart" button</li>
-                                        <li class="flex gap-2"><span class="font-bold">3.</span> Close the popup and repeat for each item</li>
-                                        <li class="flex gap-2"><span class="font-bold">4.</span> Click "View Cart & Checkout" when done</li>
-                                    </ol>
+                            <div class="p-6 border-b border-stone-100">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                    </svg>
                                 </div>
+                                <h3 class="text-xl font-semibold text-stone-900">Your Shopping List</h3>
+                                <p class="text-stone-500 text-sm mt-1">Here's what you need to add on the next page</p>
                             </div>
-                            <div class="p-5">
-                                <p class="text-xs text-stone-500 mb-3">Click each item to add to your cart:</p>
-                                <ul class="space-y-1">${itemsHTML}</ul>
-                                <div class="flex justify-between text-lg font-bold pt-4 mt-4 border-t border-stone-200">
+                            <div class="p-6">
+                                <ul class="space-y-1 mb-4">${itemsHTML}</ul>
+                                <div class="flex justify-between text-lg font-bold pt-4 border-t border-stone-200">
                                     <span>Total</span>
                                     <span class="text-emerald-700">£${total}</span>
                                 </div>
                             </div>
-                            <div class="p-5 bg-stone-50 rounded-b-2xl space-y-3">
-                                <a href="/cart" class="block w-full bg-emerald-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-950 transition">
-                                    View Cart & Checkout →
+                            <div class="p-6 bg-emerald-900 rounded-b-2xl">
+                                <p class="text-emerald-100 text-sm mb-4 text-center">On the booking page, find and add each item above to your cart</p>
+                                <a href="/bookings" class="block w-full bg-white text-emerald-900 text-center py-3 rounded-xl font-semibold hover:bg-emerald-50 transition">
+                                    Go to Booking Page →
                                 </a>
-                                <button onclick="document.getElementById('booking-modal').remove()" class="block w-full text-stone-500 text-center py-2 text-sm hover:text-stone-700">
-                                    Close
+                                <button onclick="document.getElementById('booking-modal').remove()" class="block w-full text-emerald-200 text-center py-2 text-sm mt-2 hover:text-white">
+                                    Go back
                                 </button>
                             </div>
                         </div>
@@ -940,31 +918,6 @@
                     if (e.target === this) this.remove();
                 });
             }
-
-            // Function to open product in popup window - attached to window for global access
-            window.openProductPopup = function(url, index) {
-                const width = 500;
-                const height = 700;
-                const left = (window.innerWidth - width) / 2;
-                const top = (window.innerHeight - height) / 2;
-
-                const popup = window.open(
-                    url,
-                    'AddToCart',
-                    `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`
-                );
-
-                // Mark item as done (visual feedback)
-                const checkEl = document.getElementById(`check-${index}`);
-                if (checkEl) {
-                    checkEl.innerHTML = '✓';
-                    checkEl.classList.remove('border-stone-300');
-                    checkEl.classList.add('bg-emerald-500', 'border-emerald-500', 'text-white');
-                }
-
-                // Focus popup
-                if (popup) popup.focus();
-            };
 
             dayCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
             addonCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
