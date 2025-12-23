@@ -627,12 +627,12 @@
         //
         // FIXES APPLIED:
         // 1. Fixed CSRF token handling - uses URL parameter (Squarespace standard)
-        // 2. Switched from Product IDs to SKUs (Products are under Services tab)
-        // 3. Fixed payload format: {sku: 'SQ...', quantity: 1}
+        // 2. Using correct Product IDs (not Variant IDs or SKUs)
+        // 3. Fixed payload format: {itemId: '694a6c...', quantity: 1}
         // 4. Added comprehensive error messages for debugging
         // 5. Added progress indicator showing X/Y items being added
         // 6. Added diagnostic logging on page load
-        // 7. All product SKUs verified from Squarespace dashboard
+        // 7. All 15 Product IDs verified from Squarespace Products dashboard
         //
         // DEBUGGING:
         // - Open browser console to see diagnostic messages
@@ -642,33 +642,33 @@
         // - 403 errors indicate CSRF/security issues
         //
         // ==========================================
-        // PRODUCT CONFIGURATION (Using SKUs)
+        // PRODUCT CONFIGURATION (Using Product IDs)
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   'SQ6231165',  // Monday 16th February '26
-                early: 'SQ3465636',  // Early Drop Off - Monday
-                late:  'SQ8505567'   // Late Pick Up - Monday
+                day:   '694a6cbeb50bae40ae71ed7c6',  // Monday 16th February '26
+                early: '694a6cc69b26257598d27ca',    // Early Drop Off - Monday
+                late:  '694a6cbeb50bae40ae71ed7c6'   // Late Pick Up - Monday
             },
             'tue': {
-                day:   'SQ2208830',  // Tuesday 17th February '26
-                early: 'SQ0787076',  // Early Drop Off - Tuesday
-                late:  'SQ8084671'   // Late Pick Up - Tuesday
+                day:   '694a6c247d140728b1e3445',  // Tuesday 17th February '26
+                early: '694a6d32185517dce8ac8c00',  // Early Drop Off - Tuesday
+                late:  '694a6d11bd3e8ab13f660beec'   // Late Pick Up - Tuesday
             },
             'wed': {
-                day:   'SQ3018152',  // Wednesday 18th February '26
-                early: 'SQ0212251',  // Early Drop Off - Wednesday
-                late:  'SQ2165772'   // Late Pick Up - Wednesday
+                day:   '694a6c42275698f4fa8df43d',  // Wednesday 18th February '26
+                early: '694a6d68c6e4921388a40d1d',  // Early Drop Off - Wednesday
+                late:  '694a6d8958d03318c1e34fc7'   // Late Pick Up - Wednesday
             },
             'thu': {
-                day:   'SQ0256674',  // Thursday 19th February '26
-                early: 'SQ3611816',  // Early Drop Off - Thursday
-                late:  'SQ1072526'   // Late Pick Up - Thursday
+                day:   '694a6c20c212b91e8f6edbae49',  // Thursday 19th February '26
+                early: '694a6ca0f0fde7c5e7084ed7',   // Early Drop Off - Thursday
+                late:  '694a6dbb3650b20b77ed28ae'    // Late Pick Up - Thursday
             },
             'fri': {
-                day:   'SQ0808587',  // Friday 20th February '26
-                early: 'SQ3758766',  // Early Drop Off - Friday
-                late:  'SQ5247453'   // Late Pick Up - Friday
+                day:   '694a6d7ba18548265e2bfd8a9',  // Friday 20th February '26
+                early: '694a6ded10dea5e91c11ef6',   // Early Drop Off - Friday
+                late:  '694a6cb3e695ed557896255'    // Late Pick Up - Friday
             }
         };
 
@@ -766,7 +766,7 @@
                 return null;
             }
 
-            async function addOneItemToSquarespaceCart(sku) {
+            async function addOneItemToSquarespaceCart(productId) {
                 const crumb = getSquarespaceCrumb();
 
                 // Build URL with crumb - required for Squarespace
@@ -775,9 +775,9 @@
                     url += `?crumb=${encodeURIComponent(crumb)}`;
                 }
 
-                // Using SKU-based cart add
+                // Using Product ID-based cart add
                 const payload = {
-                    sku: sku,
+                    itemId: productId,
                     quantity: 1
                 };
 
@@ -802,7 +802,7 @@
                     console.log('Status:', res.status, res.statusText);
                     console.log('URL:', url);
                     console.log('Payload sent:', payload);
-                    console.log('SKU:', sku);
+                    console.log('Product ID:', productId);
                     console.log('Crumb available:', !!crumb);
                     console.log('Response:', data);
                     console.groupEnd();
@@ -813,7 +813,7 @@
                     throw err;
                 }
 
-                console.log('✓ Added item to cart (SKU):', sku);
+                console.log('✓ Added item to cart (Product ID):', productId);
                 return data;
             }
 
@@ -849,12 +849,12 @@
                     return;
                 }
 
-                console.log('🛒 Adding items to cart (SKUs):', itemsToAdd);
+                console.log('🛒 Adding items to cart (Product IDs):', itemsToAdd);
 
                 try {
                     let successCount = 0;
-                    for (const sku of itemsToAdd) {
-                        await addOneItemToSquarespaceCart(sku);
+                    for (const productId of itemsToAdd) {
+                        await addOneItemToSquarespaceCart(productId);
                         successCount++;
                         addToCartBtn.innerHTML = `<span>Adding ${successCount}/${itemsToAdd.length}...</span>`;
                         await new Promise(r => setTimeout(r, 350));
@@ -870,7 +870,7 @@
 
                     let errorMessage = 'Unable to add to cart. ';
                     if (error.status === 404) {
-                        errorMessage += 'Product not found (404). Please check SKUs in Squarespace.';
+                        errorMessage += 'Product not found (404). Please check Product IDs in Squarespace.';
                     } else if (error.status === 403) {
                         errorMessage += 'Security error (403). CSRF token issue.';
                     } else if (error.code === 'NO_CRUMB') {
