@@ -941,8 +941,8 @@
                 });
             }
 
-            // Function to open product in popup window
-            function openProductPopup(url, index) {
+            // Function to open product in popup window - attached to window for global access
+            window.openProductPopup = function(url, index) {
                 const width = 500;
                 const height = 700;
                 const left = (window.innerWidth - width) / 2;
@@ -964,7 +964,7 @@
 
                 // Focus popup
                 if (popup) popup.focus();
-            }
+            };
 
             dayCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
             addonCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
