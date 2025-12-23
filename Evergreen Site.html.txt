@@ -622,32 +622,34 @@
         <script>
         // ==========================================
         // PRODUCT CONFIGURATION
+        // Each product needs: itemId (from Squarespace product ID) and sku
+        // Find these in Squarespace: Commerce → Products → Services tab
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   '52f2cb06-7f21-4d2e-8dba-604ebc173df5',
-                early: '88dd6573-010e-4e7b-abf7-0788a29cd35d',
-                late:  '7728f965-a8a0-405a-9ee7-2a76cd9cb98d'
+                day:   { itemId: 'REPLACE_MON_DAY_ID',   sku: 'REPLACE_MON_DAY_SKU' },
+                early: { itemId: 'REPLACE_MON_EARLY_ID', sku: 'REPLACE_MON_EARLY_SKU' },
+                late:  { itemId: 'REPLACE_MON_LATE_ID',  sku: 'REPLACE_MON_LATE_SKU' }
             },
             'tue': {
-                day:   '1e866658-e824-4e92-857d-cfba6bac544b',
-                early: '22086984-940f-4e6e-b156-951472c0c81e',
-                late:  'c0bc4f15-0f5e-439a-92f3-cd7fd1012761'
+                day:   { itemId: 'REPLACE_TUE_DAY_ID',   sku: 'REPLACE_TUE_DAY_SKU' },
+                early: { itemId: 'REPLACE_TUE_EARLY_ID', sku: 'REPLACE_TUE_EARLY_SKU' },
+                late:  { itemId: 'REPLACE_TUE_LATE_ID',  sku: 'REPLACE_TUE_LATE_SKU' }
             },
             'wed': {
-                day:   '532ae543-2216-468f-a1eb-cbd1935b82eb',
-                early: '9b5f0586-d6ae-4460-980f-d38f5c075ba7',
-                late:  '001b3c75-8c73-406b-8161-b543e4617e3c'
+                day:   { itemId: 'REPLACE_WED_DAY_ID',   sku: 'REPLACE_WED_DAY_SKU' },
+                early: { itemId: 'REPLACE_WED_EARLY_ID', sku: 'REPLACE_WED_EARLY_SKU' },
+                late:  { itemId: 'REPLACE_WED_LATE_ID',  sku: 'REPLACE_WED_LATE_SKU' }
             },
             'thu': {
-                day:   '4ec62765-c175-41b1-880a-a0492e69ab44',
-                early: '86958053-1e23-4052-ae76-9e6d6d34ba30',
-                late:  'b70451c7-6e6d-4277-b843-f5c61a2e3ac2'
+                day:   { itemId: 'REPLACE_THU_DAY_ID',   sku: 'REPLACE_THU_DAY_SKU' },
+                early: { itemId: 'REPLACE_THU_EARLY_ID', sku: 'REPLACE_THU_EARLY_SKU' },
+                late:  { itemId: 'REPLACE_THU_LATE_ID',  sku: 'REPLACE_THU_LATE_SKU' }
             },
             'fri': {
-                day:   '916b044c-a8e1-4506-91ef-340a31565eb6',
-                early: '37a31455-2e42-4c6f-8cdc-04c55d2c3872',
-                late:  '2b9bbb04-058a-494a-8004-a4cdb39579cd'
+                day:   { itemId: 'REPLACE_FRI_DAY_ID',   sku: 'REPLACE_FRI_DAY_SKU' },
+                early: { itemId: 'REPLACE_FRI_EARLY_ID', sku: 'REPLACE_FRI_EARLY_SKU' },
+                late:  { itemId: 'REPLACE_FRI_LATE_ID',  sku: 'REPLACE_FRI_LATE_SKU' }
             }
         };
 
@@ -745,7 +747,7 @@
                 return null;
             }
 
-            async function addOneItemToSquarespaceCart(itemId) {
+            async function addOneItemToSquarespaceCart(product) {
                 const crumb = getSquarespaceCrumb();
                 if (!crumb) {
                     const err = new Error('Missing Squarespace crumb. Cookie "crumb" not found and context crumb not available.');
@@ -756,8 +758,9 @@
                 const url = `/api/commerce/shopping-cart/entries?crumb=${encodeURIComponent(crumb)}`;
 
                 const payload = {
-                    itemId: itemId,
-                    sku: null,
+                    itemId: product.itemId,
+                    sku: product.sku,
+                    quantity: 1,
                     additionalFields: "null"
                 };
 
@@ -779,7 +782,8 @@
                     console.group('Squarespace cart add failed');
                     console.log('Status:', res.status, res.statusText);
                     console.log('URL:', url);
-                    console.log('ItemId:', itemId);
+                    console.log('Product:', product);
+                    console.log('Payload:', payload);
                     console.log('Response:', data);
                     console.groupEnd();
 
@@ -806,6 +810,7 @@
                     const dayConfig = PRODUCTS[dayKey];
                     if (!dayConfig) return;
 
+                    // Add the day product (now an object with itemId and sku)
                     itemsToAdd.push(dayConfig.day);
 
                     const earlyBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="early"]`);
