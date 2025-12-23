@@ -622,34 +622,33 @@
         <script>
         // ==========================================
         // PRODUCT CONFIGURATION
-        // Each product needs: itemId (from Squarespace product ID) and sku
-        // Find these in Squarespace: Commerce → Products → Services tab
+        // Using Variant IDs (UUIDs) from spreadsheet column 2, with SKUs
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   { itemId: '694a6beb50bae40ae71ed7c6', sku: 'SQ6231165' },
-                early: { itemId: '694a6cc65b2d2375984f27ca', sku: 'SQ3464636' },
-                late:  { itemId: '694a6cf9a6695e555789c525', sku: 'SQ8504567' }
+                day:   { itemId: '52f2cb06-7f21-4d2e-8dba-604ebc173df5', sku: 'SQ6231165' },
+                early: { itemId: '88dd6573-010e-4e7b-abf7-0788a29cd35d', sku: 'SQ3464636' },
+                late:  { itemId: '7728f965-a8a0-405a-9ee7-2a76cd9cb98d', sku: 'SQ8504567' }
             },
             'tue': {
-                day:   { itemId: '694a6c247d1440728b1e3445', sku: 'SQ2208830' },
-                early: { itemId: '694a6d321855174ce4cac800', sku: 'SQ0787076' },
-                late:  { itemId: '694a6d1bd3e8ab13f660beec', sku: 'SQ8084671' }
+                day:   { itemId: '1e866658-e824-4e92-857d-cfba6bac544b', sku: 'SQ2208830' },
+                early: { itemId: '22086984-940f-4e6e-b156-951472c0c81e', sku: 'SQ0787076' },
+                late:  { itemId: 'c0bc4f15-0f5e-439a-92f3-cd7fd1012761', sku: 'SQ8084671' }
             },
             'wed': {
-                day:   { itemId: '694a6c4227568f4dfa8df43d', sku: 'SQ3018152' },
-                early: { itemId: '694a6d68c6e4921388a40d1d', sku: 'SQ0212251' },
-                late:  { itemId: '694a6d8938df3318c14241c7', sku: 'SQ2165772' }
+                day:   { itemId: '532ae543-2216-468f-a1eb-cbd1935b82eb', sku: 'SQ3018152' },
+                early: { itemId: '9b5f0586-d6ae-4460-980f-d38f5c075ba7', sku: 'SQ0212251' },
+                late:  { itemId: '001b3c75-8c73-406b-8161-b543e4617e3c', sku: 'SQ2165772' }
             },
             'thu': {
-                day:   { itemId: '694a6c62c12b9163f6cbea49', sku: 'SQ0256674' },
-                early: { itemId: '694a6dad0fde7c5e7084eef7', sku: 'SQ3611818' },
-                late:  { itemId: '694a6dbb365b820b77ed28ae', sku: 'SQ1072526' }
+                day:   { itemId: '4ec62765-c175-41b1-880a-a0492e69ab44', sku: 'SQ0256674' },
+                early: { itemId: '86958053-1e23-4052-ae76-9e6d6d34ba30', sku: 'SQ3611818' },
+                late:  { itemId: 'b70451c7-6e6d-4277-b843-f5c61a2e3ac2', sku: 'SQ1072526' }
             },
             'fri': {
-                day:   { itemId: '694a6c7ba185482cbd2fd430', sku: 'SQ0808587' },
-                early: { itemId: '694a6dce10b6ea6a91c11ef6', sku: 'SQ3758766' },
-                late:  { itemId: '694a6ddc5faf3b5f5ea148b6', sku: 'SQ5247453' }
+                day:   { itemId: '916b044c-a8e1-4506-91ef-340a31565eb6', sku: 'SQ0808587' },
+                early: { itemId: '37a31455-2e42-4c6f-8cdc-04c55d2c3872', sku: 'SQ3758766' },
+                late:  { itemId: '2b9bbb04-058a-494a-8004-a4cdb39579cd', sku: 'SQ5247453' }
             }
         };
 
