@@ -795,53 +795,89 @@
                 return data;
             }
 
-            async function handleAddToCart() {
-                const originalHTML = addToCartBtn.innerHTML;
-                addToCartBtn.innerHTML = '<span>Adding...</span>';
-                addToCartBtn.disabled = true;
+            // Day names for display
+            const DAY_NAMES = {
+                'mon': 'Monday 16th Feb',
+                'tue': 'Tuesday 17th Feb',
+                'wed': 'Wednesday 18th Feb',
+                'thu': 'Thursday 19th Feb',
+                'fri': 'Friday 20th Feb'
+            };
 
-                const itemsToAdd = [];
+            function handleAddToCart() {
+                // Build summary of selected items
+                const selectedItems = [];
 
                 dayCheckboxes.forEach(checkbox => {
                     if (!checkbox.checked) return;
 
                     const dayKey = checkbox.closest('[data-day]').dataset.day;
-                    const dayConfig = PRODUCTS[dayKey];
-                    if (!dayConfig) return;
+                    const dayName = DAY_NAMES[dayKey];
 
-                    // Add the day product (now an object with itemId and sku)
-                    itemsToAdd.push(dayConfig.day);
+                    // Add day
+                    selectedItems.push({ type: 'day', name: dayName, price: 72 });
 
+                    // Check for early
                     const earlyBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="early"]`);
-                    if (earlyBox && earlyBox.checked) itemsToAdd.push(dayConfig.early);
-
-                    const lateBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="late"]`);
-                    if (lateBox && lateBox.checked) itemsToAdd.push(dayConfig.late);
-                });
-
-                if (itemsToAdd.length === 0) {
-                    addToCartBtn.innerHTML = originalHTML;
-                    calculateTotal();
-                    return;
-                }
-
-                try {
-                    for (const itemId of itemsToAdd) {
-                        await addOneItemToSquarespaceCart(itemId);
-                        await new Promise(r => setTimeout(r, 350));
+                    if (earlyBox && earlyBox.checked) {
+                        selectedItems.push({ type: 'early', name: `Early Drop-off - ${dayName}`, price: 12 });
                     }
 
-                    window.location.href = '/cart';
+                    // Check for late
+                    const lateBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="late"]`);
+                    if (lateBox && lateBox.checked) {
+                        selectedItems.push({ type: 'late', name: `Late Pick-up - ${dayName}`, price: 18 });
+                    }
+                });
 
-                } catch (error) {
-                    console.error('Error adding to cart:', error);
-                    addToCartBtn.innerHTML = 'Error. Open Console.';
-                    alert('The cart request failed. Open DevTools Console for the exact reason.');
-                    setTimeout(() => {
-                        addToCartBtn.innerHTML = originalHTML;
-                        calculateTotal();
-                    }, 1500);
-                }
+                if (selectedItems.length === 0) return;
+
+                // Build modal HTML
+                const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
+                const itemsHTML = selectedItems.map(item =>
+                    `<li class="flex justify-between py-2 border-b border-stone-100">
+                        <span class="text-stone-700">${item.name}</span>
+                        <span class="font-medium">£${item.price}</span>
+                    </li>`
+                ).join('');
+
+                const modalHTML = `
+                    <div id="booking-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000] p-4">
+                        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-auto shadow-2xl">
+                            <div class="p-6 border-b border-stone-100">
+                                <h3 class="text-xl font-semibold text-stone-900">Your Selection</h3>
+                                <p class="text-stone-500 text-sm mt-1">Please add these items from our booking page</p>
+                            </div>
+                            <div class="p-6">
+                                <ul class="space-y-1 mb-4">${itemsHTML}</ul>
+                                <div class="flex justify-between text-lg font-bold pt-4 border-t border-stone-200">
+                                    <span>Total</span>
+                                    <span class="text-emerald-700">£${total}</span>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-stone-50 rounded-b-2xl space-y-3">
+                                <a href="/shop" class="block w-full bg-emerald-700 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-800 transition">
+                                    Go to Booking Page →
+                                </a>
+                                <button onclick="document.getElementById('booking-modal').remove()" class="block w-full text-stone-500 text-center py-2 text-sm hover:text-stone-700">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Remove existing modal if any
+                const existing = document.getElementById('booking-modal');
+                if (existing) existing.remove();
+
+                // Add modal to page
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+                // Close on backdrop click
+                document.getElementById('booking-modal').addEventListener('click', function(e) {
+                    if (e.target === this) this.remove();
+                });
             }
 
             dayCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
