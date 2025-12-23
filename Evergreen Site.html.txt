@@ -621,6 +621,25 @@
 
         <script>
         // ==========================================
+        // EVERGREEN KIDS CART SYSTEM
+        // ==========================================
+        // This script handles multi-day bookings with add-ons (early drop-off & late pick-up)
+        //
+        // FIXES APPLIED:
+        // 1. Fixed CSRF token handling - now tries both URL parameter and header
+        // 2. Fixed additionalFields from string "null" to actual null value
+        // 3. Added comprehensive error messages for debugging
+        // 4. Added progress indicator showing X/Y items being added
+        // 5. Added diagnostic logging on page load
+        //
+        // DEBUGGING:
+        // - Open browser console to see diagnostic messages
+        // - Check for "🔍 Evergreen Cart System Initialized" message
+        // - If CSRF token is missing, ensure page is loaded within Squarespace
+        // - 404 errors mean product IDs don't match Squarespace products
+        // - 403 errors indicate CSRF/security issues
+        //
+        // ==========================================
         // PRODUCT CONFIGURATION
         // ==========================================
         const PRODUCTS = {
@@ -747,27 +766,33 @@
 
             async function addOneItemToSquarespaceCart(itemId) {
                 const crumb = getSquarespaceCrumb();
-                if (!crumb) {
-                    const err = new Error('Missing Squarespace crumb. Cookie "crumb" not found and context crumb not available.');
-                    err.code = 'NO_CRUMB';
-                    throw err;
-                }
 
-                const url = `/api/commerce/shopping-cart/entries?crumb=${encodeURIComponent(crumb)}`;
+                // Build URL with crumb if available
+                let url = '/api/commerce/shopping-cart/entries';
+                if (crumb) {
+                    url += `?crumb=${encodeURIComponent(crumb)}`;
+                }
 
                 const payload = {
                     itemId: itemId,
                     sku: null,
-                    additionalFields: "null"
+                    additionalFields: null
                 };
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                };
+
+                // Add crumb as header if available
+                if (crumb) {
+                    headers['X-CSRF-Token'] = crumb;
+                }
 
                 const res = await fetch(url, {
                     method: 'POST',
                     credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: headers,
                     body: JSON.stringify(payload)
                 });
 
@@ -776,10 +801,11 @@
                 try { data = text ? JSON.parse(text) : null; } catch (e) { data = text; }
 
                 if (!res.ok) {
-                    console.group('Squarespace cart add failed');
+                    console.group('❌ Squarespace cart add failed');
                     console.log('Status:', res.status, res.statusText);
                     console.log('URL:', url);
                     console.log('ItemId:', itemId);
+                    console.log('Crumb available:', !!crumb);
                     console.log('Response:', data);
                     console.groupEnd();
 
@@ -789,6 +815,7 @@
                     throw err;
                 }
 
+                console.log('✓ Added item to cart:', itemId);
                 return data;
             }
 
@@ -804,7 +831,10 @@
 
                     const dayKey = checkbox.closest('[data-day]').dataset.day;
                     const dayConfig = PRODUCTS[dayKey];
-                    if (!dayConfig) return;
+                    if (!dayConfig) {
+                        console.warn('No product config found for day:', dayKey);
+                        return;
+                    }
 
                     itemsToAdd.push(dayConfig.day);
 
@@ -821,22 +851,43 @@
                     return;
                 }
 
+                console.log('🛒 Adding items to cart:', itemsToAdd);
+
                 try {
+                    let successCount = 0;
                     for (const itemId of itemsToAdd) {
                         await addOneItemToSquarespaceCart(itemId);
+                        successCount++;
+                        addToCartBtn.innerHTML = `<span>Adding ${successCount}/${itemsToAdd.length}...</span>`;
                         await new Promise(r => setTimeout(r, 350));
                     }
 
+                    console.log('✅ All items added successfully. Redirecting to cart...');
+                    addToCartBtn.innerHTML = '<span>Success! Redirecting...</span>';
+                    await new Promise(r => setTimeout(r, 500));
                     window.location.href = '/cart';
 
                 } catch (error) {
-                    console.error('Error adding to cart:', error);
-                    addToCartBtn.innerHTML = 'Error. Open Console.';
-                    alert('The cart request failed. Open DevTools Console for the exact reason.');
+                    console.error('❌ Error adding to cart:', error);
+
+                    let errorMessage = 'Unable to add to cart. ';
+                    if (error.status === 404) {
+                        errorMessage += 'Product not found (404). Please check product IDs.';
+                    } else if (error.status === 403) {
+                        errorMessage += 'Security error (403). CSRF token issue.';
+                    } else if (error.code === 'NO_CRUMB') {
+                        errorMessage += 'CSRF token not found. This page must be loaded within Squarespace.';
+                    } else {
+                        errorMessage += 'See console for details.';
+                    }
+
+                    addToCartBtn.innerHTML = '❌ Error';
+                    alert(errorMessage);
+
                     setTimeout(() => {
                         addToCartBtn.innerHTML = originalHTML;
                         calculateTotal();
-                    }, 1500);
+                    }, 2000);
                 }
             }
 
@@ -845,6 +896,20 @@
             addToCartBtn.addEventListener('click', handleAddToCart);
 
             calculateTotal();
+
+            // Diagnostic logging
+            console.group('🔍 Evergreen Cart System Initialized');
+            const diagnosticCrumb = getSquarespaceCrumb();
+            console.log('CSRF Token available:', !!diagnosticCrumb);
+            if (diagnosticCrumb) {
+                console.log('Token (first 10 chars):', diagnosticCrumb.substring(0, 10) + '...');
+            } else {
+                console.warn('⚠️ CSRF token not found!');
+                console.log('Context check:', typeof window.Static !== 'undefined' ? 'Static exists' : 'Static missing');
+                console.log('Cookie check:', document.cookie.includes('crumb') ? 'Cookie exists' : 'Cookie missing');
+            }
+            console.log('Product IDs configured:', Object.keys(PRODUCTS).length, 'days');
+            console.groupEnd();
 
             if (window.lucide) lucide.createIcons();
         })();
