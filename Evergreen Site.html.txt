@@ -1,1048 +1,1198 @@
-<section id="evg-site">
-  <script>(function(){if(!document.querySelector('meta[name="viewport"]')){const m=document.createElement('meta');m.name='viewport';m.content='width=device-width,initial-scale=1';document.head.appendChild(m);}})();</script>
-  <script>
-    (function(){
-      const title="Evergreen Kids Camp — Holiday camps for Reception to Year 3, South London";
-      const desc="Premium holiday camps for children in Reception to Year 3 in Herne Hill, South London. Education, sportsmanship and coding. 8:30 am to 4:00 pm with optional extended care.";
-      document.title=title;
-      function setMeta(n,c,p){
-        let t=document.querySelector(p||`meta[name="${n}"]`);
-        if(!t){
-          t=document.createElement('meta');
-          if(p&&p.includes('property'))t.setAttribute('property',n);else t.name=n;
-          document.head.appendChild(t);
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evergreen Kids Camp | Herne Hill</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* SQUARESPACE OVERRIDE - Force full viewport coverage */
+        .evergreen-wrapper {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            background: white !important;
         }
-        t.setAttribute('content',c);
-      }
-      setMeta("description",desc);
-      setMeta("og:title",title,'meta[property="og:title"]');
-      setMeta("og:description",desc,'meta[property="og:description"]');
-    })();
-  </script>
-  <style>
-    /* Remove template padding */
-    .sqs-block-code .sqs-block-content{padding:0!important}
-    #evg-site{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
-    body{overflow-x:hidden}
-    :where(.page-section,.sqs-section,.index-section,section[data-section-id],.section):has(#evg-site){padding:0!important;background:transparent!important}
-    :where(.page-section,.sqs-section,.index-section,section[data-section-id],.section):has(#evg-site) .content-wrapper{padding:0!important}
-    :where(.page-section,.sqs-section,.index-section,section[data-section-id],.section):has(#evg-site) .section-background{background:transparent!important}
-    /* Header */
-    :where(header,.Header,.site-header,.SiteHeader){
-      background:linear-gradient(180deg,rgba(7,42,36,.78),rgba(7,42,36,.36),rgba(7,42,36,0))!important;
-      color:#F4FFF8!important;border-bottom:1px solid rgba(255,255,255,.08)!important;
-      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:60!important;
-    }
-    :where(.sqs-announcement-bar,.AnnouncementBar){background:transparent!important;color:#F4FFF8!important;border-bottom:1px solid rgba(255,255,255,.08)!important}
-    /* Theme tokens */
-    #evg-site{
-      --bg:#072A24;
-      --ink:#F4FFF8;
-      --muted:#C7F0E0;
-      --line:rgba(255,255,255,.2);
-      --chip:rgba(255,255,255,.06);
-      --card:rgba(255,255,255,.05);
-      --cta:#E8F8F0;
-      --cta-ink:#082A24;
-      --hdr:0px;
-      --accent:#7FD9B3;
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--ink); background:var(--bg); line-height:1.45;
-    }
-    #evg-site *{box-sizing:border-box}
-    .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
-    /* Light border around each main section */
-    #evg-site section.wrap{
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:24px;
-      margin:24px auto;
-    }
-    .hero.wrap{border:none}
-    .grid{display:grid;gap:18px}
-    .cols-2{grid-template-columns:1fr}
-    .cols-3{grid-template-columns:1fr}
-    /* Responsive 5-column grid */
-    .cols-5{grid-template-columns:repeat(2, 1fr);gap:12px;}
-    @media(min-width:600px){.cols-5{grid-template-columns:repeat(3, 1fr);}}
-    @media(min-width:900px){.cols-5{grid-template-columns:repeat(5, 1fr);gap:18px;}}
-    
-    @media(min-width:900px){.cols-2{grid-template-columns:1.15fr .85fr}.cols-3{grid-template-columns:1fr 1fr 1fr}}
-    .btn{display:inline-flex;align-items:center;gap:8px;border-radius:16px;padding:12px 18px;border:1px solid var(--line);text-decoration:none;font-weight:600;transition:all 0.2s ease}
-    .btn-fill{background:linear-gradient(135deg, #DFF4EA 0%, #BFE7D6 100%);color:var(--cta-ink);box-shadow:0 4px 14px rgba(223,244,234,.3), 0 2px 4px rgba(0,0,0,.1);transform:translateY(0)}
-    .btn-fill:hover{filter:brightness(1.05);box-shadow:0 6px 20px rgba(223,244,234,.4), 0 3px 6px rgba(0,0,0,.12);transform:translateY(-1px)}
-    .btn-ghost{background:transparent;color:var(--ink);transition:all 0.2s ease}
-    .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
-    .chip{display:inline-flex;align-items:center;border-radius:999px;padding:6px 14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);font-size:13px;font-weight:500}
-    .chip-date{font-weight:600}
-    .glass{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);border-radius:22px;box-shadow:0 8px 32px rgba(0,0,0,.18)}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;transition:all 0.3s ease}
-    .card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
-    .muted{color:var(--muted);line-height:1.5}
-    
-    .h1{font-weight:800;line-height:1.02;font-size:clamp(40px,7vw,82px);margin:0;text-shadow:0 2px 8px rgba(0,0,0,.15);letter-spacing:-0.02em}
-    .h2{font-weight:700;line-height:1.06;font-size:clamp(28px,5vw,50px);margin:0;letter-spacing:-0.015em;margin-bottom:8px}
-    .h3{font-weight:700;font-size:20px;margin:2px 0 0;letter-spacing:-0.01em;margin-bottom:4px}
-    
-    /* Scroll Animation Styles */
-    .scroll-animate {
-      opacity: 0;
-      transform: translateY(20px);
-      will-change: opacity, transform;
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      transition-delay: 0.1s;
-    }
-    .scroll-slide-left { transform: translateX(-30px); }
-    .scroll-slide-right { transform: translateX(30px); }
-    .scroll-animate.is-visible {
-      opacity: 1;
-      transform: translateY(0) translateX(0);
-    }
-    .scroll-animate.delay-1 { transition-delay: 0.2s; }
-    .scroll-animate.delay-2 { transition-delay: 0.3s; }
-    
-    /* Availability Badge Styles */
-    .availability-badge {
-      text-align: center;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px 12px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .availability-badge:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.3);
-    }
-    .availability-badge::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--accent);
-      transition: all 0.4s ease;
-    }
-    .availability-badge.critical::before {
-      background: #ff6b6b;
-      animation: pulse-glow 2s infinite;
-    }
-    .availability-badge.low::before {
-      background: #ffd93d;
-    }
-    .availability-badge.good::before {
-      background: #6bcf7f;
-    }
-    .availability-badge.sold-out::before {
-      background: #ff4757;
-    }
-    @keyframes pulse-glow {
-      0%, 100% {
-        opacity: 1;
-        box-shadow: 0 0 10px currentColor;
-      }
-      50% {
-        opacity: 0.7;
-        box-shadow: 0 0 20px currentColor;
-      }
-    }
-    .day-badge-label {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--ink);
-    }
-    .places-remaining {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 6px;
-      color: var(--accent);
-    }
-    .places-remaining.critical {
-      color: #ff6b6b;
-      animation: number-pulse 1.5s ease-in-out infinite;
-    }
-    .places-remaining.low {
-      color: #ffd93d;
-    }
-    .places-remaining.good {
-      color: #6bcf7f;
-    }
-    .places-remaining.sold-out {
-      color: #ff4757;
-    }
-    @keyframes number-pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.08);
-      }
-    }
-    .places-text {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-    .urgency-label {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .urgency-label.critical {
-      background: rgba(255,107,107,.2);
-      color: #ffb3b3;
-      border: 1px solid rgba(255,107,107,.3);
-      animation: shake 0.5s 2s 2;
-    }
-    .urgency-label.low {
-      background: rgba(255,217,61,.15);
-      color: #ffe89d;
-      border: 1px solid rgba(255,217,61,.25);
-    }
-    .urgency-label.good {
-      background: rgba(107,207,127,.15);
-      color: #b3e7bd;
-      border: 1px solid rgba(107,207,127,.25);
-    }
-    .urgency-label.sold-out {
-      background: rgba(255,71,87,.2);
-      color: #ffa3ab;
-      border: 1px solid rgba(255,71,87,.3);
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
-    }
 
-    /* Hero */
-    .hero{position:relative;overflow:hidden;margin-top:calc(-1 * var(--hdr));padding-top:calc(24px + var(--hdr));padding-bottom:12px}
-    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,42,36,.86),rgba(7,42,36,.92))}
-    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}
-    .hero-inner{position:relative}
-    
-    .pillbar{display:flex;gap:8px;padding:6px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-    .pillbar a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--ink)}
-    .pillbar a:hover{background:rgba(255,255,255,.06)}
-        
-    .booking-card {
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-    
-    .faq{border:1px solid var(--line);border-radius:16px;background:var(--card)}
-    .faq-btn{width:100%;text-align:left;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-    .faq-body{padding:0 16px 16px 16px;display:none}.faq.open .faq-body{display:block}
-    .quote{font-size:16px;line-height:1.6;font-style:italic}
-    .cite{font-size:14px;color:var(--muted);margin-top:6px}
-    #testimonials .card{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.25)}
-    .reel-video{cursor:pointer}
-    #reel .card{box-shadow:0 8px 24px rgba(0,0,0,.2)}
-    /* Focus states for accessibility */
-    .btn:focus-visible,
-    .faq-btn:focus-visible,
-    a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-    /* Loading states */
-    .status-label.checking::after {
-      content: '...';
-      animation: ellipsis 1.5s infinite;
-    }
-    @keyframes ellipsis {
-      0%, 20% { content: '.'; }
-      40% { content: '..'; }
-      60%, 100% { content: '...'; }
-    }
-    /* Sticky CTA on mobile */
-    .sticky-book{position:fixed;left:0;right:0;bottom:12px;z-index:70;display:none;justify-content:center}
-    .sticky-book .inner{display:inline-flex;gap:10px;background:rgba(7,42,36,.85);backdrop-filter:blur(8px);border:1px solid var(--line);padding:10px 12px;border-radius:999px}
-    .sticky-show .sticky-book{display:flex}
-    @media(max-width:700px){
-      .wrap{padding:0 16px}
-      .hero .wrap{padding:0 12px}
-      .card{padding:14px}
-      .btn{width:100%;justify-content:center;padding:14px 20px}
-      .pillbar{flex-wrap:wrap;justify-content:center}
-    }
+        .evergreen-wrapper * {
+            box-sizing: border-box;
+        }
 
-    /* Age confirmation modal */
-    .age-modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.55);
-      z-index:200;
-    }
-    .age-modal.is-open{display:flex;}
-    .age-modal-box{
-      background:rgba(7,42,36,.96);
-      border-radius:18px;
-      border:1px solid var(--line);
-      padding:20px 20px 16px;
-      max-width:360px;
-      width:90%;
-      box-shadow:0 20px 40px rgba(0,0,0,.45);
-    }
-    .age-modal-title{
-      font-weight:600;
-      margin:0 0 6px;
-      font-size:18px;
-    }
-    .age-modal-text{
-      font-size:14px;
-      color:var(--muted);
-      margin:0 0 14px;
-    }
-    .age-modal-actions{
-      display:flex;
-      gap:10px;
-      justify-content:flex-end;
-      flex-wrap:wrap;
-    }
-  </style>
-  
-  <section id="home" class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap hero-inner" style="padding:22px 0 34px">
-      <div class="pillbar scroll-animate" style="width:max-content;max-width:100%;overflow:auto">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#day">A day at camp</a><a href="#availability-preview">Book</a><a href="#safety">Safety</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
-      </div>
-      <div class="glass scroll-animate delay-1" style="margin-top:14px;padding:22px">
-        <p class="muted" style="margin:0 0 6px">Enjoy the calm of</p>
-        <h1 class="h1">Evergreen</h1>
-        
-        <p class="muted" style="max-width:60ch;margin:10px 0 0">
-          Holiday camps for children in Reception to Year 3. Daily activities and adventures in a calm, nurturing environment led by experienced teachers.
-        </p>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        <div style="display:flex;align-items:center;gap:12px;margin:14px 0;padding:10px 14px;background:rgba(127, 217, 179, 0.1);border:1px solid rgba(127, 217, 179, 0.2);border-radius:12px;width:fit-content">
-           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD9B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-           <span style="font-size:14px;color:#dff4ea;font-weight:500;line-height:1.3">Trusted by <strong>430+ families</strong> since Feb 2024</span>
-        </div>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .glass-panel-dark {
+            background: rgba(20, 83, 45, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-          <span class="chip">South London</span><span class="chip">Small groups</span><span class="chip">Experienced teachers</span>
-          <span class="chip">Ofsted registered</span><span class="chip">Nut free and sesame free</span><span class="chip">Coding with Cubetto</span>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-          <a class="btn btn-fill" href="#availability-preview">Book Christmas camp</a>
-          <a class="btn btn-ghost" href="#day">A day at Evergreen</a>
-        </div>
-        <p class="muted" style="margin:10px 0 0;font-size:14px">Standard day 8:30 am to 4:00 pm. Extended care available.</p>
-      </div>
-    </div>
-  </section>
+        /* =========================================
+            MOBILE OPTIMISATIONS
+            ========================================= */
+        @media (max-width: 768px) {
+            section {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
 
-  <section id="reel" class="wrap" style="padding:16px 0 10px">
-    <div class="glass scroll-animate" style="padding:24px">
-      <div class="grid cols-2" style="align-items:center">
-        <div class="scroll-animate scroll-slide-left">
-          <div class="muted">Transparency</div>
-          <h2 class="h2" style="margin-top:6px">Daily reels on Instagram</h2>
-          <p class="muted" style="margin-top:10px;max-width:55ch">
-            We want to bring you as close to the camp experience as possible. We post daily videos so you can see exactly what the children are learning, creating, and playing.
-          </p>
-          <div style="margin-top:20px">
-            <a href="https://www.instagram.com/evergreen.kids.dulwich/" target="_blank" class="btn btn-ghost" style="padding-left:14px;padding-right:14px">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              Follow @evergreen.kids.dulwich
-            </a>
-          </div>
-        </div>
-        <div class="scroll-animate scroll-slide-right delay-1">
-          <div class="card" style="padding:0;overflow:hidden;border-radius:18px;margin-top:10px">
-            <div style="position:relative;width:100%;padding-top:56.25%;background:#000">
-              <video 
-                class="reel-video" 
-                muted 
-                playsinline 
-                preload="auto" 
-                loop 
-                controls 
-                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-              >
-                <source src="https://www.evergreenkids.co.uk/s/Evergreen-Website-POV-Final.mp4" type="video/mp4">
-              </video>
+            .text-3xl { font-size: 1.5rem !important; }
+            .text-5xl { font-size: 1.75rem !important; }
+
+            .pillar-card-mobile {
+                height: 280px !important;
+            }
+
+            .rounded-\[2rem\] { border-radius: 1.25rem !important; }
+            .rounded-\[2\.5rem\] { border-radius: 1.25rem !important; }
+            .rounded-3xl { border-radius: 1.25rem !important; }
+
+            .p-8 { padding: 1.25rem !important; }
+            .p-6 { padding: 1rem !important; }
+
+            .space-y-8 > * + * { margin-top: 1.25rem !important; }
+
+            .phone-mockup-mobile {
+                height: 400px !important;
+                width: 200px !important;
+            }
+
+            .pricing-grid-mobile {
+                grid-template-columns: 1fr 1fr 1fr !important;
+                gap: 0.5rem !important;
+            }
+            .pricing-grid-mobile > div {
+                padding: 1rem !important;
+            }
+            .pricing-grid-mobile .scale-105 {
+                transform: none !important;
+            }
+
+            .space-y-6 > * + * { margin-top: 0.75rem !important; }
+
+            .space-y-4 > * + * { margin-top: 0.5rem !important; }
+
+            footer { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+
+            .trust-indicators-mobile {
+                gap: 0.5rem 1rem !important;
+            }
+
+            .mb-16 { margin-bottom: 2rem !important; }
+            .mb-12 { margin-bottom: 1.5rem !important; }
+            .mb-8 { margin-bottom: 1rem !important; }
+            .mb-6 { margin-bottom: 0.75rem !important; }
+
+            .py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+            .py-24 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+            .py-28 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+
+            .gap-16 { gap: 2rem !important; }
+            .gap-12 { gap: 1.5rem !important; }
+            .gap-8 { gap: 1rem !important; }
+            .gap-6 { gap: 0.75rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-white text-stone-900 min-h-screen">
+
+    <div class="evergreen-wrapper">
+
+        <div class="relative w-full h-[90vh] md:h-[100vh] bg-emerald-900 overflow-hidden shrink-0">
+            <div class="absolute inset-0">
+                <img src="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/cc4c2398-8f38-4e9c-ae42-0a571806f372/DSCF3034.JPG" alt="Boy wearing leaf crown" class="w-full h-full object-cover object-top md:object-center opacity-90 scale-105">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-emerald-950/90"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/50 to-transparent"></div>
             </div>
-          </div>
-          <div style="text-align:center;margin-top:12px;font-size:13px" class="muted">
-            <span style="opacity:0.7">Watch a typical day in 30 seconds</span>
-          </div>
+
+            <nav class="absolute top-0 left-0 right-0 z-50 px-3 md:px-10 py-4 md:py-6 flex justify-between items-center">
+                <div class="glass-panel px-3 md:px-6 py-1.5 md:py-2.5 rounded-full flex items-center gap-1.5 md:gap-2 shadow-lg">
+                    <span class="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-emerald-600"></span>
+                    <span class="text-emerald-950 font-bold tracking-tight text-[11px] md:text-sm">Evergreen Kids</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#about" class="px-5 py-2 rounded-full text-white/90 hover:bg-white/10 transition text-xs font-medium tracking-wide">About</a>
+                    <a href="#pillars" class="px-5 py-2 rounded-full text-white/90 hover:bg-white/10 transition text-xs font-medium tracking-wide">Education</a>
+                    <a href="#schedule" class="px-5 py-2 rounded-full text-white/90 hover:bg-white/10 transition text-xs font-medium tracking-wide">Schedule</a>
+                    <a href="#dates" class="px-5 py-2 rounded-full text-white/90 hover:bg-white/10 transition text-xs font-medium tracking-wide">Dates</a>
+                </div>
+
+                <a href="#newsletter" class="bg-emerald-50 text-emerald-900 px-3 md:px-5 py-1.5 md:py-2.5 rounded-full font-semibold text-[11px] md:text-xs hover:bg-white transition shadow-lg flex items-center gap-1.5 md:gap-2 group">
+                    <span class="hidden sm:inline">Join Waiting List</span>
+                    <span class="sm:hidden">Join List</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </nav>
+
+            <div class="relative w-full h-full pt-20 md:pt-32 pb-4 md:pb-12 px-6 md:px-12 lg:px-20 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 pointer-events-none max-w-[1800px] mx-auto">
+                <div class="md:col-span-6 flex flex-col pointer-events-auto md:h-full md:justify-center">
+                    <div class="mb-2 md:mb-8">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-emerald-900/30 backdrop-blur-md text-emerald-100 text-[10px] font-medium tracking-wider uppercase mb-3 md:mb-6">
+                            <i data-lucide="map-pin" class="w-3 h-3"></i> Herne Hill, South London
+                        </div>
+                        <h1 class="text-3xl md:text-7xl lg:text-8xl font-medium text-white tracking-tight leading-[0.95] mb-2 md:mb-6 drop-shadow-sm">
+                            Safe, seen,<br>and inspired.
+                        </h1>
+                        <p class="text-emerald-100/90 text-sm md:text-xl font-light max-w-md leading-relaxed hidden md:block">
+                            Premium holiday camps for Reception to Year 3. Blending creativity, sportsmanship, and coding.
+                        </p>
+                    </div>
+
+                    <div class="hidden md:flex flex-wrap gap-x-6 gap-y-2 mt-4 text-white text-xs font-medium items-center">
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Ofsted Registered</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> 430+ Families Served</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Led by Teachers</span>
+                    </div>
+                </div>
+
+                <div class="flex-1 md:hidden"></div>
+
+                <div class="md:col-span-6 flex flex-col items-stretch md:items-end justify-end pointer-events-auto pb-2 md:pb-10">
+                    <p class="text-emerald-100/90 text-sm font-light leading-relaxed mb-3 md:hidden">
+                        Premium holiday camps for Reception to Year 3. Blending creativity, sportsmanship, and coding.
+                    </p>
+                    <a href="#booking" class="glass-panel p-3 md:p-8 rounded-xl md:rounded-3xl w-full md:max-w-sm shadow-xl backdrop-blur-xl border-white/20 block hover:scale-[1.02] transition-transform">
+                        <div class="flex items-center md:items-start justify-between mb-2 md:mb-6">
+                            <div>
+                                <h3 class="text-emerald-950 text-base md:text-2xl tracking-tight font-semibold">Next Camp</h3>
+                                <p class="text-emerald-800 text-[11px] md:text-sm">February Half Term</p>
+                            </div>
+                            <div class="bg-emerald-500 text-white p-1.5 md:p-3 rounded-full">
+                                <i data-lucide="calendar-check" class="w-4 md:w-5 h-4 md:h-5"></i>
+                            </div>
+                        </div>
+                        <div class="flex md:block gap-4 md:space-y-4">
+                            <div class="flex justify-between items-center text-[11px] md:text-base md:border-b md:border-emerald-900/5 md:pb-3">
+                                <span class="text-emerald-800">Dates</span>
+                                <span class="text-emerald-950 font-medium ml-2">Feb 16 — 20, 2026</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[11px] md:text-base">
+                                <span class="text-emerald-800">Status</span>
+                                <span class="text-emerald-600 font-semibold flex items-center gap-1 ml-2 bg-emerald-100 px-2 py-0.5 rounded-full"><span class="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-emerald-500"></span> Book Now</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="wrap" style="padding:24px 0">
-    <div class="grid cols-3">
-      <div class="card scroll-animate">
-        <div class="muted">Education</div>
-        <div class="h3">Learning that sticks</div>
-        <p class="muted" style="margin-top:6px">Short daily sessions in English and maths keep skills sharp through games and active challenges.</p>
-      </div>
-      <div class="card scroll-animate delay-1">
-        <div class="muted">Sportsmanship</div>
-        <div class="h3">Strong teams and kind hearts</div>
-        <p class="muted" style="margin-top:6px">Coached play builds confidence, turn taking and fair play while children make friends.</p>
-      </div>
-      <div class="card scroll-animate delay-2">
-        <div class="muted">Coding and logic</div>
-        <div class="h3">Hands on problem solving</div>
-        <p class="muted" style="margin-top:6px">Cubetto coding robots and puzzle based games grow sequencing, reasoning and creativity.</p>
-      </div>
-    </div>
-  </section>
+        <section id="about" class="bg-white w-full px-6 md:px-16 lg:px-20 py-10 md:py-20 lg:py-24">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="max-w-3xl mb-6 md:mb-16">
+                    <span class="text-emerald-600 font-semibold tracking-wide text-xs uppercase mb-2 md:mb-3 block">Our Philosophy</span>
+                    <h2 class="text-2xl md:text-5xl font-medium tracking-tight text-stone-900 leading-[1.1] mb-3 md:mb-6">
+                        Designed by teachers <span class="text-stone-500">Emma and Brad Clay.</span>
+                    </h2>
+                    <p class="text-stone-600 text-base md:text-xl font-light leading-relaxed">
+                        We are experienced primary teachers who design calm, purposeful days where children feel safe, seen, and inspired.
+                    </p>
+                </div>
 
-  <section id="about" class="wrap" style="padding:8px 0 26px">
-    <div class="glass" style="padding:22px">
-      <div class="grid cols-2" style="align-items:center">
-        <div class="scroll-animate scroll-slide-left">
-          <div class="muted">About Evergreen</div>
-          <h2 class="h2" style="margin-top:6px">Led by teachers Emma and Bradley Clay</h2>
-          <p class="muted" style="margin-top:10px;max-width:60ch">
-            We are experienced primary teachers who design calm, purposeful days where children feel safe, seen and inspired. Our camps blend creativity, English and maths refreshers, coached sport and screen free coding with Cubetto. Staff are DBS checked and trained in first aid and safeguarding. We run in the woodland and all-weather spaces at Herne Hill School in South London.
-          </p>
-        </div>
-        <div class="card scroll-animate scroll-slide-right" style="text-align:center">
-          <div class="h3">Our promise</div>
-          <p class="muted" style="margin-top:6px">Warm welcome. Educational. Varied activities. Plenty of joy and friendship.</p>
-          <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-            <span class="chip">DBS checked staff</span><span class="chip">Paediatric first aid</span><span class="chip">KCSIE aligned</span>
-            <span class="chip">Herne Hill School</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div id="pillars" class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
 
-  <section id="day" class="wrap" style="padding:12px 0 26px">
-    <div class="glass scroll-animate" style="padding:24px;text-align:center">
-      <div>
-        <div class="muted">A day at Evergreen</div>
-        <h2 class="h2" style="margin-top:6px">What a typical day looks like</h2>
-        <p class="muted" style="margin-top:8px">Early drop off 7:30 am to 8:30 am for £12. Late pick up 4:00 pm to 5:30 pm for £18.</p>
-      </div>
-      <div class="card" style="display:inline-block;margin-top:16px"><div class="h3">Early drop off</div><p class="muted" style="margin-top:4px">7:30 am to 8:30 am</p></div>
-      <div style="margin-top:26px"><div class="chip" style="font-weight:600">Morning</div></div>
-      <div class="grid cols-3" style="margin-top:16px;justify-items:center">
-        <div class="card" style="width:100%"><div class="muted">8:30 to 9:00</div><div class="h3">Welcome and settling in</div><p class="muted">Soft start and morning activities</p></div>
-        <div class="card" style="width:100%"><div class="muted">9:00 to 10:15</div><div class="h3">Creativity time</div><p class="muted">Art and construction projects</p></div>
-        <div class="card" style="width:100%"><div class="muted">10:15 to 10:30</div><div class="h3">Snack</div><p class="muted">Nut free and sesame free</p></div>
-        <div class="card" style="width:100%"><div class="muted">10:30 to 11:10</div><div class="h3">English or maths</div><p class="muted">Short focused session</p></div>
-        <div class="card" style="width:100%"><div class="muted">11:10 to 12:30</div><div class="h3">Team sports and group games</div><p class="muted">Coached play and sportsmanship</p></div>
-      </div>
-      <div style="margin-top:26px"><div class="chip" style="font-weight:600">Afternoon</div></div>
-      <div class="grid cols-3" style="margin-top:16px;justify-items:center">
-        <div class="card" style="width:100%"><div class="muted">12:30 to 1:30</div><div class="h3">Lunch and social time</div><p class="muted">Picnic style and fully supervised</p></div>
-        <div class="card" style="width:100%"><div class="muted">1:30 to 2:10</div><div class="h3">Outdoor play</div><p class="muted">Woodland and nature area</p></div>
-        <div class="card" style="width:100%"><div class="muted">2:10 to 3:45</div><div class="h3">Coding with Cubetto and logic games</div><p class="muted">Hands on problem solving</p></div>
-        <div class="card" style="width:100%"><div class="muted">3:45 to 4:00</div><div class="h3">Story and farewell</div><p class="muted">Calm close and collection</p></div>
-      </div>
-      <div class="card" style="display:inline-block;margin-top:16px"><div class="h3">Late pick up</div><p class="muted" style="margin-top:4px">4:00 pm to 5:30 pm</p></div>
-    </div>
-  </section>
-  
-  <section id="availability-preview" class="wrap" style="padding:12px 0 28px">
-    <div class="glass scroll-animate" style="padding:20px">
-      <div style="text-align: center; margin-bottom: 18px;">
-        <div class="muted">Live Availability</div>
-        <h2 class="h2" style="margin-top:6px">Christmas Camp</h2>
-      </div>
-      <div id="availabilityPreviewBody" class="grid cols-5">
-        </div>
-    </div>
-  </section>
-  
-  <section id="book" class="wrap" style="padding:12px 0 28px">
-    <div class="glass scroll-animate" style="padding:20px">
-      <div class="grid cols-2" style="align-items:end">
-        <div>
-          <div class="muted">Confirm Your Dates</div>
-          <h2 class="h2" style="margin-top:6px">Booking</h2>
-          <p class="muted" style="margin-top:8px">Please select your required days below.</p>
-        </div>
-        <div style="text-align:right;display:flex;gap:12px;justify-content:flex-end;align-items:center;flex-wrap:wrap">
-          <a id="refreshAvail" class="muted" href="#" style="font-size:14px;text-decoration:underline">Refresh availability</a>
-          <label class="muted" style="font-size:14px"><input id="hideSold" type="checkbox" style="accent-color:var(--accent)"> Hide sold out</label>
-        </div>
-      </div>
-      <div id="bookingGridBody" class="grid cols-5" style="margin-top:14px">
-        </div>
-      <p class="muted" style="margin-top:10px;font-size:13px">
-        We accept Tax-Free Childcare vouchers. Book as normal and we will refund your payment when the voucher arrives.
-      </p>
-    </div>
-  </section>
+                    <div class="group relative rounded-[2rem] overflow-hidden bg-stone-50 h-[280px] md:h-[450px] border border-stone-100 transition-all hover:shadow-xl hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/5cc8fd36-e59e-43d0-b569-0261687ae528/DSCF3484.JPG" alt="Children writing" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+                            <div class="mb-2 inline-flex p-2 bg-white/20 backdrop-blur-md rounded-lg text-white">
+                                <i data-lucide="book-open" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-white text-xl md:text-2xl font-medium tracking-tight mb-1 md:mb-2">Learning that sticks</h3>
+                            <p class="text-white/90 text-xs md:text-sm font-light leading-relaxed">Daily phonics and maths games keep skills sharp without the pressure of a classroom setting.</p>
+                        </div>
+                    </div>
 
-  <section id="future" class="wrap" style="padding:0 0 24px">
-    <div class="card scroll-animate">
-      <div class="h3" style="margin-bottom:12px">Future camp dates</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
-        <span class="chip">16 to 20 February 2026 (half-term)</span>
-        <span class="chip">30 March to 2 April 2026</span>
-        <span class="chip">13 to 17 April 2026</span>
-        <span class="chip">6 to 10 July 2026</span>
-        <span class="chip">13 to 17 July 2026</span>
-        <span class="chip">17 to 21 August 2026</span>
-      </div>
-    </div>
-  </section>
+                    <div class="group relative rounded-[2rem] overflow-hidden bg-stone-50 h-[280px] md:h-[450px] border border-stone-100 transition-all hover:shadow-xl hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/e78e6fad-2ce8-499c-b799-b9c177f85f24/DSCF3502.JPG" alt="Girl throwing dodgeball" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+                            <div class="mb-2 inline-flex p-2 bg-white/20 backdrop-blur-md rounded-lg text-white">
+                                <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-white text-xl md:text-2xl font-medium tracking-tight mb-1 md:mb-2">Strong teams, kind hearts</h3>
+                            <p class="text-white/90 text-xs md:text-sm font-light leading-relaxed">Coached play builds resilience, fair play, and teamwork while making lasting friends.</p>
+                        </div>
+                    </div>
 
-  <section id="safety" class="wrap" style="padding:8px 0 24px">
-    <div class="glass" style="padding:22px">
-      <div class="grid cols-2">
-        <div class="scroll-animate scroll-slide-left">
-          <div class="muted">Safety and care</div>
-          <h2 class="h2" style="margin-top:6px">Practical information for a smooth day</h2>
-          <ul class="muted" style="margin:10px 0 0 18px">
-            <li>Nut free and sesame free site. Please check snacks carefully.</li>
-            <li>Bring a packed lunch, extra snacks and a refillable water bottle.</li>
-            <li>Children must be well to attend. Keep at home for 48 hours after vomiting or diarrhoea.</li>
-            <li>Medication labelled with child's name and instructions. We record administration with consent.</li>
-            <li>All staff are DBS checked. Paediatric first aid on site at all times.</li>
-            <li>Authorised adults only for collection. Let us know if someone different will collect.</li>
-            <li>Sun cream before arrival. We can support reapplication with a labelled bottle.</li>
-          </ul>
-        </div>
-        <div class="card scroll-animate scroll-slide-right">
-          <div class="h3">Groupings and ages</div>
-          <p class="muted" style="margin-top:6px">Reception group and a mixed group for Years 1 to 3 for the best social and learning fit.</p>
-          <div style="margin-top:10px"><a class="btn btn-ghost" href="#faq">Read FAQ</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="group relative rounded-[2rem] overflow-hidden bg-stone-50 h-[280px] md:h-[450px] border border-stone-100 transition-all hover:shadow-xl hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/6fdbfaf7-adfc-425a-b82a-e39aceefc27a/DSCF3567.JPG" alt="Cubetto board" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+                            <div class="mb-2 inline-flex p-2 bg-white/20 backdrop-blur-md rounded-lg text-white">
+                                <i data-lucide="bot" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-white text-xl md:text-2xl font-medium tracking-tight mb-1 md:mb-2">Hands on logic</h3>
+                            <p class="text-white/90 text-xs md:text-sm font-light leading-relaxed">Cubetto robots grow sequencing and reasoning skills through screen-free exploration.</p>
+                        </div>
+                    </div>
 
-  <section id="policy" class="wrap" style="padding:8px 0 24px">
-    <div class="glass scroll-animate" style="padding:22px">
-      <div class="muted">Policy</div>
-      <h2 class="h2" style="margin-top:6px">Cancellation policy</h2>
-      <p class="muted" style="margin-top:8px;max-width:80ch">
-        If you need to cancel, please email
-        <a href="mailto:info@evergreenkids.co.uk" style="color:#c7f0e0;text-decoration:underline">info@evergreenkids.co.uk</a>.
-        We will release your place back onto the website. A refund is issued if the place is repurchased and is subject to a £5 admin charge.
-        Early drop off and late pick up are non-refundable as these are very hard to resell.
-      </p>
-    </div>
-  </section>
+                </div>
+            </div>
+        </section>
 
-  <section id="testimonials" class="wrap" style="padding:8px 0 24px">
-    <h2 class="h2 scroll-animate" style="text-align:center;margin-bottom:18px">What Parents Say</h2>
-    <div class="grid cols-3">
-      <div class="card scroll-animate">
-        <p class="quote">"Loved the daily Instagram videos showing us what the kids had done as very often they're not able to recall it all. Also love that there's some learning too! Couldn't recommend more but that'll probably mean it'll sell out even faster in due course!!"</p>
-        <div class="cite" style="margin-top:10px;font-style:italic">If there was one thing you'd say to another parent about Evergreen, what would it be?</div>
-      </div>
-      <div class="card scroll-animate delay-1">
-        <p class="quote">"Meeting new friends and trying new activities. On picking him up after his first day, I was greeted with a beaming smile followed by, 'I had the best day ever!'"</p>
-        <div class="cite" style="margin-top:10px;font-style:italic">What did your child enjoy most about their time at Evergreen?</div>
-      </div>
-      <div class="card scroll-animate delay-2">
-        <p class="quote">"The kids are learning while having fun all day!"</p>
-        <div class="cite" style="margin-top:10px;font-style:italic">If there was one thing you'd say to another parent about Evergreen, what would it be?</div>
-      </div>
-    </div>
-  </section>
+        <section id="schedule" class="bg-emerald-950 w-full px-6 md:px-16 lg:px-20 py-10 md:py-20 lg:py-28 text-white">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-12 gap-4 md:gap-8">
+                    <div class="max-w-2xl">
+                        <h2 class="text-2xl md:text-5xl font-medium tracking-tight leading-[1.1] mb-2 md:mb-6">
+                            A purposeful day.
+                        </h2>
+                        <p class="text-emerald-200 text-sm md:text-lg font-light max-w-lg">
+                            Structure meets freedom. From 7:30am early drop-off to 5:30pm late pick-up options.
+                        </p>
+                    </div>
+                </div>
 
-  <section id="faq" class="wrap" style="padding:4px 0 24px">
-    <div class="grid cols-2">
-      <div class="faq scroll-animate"><button class="faq-btn" type="button">What should my child bring?
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">A packed lunch, extra snack and a refillable water bottle. Please avoid nuts and sesame.</div></div>
-      <div class="faq scroll-animate delay-1"><button class="faq-btn" type="button">Do you take tax-free childcare vouchers?
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Yes. Book and pay as normal to secure your place then send your voucher payment. We will refund the original.</div></div>
-      <div class="faq scroll-animate"><button class="faq-btn" type="button">What are the extended care options?
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Early drop off 7:30 am to 8:30 am for £12. Late pick up 4:00 pm to 5:30 pm for £18.</div></div>
-      <div class="faq scroll-animate delay-1"><button class="faq-btn" type="button">How are children grouped?
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Reception group and a mixed group for Years 1 to 3.</div></div>
-      <div class="faq scroll-animate"><button class="faq-btn" type="button">What is your cancellation policy?
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-body muted">Email us to cancel. We refund if your place is repurchased, minus a £5 admin charge. Early and late sessions are non-refundable. <a href="#policy" style="color:#c7f0e0;text-decoration:underline">Read the full policy</a>.</div></div>
-    </div>
-  </section>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
 
-  <section id="contact" class="wrap" style="padding:10px 0 24px">
-    <div class="grid cols-2">
-      <div class="glass scroll-animate scroll-slide-left" style="padding:20px">
-        <h2 class="h2">Contact</h2>
-        <p class="muted" style="margin-top:8px">Herne Hill School<br>127 Herne Hill, London SE24 9LY</p>
-        <p class="muted">Phone 1: <a href="tel:07411625794" style="color:#c7f0e0;text-decoration:underline">07411 625794</a><br>
-           Phone 2: <a href="tel:07903415439" style="color:#c7f0e0;text-decoration:underline">07903 415439</a><br>
-           Email: <a href="mailto:info@evergreenkids.co.uk" style="color:#c7f0e0;text-decoration:underline">info@evergreenkids.co.uk</a></p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-fill" href="#availability-preview">Book now</a><a class="btn btn-ghost" href="#faq">Read FAQ</a></div>
-      </div>
-      <div class="glass scroll-animate scroll-slide-right delay-1" style="padding:10px">
-        <div style="aspect-ratio:4/3;width:100%;overflow:hidden;border-radius:14px">
-          <iframe title="Map" loading="lazy" style="width:100%;height:100%;border:0" src="https://www.google.com/maps?q=127%20Herne%20Hill%2C%20London%20SE24%209LY&output=embed"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="md:col-span-7 relative bg-emerald-900/50 rounded-2xl md:rounded-[2.5rem] p-5 md:p-12 border border-emerald-500/10 backdrop-blur-sm">
+                        <div class="flex items-center gap-3 mb-4 md:mb-8">
+                            <div class="p-2 bg-white/10 rounded-full"><i data-lucide="clock" class="w-4 md:w-5 h-4 md:h-5 text-emerald-300"></i></div>
+                            <h3 class="text-xl md:text-2xl font-medium tracking-tight">Daily Schedule</h3>
+                        </div>
 
-  <footer class="wrap" style="border-top:1px solid var(--line);padding:18px 0;color:#c4ecdf;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:14px">
-    <div><strong>Evergreen</strong> · Holiday camps for Reception to Year 3 in South London</div>
-    <div style="display:flex;gap:12px"><a href="#home" style="color:inherit">Home</a><a href="#about" style="color:inherit">About</a><a href="#day" style="color:inherit">Day</a><a href="#availability-preview" style="color:inherit">Book</a><a href="#safety" style="color:inherit">Safety</a><a href="#faq" style="color:inherit">FAQ</a><a href="#contact" style="color:inherit">Contact</a></div>
-  </footer>
+                        <div class="relative pl-6 md:pl-8 border-l border-emerald-800 space-y-4 md:space-y-8">
+                            <div class="relative">
+                                <div class="absolute -left-[29px] md:-left-[37px] top-1 w-3 md:w-4 h-3 md:h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-900"></div>
+                                <span class="text-[10px] md:text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-1">Morning</span>
+                                <div class="space-y-1 md:space-y-2 text-xs md:text-sm text-emerald-100">
+                                    <div class="flex justify-between"><span class="text-white">08:30</span> <span>Welcome & Settle</span></div>
+                                    <div class="flex justify-between"><span class="text-white">09:00</span> <span>Creativity & Art</span></div>
+                                    <div class="flex justify-between"><span class="text-white">10:30</span> <span>English or Maths</span></div>
+                                    <div class="flex justify-between"><span class="text-white">11:10</span> <span>Team Sports</span></div>
+                                </div>
+                            </div>
+                             <div class="relative">
+                                <div class="absolute -left-[29px] md:-left-[37px] top-1 w-3 md:w-4 h-3 md:h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-900"></div>
+                                <span class="text-[10px] md:text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-1">Midday</span>
+                                <div class="space-y-1 md:space-y-2 text-xs md:text-sm text-emerald-100">
+                                    <div class="flex justify-between"><span class="text-white">12:30</span> <span>Picnic Lunch</span></div>
+                                    <div class="flex justify-between"><span class="text-white">13:30</span> <span>Woodland Play</span></div>
+                                </div>
+                            </div>
+                             <div class="relative">
+                                <div class="absolute -left-[29px] md:-left-[37px] top-1 w-3 md:w-4 h-3 md:h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-900"></div>
+                                <span class="text-[10px] md:text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-1">Afternoon</span>
+                                <div class="space-y-1 md:space-y-2 text-xs md:text-sm text-emerald-100">
+                                    <div class="flex justify-between"><span class="text-white">14:10</span> <span>Coding & Logic</span></div>
+                                    <div class="flex justify-between"><span class="text-white">15:45</span> <span>Story & Farewell</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-  <div id="ageConfirmModal" class="age-modal" aria-hidden="true">
-    <div class="age-modal-box">
-      <h3 class="age-modal-title">Before you book</h3>
-      <p class="age-modal-text">
-        Please confirm that your child is currently in Reception, Year 1, Year 2 or Year 3.
-      </p>
-      <div class="age-modal-actions">
-        <button type="button" id="ageConfirmNo" class="btn btn-ghost">Cancel</button>
-        <button type="button" id="ageConfirmYes" class="btn btn-fill">I confirm and continue</button>
-      </div>
-    </div>
-  </div>
+                    <div class="md:col-span-5 flex flex-col gap-4 md:gap-6">
 
-  <div class="sticky-book" aria-hidden="true">
-    <div class="inner">
-      <a class="btn btn-fill" href="#availability-preview">Book now</a>
-      <a class="btn btn-ghost" href="#faq">FAQ</a>
-    </div>
-  </div>
+                        <div id="dates" class="flex-1 bg-emerald-900/30 rounded-2xl md:rounded-[2.5rem] p-5 md:p-8 border border-emerald-500/10 hover:bg-emerald-900/50 transition">
+                            <div class="flex items-center gap-3 mb-4 md:mb-6">
+                                <div class="p-2 bg-white/10 rounded-full"><i data-lucide="calendar-days" class="w-4 md:w-5 h-4 md:h-5 text-emerald-300"></i></div>
+                                <h3 class="text-lg md:text-xl font-medium tracking-tight">2026 Dates</h3>
+                            </div>
+                            <ul class="space-y-2 md:space-y-3">
+                                <li class="flex items-center justify-between text-xs md:text-sm py-1.5 md:py-2 border-b border-emerald-800/50">
+                                    <span class="text-white">Feb 16 — 20</span>
+                                    <span class="text-emerald-400 text-[10px] md:text-xs uppercase font-medium bg-emerald-950/50 px-2 py-0.5 md:py-1 rounded">Half Term</span>
+                                </li>
+                                <li class="flex items-center justify-between text-xs md:text-sm py-1.5 md:py-2 border-b border-emerald-800/50">
+                                    <span class="text-white">Mar 30 — Apr 2</span>
+                                    <span class="text-emerald-400 text-[10px] md:text-xs uppercase font-medium bg-emerald-950/50 px-2 py-0.5 md:py-1 rounded">Easter</span>
+                                </li>
+                                <li class="flex items-center justify-between text-xs md:text-sm py-1.5 md:py-2 border-b border-emerald-800/50">
+                                    <span class="text-white">Apr 13 — 17</span>
+                                    <span class="text-emerald-400 text-[10px] md:text-xs uppercase font-medium bg-emerald-950/50 px-2 py-0.5 md:py-1 rounded">Easter</span>
+                                </li>
+                                <li class="flex items-center justify-between text-xs md:text-sm py-1.5 md:py-2 border-b border-emerald-800/50">
+                                    <span class="text-white">Summer Series</span>
+                                    <span class="text-emerald-200 text-[10px] md:text-xs">Jul 6, Jul 13, Aug 17</span>
+                                </li>
+                            </ul>
+                        </div>
 
-  <script>
-    /* Header offset + smooth scroll */
-    (function(){
-      const root=document.querySelector('#evg-site');
-      function calc(){
-        const hdr=document.querySelector('header,.Header,.site-header,.SiteHeader');
-        const ann=document.querySelector('.sqs-announcement-bar,.AnnouncementBar');
-        const h=(hdr?hdr.getBoundingClientRect().height:0)+(ann?ann.getBoundingClientRect().height:0);
-        root.style.setProperty('--hdr', h+'px');
-      }
-      calc();window.addEventListener('resize',calc);
-      new MutationObserver(calc).observe(document.body,{subtree:true,attributes:true,childList:true});
-    })();
-    document.querySelectorAll('#evg-site a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',function(e){const el=document.querySelector(this.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}});
-    });
-    /* FAQ toggles */
-    document.querySelectorAll('#evg-site .faq .faq-btn').forEach(btn=>{
-      btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open'));
-    });
-    /* Sticky CTA reveal */
-    (function(){
-      const root=document.querySelector('#evg-site');
-      function onScroll(){ if(window.scrollY>420) root.classList.add('sticky-show'); else root.classList.remove('sticky-show'); }
-      onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
-    })();
-    
-    /* BOOKING SCRIPT */
-    const PRODUCTS=[
-      {date:"Mon 15 Dec 2025",url:"https://www.evergreenkids.co.uk/bookings/p/monday-20th-october-25-b375h"},
-      {date:"Tue 16 Dec 2025",url:"https://www.evergreenkids.co.uk/bookings/p/tuesday-21st-october-25-8tpnf"},
-      {date:"Wed 17 Dec 2025",url:"https://www.evergreenkids.co.uk/bookings/p/wednesday-22nd-october-25-lpshg"},
-      {date:"Thu 18 Dec 2025",url:"https://www.evergreenkids.co.uk/bookings/p/thursday-23rd-october-25-3hhpg"},
-      {date:"Fri 19 Dec 2025",url:"https://www.evergreenkids.co.uk/bookings/p/friday-24th-october-25-bl8bc"}
-    ];
-    const LOW=7;
-    const MONTHS={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
-    function parseLabelToDate(lbl){const m=lbl.match(/(\d{2}) (\w{3}) (\d{4})$/);if(!m)return new Date();return new Date(+m[3],MONTHS[m[2]]||0,+m[1]);}
-    PRODUCTS.sort((a,b)=>parseLabelToDate(a.date)-parseLabelToDate(b.date));
-    function keyFor(u){return 'evg-stock:'+btoa(u)}
-    function cacheGet(u){try{const r=sessionStorage.getItem(keyFor(u));if(!r)return null;const o=JSON.parse(r);if(Date.now()-o.t>5*60*1000)return null;return o.v}catch(e){return null}}
-    function cacheSet(u,v){try{sessionStorage.setItem(keyFor(u),JSON.stringify({t:Date.now(),v}))}catch(e){}}
-    async function fetchJSON(url){
-      const sep=url.includes('?')?'&':'?';
-      const res=await fetch(url+sep+'format=json',{credentials:'include',headers:{'Accept':'application/json'}});
-      if(!res.ok) throw new Error('no json');
-      return res.json();
-    }
-    function qtyFromVariants(variants){
-      if(!variants) return null;
-      let total=0, any=false;
-      variants.forEach(v=>{
-        const n=v.qtyInStock??v.stock??v.inventoryQuantity??v.inventoryAvailable;
-        if(typeof n==='number'){total+=n;any=true;}
-        else if(typeof n==='string' && /outofstock|sold[_\s-]*out/i.test(n)){any=true;}
-      });
-      return any?total:null;
-    }
-    function readJSON(data){
-      const item=data?.item||data?.storeItem||data?.product||data;
-      if(!item) return {};
-      if(item.soldOut===true) return {soldOut:true};
-      const v=item.variants||item.skus||item.items||null;
-      const qty=qtyFromVariants(v);
-      if(typeof qty==='number') return {qty};
-      try{
-        const seo=item.seoSchema&&JSON.parse(item.seoSchema);
-        const offers=seo?.offers; const arr=Array.isArray(offers)?offers:[offers];
-        for(const o of arr){const av=(o?.availability||'').toLowerCase();if(av.includes('outofstock')) return {soldOut:true};}
-      }catch(e){}
-      return {};
-    }
-    function readHTML(html){
-      const t=html.toLowerCase();
-      if(/\bout of stock\b|\bsold\s*out\b/.test(t)) return {soldOut:true};
-      const m=t.match(/only\s*(\d+)\s*(left|remaining)/i);
-      if(m){const n=parseInt(m[1],10);return {htmlQty:isNaN(n)?null:n};}
-      if(/\blimited\s*(availability|stock)\b|\blow\s*stock\b/.test(t)) return {limited:true};
-      return {};
-    }
+                        <div class="bg-white text-emerald-950 rounded-2xl md:rounded-[2.5rem] p-5 md:p-8 border border-white/10">
+                            <div class="flex items-center gap-3 mb-3 md:mb-4">
+                                <div class="p-2 bg-emerald-100 rounded-full"><i data-lucide="shield-check" class="w-4 md:w-5 h-4 md:h-5 text-emerald-700"></i></div>
+                                <h3 class="text-lg md:text-xl font-medium tracking-tight text-emerald-950">Safety First</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 md:gap-4">
+                                <div class="text-[10px] md:text-xs font-medium bg-emerald-50 p-2 md:p-3 rounded-lg md:rounded-xl text-emerald-900">
+                                    Strong Staff Ratios
+                                </div>
+                                <div class="text-[10px] md:text-xs font-medium bg-emerald-50 p-2 md:p-3 rounded-lg md:rounded-xl text-emerald-900">
+                                    Nut & Sesame Free
+                                </div>
+                                <div class="text-[10px] md:text-xs font-medium bg-emerald-50 p-2 md:p-3 rounded-lg md:rounded-xl text-emerald-900">
+                                    Experienced Practitioners
+                                </div>
+                                <div class="text-[10px] md:text-xs font-medium bg-emerald-50 p-2 md:p-3 rounded-lg md:rounded-xl text-emerald-900">
+                                    First Aid Trained
+                                </div>
+                                <div class="text-[10px] md:text-xs font-medium bg-emerald-50 p-2 md:p-3 rounded-lg md:rounded-xl text-emerald-900 col-span-2">
+                                    DSL & Deputy DSL on Site
+                                </div>
+                            </div>
+                        </div>
 
-    function getBarColorClass(label, qty) {
-      if (label === 'Sold out') return 'bad';
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      if (typeof qty === 'number') {
-        if (qty <= 5) return 'bad';     // Nearly sold out
-        if (qty <= 15) return 'warn';   // Filling up
-        return 'ok';                     // Good availability
-      }
+        <section id="booking" class="bg-gradient-to-b from-emerald-50 to-white w-full px-6 md:px-16 lg:px-20 py-12 md:py-24 relative overflow-hidden">
+            <div class="max-w-[1800px] mx-auto">
 
-      return 'warn'; // Default for "Limited" - assume moderate availability
-    }
+                <div class="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+                    <span class="text-emerald-600 font-semibold tracking-wide text-xs uppercase mb-3 block">Book Now</span>
+                    <h2 class="text-2xl md:text-5xl font-medium tracking-tight text-stone-900 mb-2 md:mb-4">
+                        February Half Term 2026
+                    </h2>
+                    <p class="text-stone-600 text-sm md:text-lg font-light">
+                        Monday 16th — Friday 20th February
+                    </p>
+                </div>
 
-    function updateBadge(rid, result) {
-      const badge = document.getElementById('badge-' + rid);
-      if (!badge) return;
+                <div class="max-w-5xl mx-auto">
+                    <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-stone-200 overflow-hidden">
 
-      const placesNum = badge.querySelector('.places-remaining');
-      const placesText = badge.querySelector('.places-text');
-      const urgencyLabel = badge.querySelector('.urgency-label');
+                        <div class="p-4 md:p-8">
+                            <div class="flex items-center justify-between mb-4 md:mb-6">
+                                <h3 class="text-lg md:text-xl font-semibold text-stone-900">Select your days</h3>
+                                <span class="text-xs md:text-sm text-stone-500">£60 + VAT (£72) per day</span>
+                            </div>
 
-      const qty = result.qty || 0;
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-4 mb-6 md:mb-8">
+                                <div class="border-2 border-stone-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-emerald-300 transition" data-day="mon">
+                                    <label class="relative cursor-pointer group block">
+                                        <input type="checkbox" class="peer sr-only day-checkbox" data-price="72">
+                                        <div class="peer-checked:bg-emerald-50 p-3 md:p-4 text-center transition-all">
+                                            <div class="flex md:block items-center justify-between">
+                                                <div class="flex md:block items-center gap-3">
+                                                    <div class="bg-emerald-700 text-white text-[10px] md:text-xs font-bold uppercase px-2 py-1 rounded md:mb-2 md:mx-auto md:w-fit">Mon</div>
+                                                    <div>
+                                                        <div class="text-sm md:text-lg font-bold text-stone-900">16th Feb</div>
+                                                        <div class="text-emerald-600 text-[10px] md:text-xs font-medium">30 places left</div>
+                                                    </div>
+                                                </div>
+                                                <div class="md:mt-3 flex justify-center">
+                                                    <div class="w-5 h-5 rounded-full border-2 border-stone-300 peer-checked:border-emerald-500 peer-checked:bg-emerald-500 flex items-center justify-center transition-all">
+                                                        <svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-emerald-500 opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
+                                    </label>
+                                    <div class="border-t border-stone-100 bg-stone-50 p-2 md:p-3 space-y-2 extended-care" data-day="mon">
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="12" data-type="early" data-day="mon">
+                                                <span class="text-stone-600">Early (7:30–8:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£12</span>
+                                        </label>
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="18" data-type="late" data-day="mon">
+                                                <span class="text-stone-600">Late (4:00–5:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£18</span>
+                                        </label>
+                                    </div>
+                                </div>
 
-      // Remove all classes first
-      badge.className = 'availability-badge scroll-animate';
-      placesNum.className = 'places-remaining';
-      urgencyLabel.className = 'urgency-label';
-      urgencyLabel.style.display = 'none';
+                                <div class="border-2 border-stone-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-emerald-300 transition" data-day="tue">
+                                    <label class="relative cursor-pointer group block">
+                                        <input type="checkbox" class="peer sr-only day-checkbox" data-price="72">
+                                        <div class="peer-checked:bg-emerald-50 p-3 md:p-4 text-center transition-all">
+                                            <div class="flex md:block items-center justify-between">
+                                                <div class="flex md:block items-center gap-3">
+                                                    <div class="bg-emerald-700 text-white text-[10px] md:text-xs font-bold uppercase px-2 py-1 rounded md:mb-2 md:mx-auto md:w-fit">Tue</div>
+                                                    <div>
+                                                        <div class="text-sm md:text-lg font-bold text-stone-900">17th Feb</div>
+                                                        <div class="text-emerald-600 text-[10px] md:text-xs font-medium">30 places left</div>
+                                                    </div>
+                                                </div>
+                                                <div class="md:mt-3 flex justify-center">
+                                                    <div class="w-5 h-5 rounded-full border-2 border-stone-300 peer-checked:border-emerald-500 peer-checked:bg-emerald-500 flex items-center justify-center transition-all">
+                                                        <svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-emerald-500 opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
+                                    </label>
+                                    <div class="border-t border-stone-100 bg-stone-50 p-2 md:p-3 space-y-2 extended-care" data-day="tue">
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="12" data-type="early" data-day="tue">
+                                                <span class="text-stone-600">Early (7:30–8:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£12</span>
+                                        </label>
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="18" data-type="late" data-day="tue">
+                                                <span class="text-stone-600">Late (4:00–5:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£18</span>
+                                        </label>
+                                    </div>
+                                </div>
 
-      if (result.label === 'Sold out' || qty === 0) {
-        badge.classList.add('sold-out');
-        placesNum.classList.add('sold-out');
-        placesNum.textContent = '0';
-        placesText.textContent = 'places left';
-        urgencyLabel.classList.add('sold-out');
-        urgencyLabel.textContent = 'Sold Out';
-        urgencyLabel.style.display = 'inline-block';
-      } else if (typeof qty === 'number') {
-        // Hybrid approach: show "Limited" for > 7, exact number for 1-7
-        if (qty > 7) {
-          placesNum.textContent = 'Limited';
-          placesText.textContent = 'places available';
-        } else {
-          placesNum.textContent = qty;
-          placesText.textContent = qty === 1 ? 'place left' : 'places left';
-        }
+                                <div class="border-2 border-stone-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-emerald-300 transition" data-day="wed">
+                                    <label class="relative cursor-pointer group block">
+                                        <input type="checkbox" class="peer sr-only day-checkbox" data-price="72">
+                                        <div class="peer-checked:bg-emerald-50 p-3 md:p-4 text-center transition-all">
+                                            <div class="flex md:block items-center justify-between">
+                                                <div class="flex md:block items-center gap-3">
+                                                    <div class="bg-emerald-700 text-white text-[10px] md:text-xs font-bold uppercase px-2 py-1 rounded md:mb-2 md:mx-auto md:w-fit">Wed</div>
+                                                    <div>
+                                                        <div class="text-sm md:text-lg font-bold text-stone-900">18th Feb</div>
+                                                        <div class="text-emerald-600 text-[10px] md:text-xs font-medium">30 places left</div>
+                                                    </div>
+                                                </div>
+                                                <div class="md:mt-3 flex justify-center">
+                                                    <div class="w-5 h-5 rounded-full border-2 border-stone-300 peer-checked:border-emerald-500 peer-checked:bg-emerald-500 flex items-center justify-center transition-all">
+                                                        <svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-emerald-500 opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
+                                    </label>
+                                    <div class="border-t border-stone-100 bg-stone-50 p-2 md:p-3 space-y-2 extended-care" data-day="wed">
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="12" data-type="early" data-day="wed">
+                                                <span class="text-stone-600">Early (7:30–8:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£12</span>
+                                        </label>
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="18" data-type="late" data-day="wed">
+                                                <span class="text-stone-600">Late (4:00–5:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£18</span>
+                                        </label>
+                                    </div>
+                                </div>
 
-        // Color coding based on actual quantity
-        if (qty <= 5) {
-          badge.classList.add('critical');
-          placesNum.classList.add('critical');
-          urgencyLabel.classList.add('critical');
-          urgencyLabel.textContent = 'Almost Gone!';
-          urgencyLabel.style.display = 'inline-block';
-        } else if (qty <= 15) {
-          badge.classList.add('low');
-          placesNum.classList.add('low');
-          urgencyLabel.classList.add('low');
-          urgencyLabel.textContent = 'Filling Fast';
-          urgencyLabel.style.display = 'inline-block';
-        } else {
-          badge.classList.add('good');
-          placesNum.classList.add('good');
-          urgencyLabel.classList.add('good');
-          urgencyLabel.textContent = 'Available';
-          urgencyLabel.style.display = 'inline-block';
-        }
-      } else {
-        // Unknown quantity - show "Limited"
-        placesNum.textContent = '?';
-        placesText.textContent = 'places';
-        badge.classList.add('low');
-        urgencyLabel.classList.add('low');
-        urgencyLabel.textContent = 'Limited';
-        urgencyLabel.style.display = 'inline-block';
-      }
-    }
+                                <div class="border-2 border-stone-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-emerald-300 transition" data-day="thu">
+                                    <label class="relative cursor-pointer group block">
+                                        <input type="checkbox" class="peer sr-only day-checkbox" data-price="72">
+                                        <div class="peer-checked:bg-emerald-50 p-3 md:p-4 text-center transition-all">
+                                            <div class="flex md:block items-center justify-between">
+                                                <div class="flex md:block items-center gap-3">
+                                                    <div class="bg-emerald-700 text-white text-[10px] md:text-xs font-bold uppercase px-2 py-1 rounded md:mb-2 md:mx-auto md:w-fit">Thu</div>
+                                                    <div>
+                                                        <div class="text-sm md:text-lg font-bold text-stone-900">19th Feb</div>
+                                                        <div class="text-emerald-600 text-[10px] md:text-xs font-medium">30 places left</div>
+                                                    </div>
+                                                </div>
+                                                <div class="md:mt-3 flex justify-center">
+                                                    <div class="w-5 h-5 rounded-full border-2 border-stone-300 peer-checked:border-emerald-500 peer-checked:bg-emerald-500 flex items-center justify-center transition-all">
+                                                        <svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-emerald-500 opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
+                                    </label>
+                                    <div class="border-t border-stone-100 bg-stone-50 p-2 md:p-3 space-y-2 extended-care" data-day="thu">
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="12" data-type="early" data-day="thu">
+                                                <span class="text-stone-600">Early (7:30–8:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£12</span>
+                                        </label>
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="18" data-type="late" data-day="thu">
+                                                <span class="text-stone-600">Late (4:00–5:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£18</span>
+                                        </label>
+                                    </div>
+                                </div>
 
-    async function availabilityFor(url){
-      const c=cacheGet(url); if(c) return c;
-      let info={};
-      try{const j=await fetchJSON(url); info={...info,...readJSON(j)};}catch(e){}
-      if(typeof info.qty!=='number' && !info.soldOut){
-        try{const r=await fetch(url,{credentials:'include'}); if(r.ok){const html=await r.text(); info={...info,...readHTML(html)};}}catch(e){}
-      }
-      let label='Limited';
-      let rawQty=null;
-      if(info.soldOut) label='Sold out';
-      else if(typeof info.qty==='number'){
-        rawQty = info.qty;
-        if(info.qty<=0) label='Sold out';
-        else if(info.qty<=LOW) label=info.qty+' left';
-        else label='Limited';
-      }else if(typeof info.htmlQty==='number'){
-        rawQty = info.htmlQty;
-        if(info.htmlQty<=0) label='Sold out';
-        else if(info.htmlQty<=LOW) label=info.htmlQty+' left';
-        else label='Limited';
-      }
-      const result={label,qty:rawQty};
-      cacheSet(url,result); return result;
-    }
+                                <div class="border-2 border-stone-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-emerald-300 transition" data-day="fri">
+                                    <label class="relative cursor-pointer group block">
+                                        <input type="checkbox" class="peer sr-only day-checkbox" data-price="72">
+                                        <div class="peer-checked:bg-emerald-50 p-3 md:p-4 text-center transition-all">
+                                            <div class="flex md:block items-center justify-between">
+                                                <div class="flex md:block items-center gap-3">
+                                                    <div class="bg-emerald-700 text-white text-[10px] md:text-xs font-bold uppercase px-2 py-1 rounded md:mb-2 md:mx-auto md:w-fit">Fri</div>
+                                                    <div>
+                                                        <div class="text-sm md:text-lg font-bold text-stone-900">20th Feb</div>
+                                                        <div class="text-emerald-600 text-[10px] md:text-xs font-medium">30 places left</div>
+                                                    </div>
+                                                </div>
+                                                <div class="md:mt-3 flex justify-center">
+                                                    <div class="w-5 h-5 rounded-full border-2 border-stone-300 peer-checked:border-emerald-500 peer-checked:bg-emerald-500 flex items-center justify-center transition-all">
+                                                        <svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-emerald-500 opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
+                                    </label>
+                                    <div class="border-t border-stone-100 bg-stone-50 p-2 md:p-3 space-y-2 extended-care" data-day="fri">
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="12" data-type="early" data-day="fri">
+                                                <span class="text-stone-600">Early (7:30–8:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£12</span>
+                                        </label>
+                                        <label class="flex items-center justify-between text-[11px] md:text-xs cursor-pointer hover:bg-white p-1.5 rounded-lg transition">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" class="w-3.5 h-3.5 text-emerald-600 rounded border-stone-300 addon-checkbox" data-price="18" data-type="late" data-day="fri">
+                                                <span class="text-stone-600">Late (4:00–5:30)</span>
+                                            </div>
+                                            <span class="text-emerald-700 font-medium">+£18</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-    (function buildTable(){
-      const bookingGridBody=document.getElementById('bookingGridBody');
-      const previewBody=document.getElementById('availabilityPreviewBody');
-      
-      const rows=PRODUCTS.map(p=>({
-        date:p.date,
-        time:'8:30 am to 4:00 pm',
-        price:'£72',
-        url:p.url,
-        rid:'row-'+p.date.replace(/[^a-z0-9]+/gi,'-'),
-        status:'Checking…'
-      }));
+                            <div class="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm">
+                                <i data-lucide="info" class="w-5 h-5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <div class="text-blue-800">
+                                    <strong>Standard day:</strong> 08:30 — 16:00. Add early drop-off or late pick-up for each day as needed.
+                                </div>
+                            </div>
+                        </div>
 
-      // Preview badges
-      let previewHTML='';
-      rows.forEach(r=>{
-        const shortDate=r.date.split(' ').slice(0,3).join(' ');
-        previewHTML+=`
-          <div class="availability-badge scroll-animate" id="badge-${r.rid}">
-            <div class="day-badge-label">${shortDate}</div>
-            <div class="places-remaining">--</div>
-            <div class="places-text">checking...</div>
-            <div class="urgency-label" style="display:none"></div>
-          </div>
-        `;
-      });
-      previewBody.innerHTML=previewHTML;
-      
-      // Booking cards
-      let bookingGridHTML='';
-      rows.forEach(r=>{
-        bookingGridHTML+=`
-          <div class="card booking-card" id="${r.rid}">
-            <div style="font-weight: 600; font-size: 15px; color: var(--ink);">${r.date}</div>
-            <div style="font-size: 14px; color: var(--muted); margin-top: 4px;">${r.time} • ${r.price}</div>
-            <a class="btn btn-ghost" data-book data-url="${r.url}" href="${r.url}" style="margin-top: 12px; width: 100%; justify-content: center;">Book</a>
-          </div>
-        `;
-      });
-      bookingGridBody.innerHTML=bookingGridHTML;
+                        <div class="bg-emerald-900 p-4 md:p-8 text-white">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8">
+                                <div class="flex-1">
+                                    <div class="text-emerald-200 text-sm mb-1" id="summary-text">5 days selected</div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-3xl md:text-4xl font-bold" id="total-price">£360</span>
+                                        <span class="text-emerald-300 text-sm">inc. VAT</span>
+                                    </div>
+                                    <div class="text-emerald-300 text-xs mt-1" id="price-breakdown">£300 + £60 VAT (5 × £72)</div>
+                                </div>
 
-      // Age confirmation elements
-      const ageModal=document.getElementById('ageConfirmModal');
-      const ageYes=document.getElementById('ageConfirmYes');
-      const ageNo=document.getElementById('ageConfirmNo');
-      let pendingUrl=null;
+                                <button id="add-to-cart-btn" class="w-full md:w-auto bg-white text-emerald-900 px-8 md:px-12 py-4 rounded-xl md:rounded-2xl font-bold text-base md:text-lg hover:bg-emerald-50 transition shadow-lg flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                    Add to Cart
+                                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-      function openAgeModal(url){
-        pendingUrl=url;
-        if(ageModal){
-          ageModal.classList.add('is-open');
-          ageModal.setAttribute('aria-hidden','false');
-        }
-      }
-      function closeAgeModal(){
-        if(ageModal){
-          ageModal.classList.remove('is-open');
-          ageModal.setAttribute('aria-hidden','true');
-        }
-        pendingUrl=null;
-      }
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-6 md:mt-8 text-stone-500 text-xs md:text-sm">
+                        <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Secure checkout</span>
+                        <span class="flex items-center gap-2"><i data-lucide="credit-card" class="w-4 h-4 text-emerald-600"></i> Tax-Free Childcare accepted</span>
+                        <span class="flex items-center gap-2"><i data-lucide="undo-2" class="w-4 h-4 text-emerald-600"></i> Flexible cancellation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      function attachBookingHandlers(){
-        const buttons=document.querySelectorAll('#evg-site [data-book]');
-        buttons.forEach(btn=>{
-          btn.addEventListener('click',function(e){
-            if(this.getAttribute('aria-disabled')==='true') return;
-            e.preventDefault();
-            const url=this.getAttribute('data-url') || this.href;
-            if(!url) return;
-            openAgeModal(url);
-          });
-        });
-      }
-
-      attachBookingHandlers();
-
-      if(ageNo){
-        ageNo.addEventListener('click',function(e){
-          e.preventDefault();
-          closeAgeModal();
-        });
-      }
-      if(ageYes){
-        ageYes.addEventListener('click',function(e){
-          e.preventDefault();
-          if(pendingUrl){
-            window.location.href=pendingUrl;
-          }
-          closeAgeModal();
-        });
-      }
-      if(ageModal){
-        ageModal.addEventListener('click',function(e){
-          if(e.target===ageModal){
-            closeAgeModal();
-          }
-        });
-      }
-      document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'){
-          closeAgeModal();
-        }
-      });
-
-      // Fetch data and update both sections
-      rows.forEach(async r=>{
-        const card=document.getElementById(r.rid);
-        const btn=card.querySelector('[data-book]');
-
-        const result=await availabilityFor(r.url);
-
-        r.status=result.label;
-        r.qty=result.qty;
-
-        // Update badge display
-        updateBadge(r.rid, result);
-
-        // Update booking button
-        if(result.label==='Sold out'){
-          btn.textContent='Sold Out';
-          btn.setAttribute('aria-disabled','true');
-          btn.style.opacity='.45';
-          btn.style.pointerEvents='none';
-          btn.href='#';
-        }
-      });
-      
-      document.getElementById('hideSold').addEventListener('change',e=>{
-        const hide=e.target.checked;
-        rows.forEach(r=>{
-          const card=document.getElementById(r.rid);
-          const label=r.status || ''; 
-          card.style.display=(hide && label==='Sold out')?'none':'';
-        });
-      });
-      
-      document.getElementById('refreshAvail').addEventListener('click',e=>{
-        e.preventDefault();
-        PRODUCTS.forEach(p=>{try{sessionStorage.removeItem('evg-stock:'+btoa(p.url))}catch(_){}})
-        
-        rows.forEach(async r=>{
-          const card=document.getElementById(r.rid);
-          const btn=card.querySelector('[data-book]');
-          const badge=document.getElementById('badge-'+r.rid);
-
-          // Reset badge to checking state
-          if(badge){
-            const placesNum=badge.querySelector('.places-remaining');
-            const placesText=badge.querySelector('.places-text');
-            const urgencyLabel=badge.querySelector('.urgency-label');
-            badge.className='availability-badge scroll-animate';
-            placesNum.className='places-remaining';
-            placesNum.textContent='--';
-            placesText.textContent='checking...';
-            urgencyLabel.style.display='none';
-          }
-
-          const result=await availabilityFor(r.url);
-
-          r.status=result.label;
-          r.qty=result.qty;
-
-          // Update badge display
-          updateBadge(r.rid, result);
-
-          // Update booking button
-          if(result.label==='Sold out'){
-            btn.textContent='Sold Out';
-            btn.setAttribute('aria-disabled','true');
-            btn.style.opacity='.45';
-            btn.style.pointerEvents='none';
-            btn.href='#';
-          } else {
-            btn.textContent='Book';
-            btn.removeAttribute('aria-disabled');
-            btn.style.opacity='1';
-            btn.style.pointerEvents='auto';
-            btn.href=r.url;
-          }
-        });
-      });
-    })();
-
-    /* Scroll Animation Observer */
-    (function(){
-      if('IntersectionObserver' in window){
-        const observer=new IntersectionObserver((entries,obs)=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){
-              entry.target.classList.add('is-visible');
-              if(!entry.target.querySelector('.bar-container')){
-                obs.unobserve(entry.target);
-              }
-            }else{
-              if(entry.target.querySelector('.bar-container')){
-                entry.target.classList.remove('is-visible');
-              }
+        <script>
+        // ==========================================
+        // PRODUCT CONFIGURATION
+        // ==========================================
+        const PRODUCTS = {
+            'mon': {
+                day:   '52f2cb06-7f21-4d2e-8dba-604ebc173df5',
+                early: '88dd6573-010e-4e7b-abf7-0788a29cd35d',
+                late:  '7728f965-a8a0-405a-9ee7-2a76cd9cb98d'
+            },
+            'tue': {
+                day:   '1e866658-e824-4e92-857d-cfba6bac544b',
+                early: '22086984-940f-4e6e-b156-951472c0c81e',
+                late:  'c0bc4f15-0f5e-439a-92f3-cd7fd1012761'
+            },
+            'wed': {
+                day:   '532ae543-2216-468f-a1eb-cbd1935b82eb',
+                early: '9b5f0586-d6ae-4460-980f-d38f5c075ba7',
+                late:  '001b3c75-8c73-406b-8161-b543e4617e3c'
+            },
+            'thu': {
+                day:   '4ec62765-c175-41b1-880a-a0492e69ab44',
+                early: '86958053-1e23-4052-ae76-9e6d6d34ba30',
+                late:  'b70451c7-6e6d-4277-b843-f5c61a2e3ac2'
+            },
+            'fri': {
+                day:   '916b044c-a8e1-4506-91ef-340a31565eb6',
+                early: '37a31455-2e42-4c6f-8cdc-04c55d2c3872',
+                late:  '2b9bbb04-058a-494a-8004-a4cdb39579cd'
             }
-          });
-        },{threshold:0.1});
-        
-        document.querySelectorAll('#evg-site .scroll-animate').forEach(el=>{
-          observer.observe(el);
-        });
-      }else{
-        document.querySelectorAll('#evg-site .scroll-animate').forEach(el=>{
-          el.classList.add('is-visible');
-        });
-      }
-    })();
+        };
 
-    /* Reel video: play when in view, pause when out of view */
-    document.addEventListener('DOMContentLoaded',function(){
-      const reelSection=document.getElementById('reel');
-      const video=document.querySelector('#evg-site .reel-video');
-      if(!reelSection||!video||!('IntersectionObserver' in window)) return;
+        // ==========================================
+        // CALCULATOR & ADD TO CART LOGIC
+        // ==========================================
+        (function() {
+            const dayCheckboxes = document.querySelectorAll('.day-checkbox');
+            const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
+            const totalPriceEl = document.getElementById('total-price');
+            const summaryTextEl = document.getElementById('summary-text');
+            const priceBreakdownEl = document.getElementById('price-breakdown');
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
 
-      function safePlay(){
-        const p=video.play();
-        if(p && p.catch) p.catch(()=>{});
-      }
+            function calculateTotal() {
+                let total = 0;
+                let daysSelected = 0;
+                let earlyCount = 0;
+                let lateCount = 0;
 
-      const io=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-          if(entry.target!==reelSection) return;
-          if(entry.isIntersecting && entry.intersectionRatio>0.35){
-            if(video.readyState>=3){
-              safePlay();
-            }else{
-              video.addEventListener('canplaythrough',safePlay,{once:true});
+                const selectedDays = [];
+
+                dayCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const price = parseInt(checkbox.dataset.price || '72', 10);
+                        total += price;
+                        daysSelected++;
+                        selectedDays.push(checkbox.closest('[data-day]').dataset.day);
+                    }
+                });
+
+                addonCheckboxes.forEach(checkbox => {
+                    const day = checkbox.dataset.day;
+                    if (selectedDays.includes(day) && checkbox.checked) {
+                        const price = parseInt(checkbox.dataset.price, 10);
+                        total += price;
+                        if (checkbox.dataset.type === 'early') earlyCount++;
+                        if (checkbox.dataset.type === 'late') lateCount++;
+                    }
+                });
+
+                totalPriceEl.textContent = '£' + total;
+
+                const summaryParts = [];
+                if (daysSelected > 0) summaryParts.push(daysSelected + ' day' + (daysSelected !== 1 ? 's' : ''));
+                if (earlyCount > 0) summaryParts.push(earlyCount + ' early');
+                if (lateCount > 0) summaryParts.push(lateCount + ' late');
+                summaryTextEl.textContent = summaryParts.length > 0 ? summaryParts.join(' + ') + ' selected' : 'No days selected';
+
+                const netTotal = (total / 1.2).toFixed(2);
+                const vatAmount = (total - parseFloat(netTotal)).toFixed(2);
+                priceBreakdownEl.textContent = '£' + netTotal + ' + £' + vatAmount + ' VAT';
+
+                addToCartBtn.disabled = daysSelected === 0;
+
+                dayCheckboxes.forEach(dayCheckbox => {
+                    const dayContainer = dayCheckbox.closest('[data-day]');
+                    const extendedCare = dayContainer.querySelector('.extended-care');
+                    const addons = extendedCare.querySelectorAll('.addon-checkbox');
+
+                    if (dayCheckbox.checked) {
+                        extendedCare.classList.remove('opacity-50', 'pointer-events-none');
+                        addons.forEach(addon => addon.disabled = false);
+                    } else {
+                        extendedCare.classList.add('opacity-50', 'pointer-events-none');
+                        addons.forEach(addon => {
+                            addon.disabled = true;
+                            addon.checked = false;
+                        });
+                    }
+                });
             }
-          }else{
-            video.pause();
-          }
-        });
-      },{threshold:[0.0,0.35]});
 
-      io.observe(reelSection);
-    });
-  </script>
-</section>
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+                }
+                return null;
+            }
+
+            function getSquarespaceCrumb() {
+                try {
+                    if (window.Static && window.Static.SQUARESPACE_CONTEXT && window.Static.SQUARESPACE_CONTEXT.crumb) {
+                        return window.Static.SQUARESPACE_CONTEXT.crumb;
+                    }
+                } catch (e) {}
+
+                const cookieCrumb = getCookie('crumb');
+                if (cookieCrumb) return cookieCrumb;
+
+                return null;
+            }
+
+            async function addOneItemToSquarespaceCart(itemId) {
+                const crumb = getSquarespaceCrumb();
+                if (!crumb) {
+                    const err = new Error('Missing Squarespace crumb. Cookie "crumb" not found and context crumb not available.');
+                    err.code = 'NO_CRUMB';
+                    throw err;
+                }
+
+                const url = `/api/commerce/shopping-cart/entries?crumb=${encodeURIComponent(crumb)}`;
+
+                const payload = {
+                    itemId: itemId,
+                    sku: null,
+                    additionalFields: "null"
+                };
+
+                const res = await fetch(url, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const text = await res.text();
+                let data = null;
+                try { data = text ? JSON.parse(text) : null; } catch (e) { data = text; }
+
+                if (!res.ok) {
+                    console.group('Squarespace cart add failed');
+                    console.log('Status:', res.status, res.statusText);
+                    console.log('URL:', url);
+                    console.log('ItemId:', itemId);
+                    console.log('Response:', data);
+                    console.groupEnd();
+
+                    const err = new Error(`Cart request failed: ${res.status} ${res.statusText}`);
+                    err.status = res.status;
+                    err.response = data;
+                    throw err;
+                }
+
+                return data;
+            }
+
+            async function handleAddToCart() {
+                const originalHTML = addToCartBtn.innerHTML;
+                addToCartBtn.innerHTML = '<span>Adding...</span>';
+                addToCartBtn.disabled = true;
+
+                const itemsToAdd = [];
+
+                dayCheckboxes.forEach(checkbox => {
+                    if (!checkbox.checked) return;
+
+                    const dayKey = checkbox.closest('[data-day]').dataset.day;
+                    const dayConfig = PRODUCTS[dayKey];
+                    if (!dayConfig) return;
+
+                    itemsToAdd.push(dayConfig.day);
+
+                    const earlyBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="early"]`);
+                    if (earlyBox && earlyBox.checked) itemsToAdd.push(dayConfig.early);
+
+                    const lateBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="late"]`);
+                    if (lateBox && lateBox.checked) itemsToAdd.push(dayConfig.late);
+                });
+
+                if (itemsToAdd.length === 0) {
+                    addToCartBtn.innerHTML = originalHTML;
+                    calculateTotal();
+                    return;
+                }
+
+                try {
+                    for (const itemId of itemsToAdd) {
+                        await addOneItemToSquarespaceCart(itemId);
+                        await new Promise(r => setTimeout(r, 350));
+                    }
+
+                    window.location.href = '/cart';
+
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                    addToCartBtn.innerHTML = 'Error. Open Console.';
+                    alert('The cart request failed. Open DevTools Console for the exact reason.');
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = originalHTML;
+                        calculateTotal();
+                    }, 1500);
+                }
+            }
+
+            dayCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
+            addonCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
+            addToCartBtn.addEventListener('click', handleAddToCart);
+
+            calculateTotal();
+
+            if (window.lucide) lucide.createIcons();
+        })();
+        </script>
+
+        <section class="bg-stone-50 w-full px-6 md:px-16 lg:px-20 py-12 md:py-24 relative overflow-hidden">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-8 md:mb-16 relative z-10">
+                    <span class="text-emerald-600 font-semibold tracking-wide text-xs uppercase mb-3 block">Flexible Options</span>
+                    <h2 class="text-2xl md:text-5xl font-medium tracking-tight text-stone-900 mb-2 md:mb-4">
+                        Extended Care.
+                    </h2>
+                    <p class="text-stone-600 text-sm md:text-lg font-light">
+                        We accept Tax-Free Childcare via a refund system.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 md:gap-6 relative z-10 max-w-5xl mx-auto">
+                    <div class="bg-white rounded-xl md:rounded-3xl p-3 md:p-8 border border-stone-200 shadow-sm flex flex-col items-center text-center">
+                        <span class="text-[10px] md:text-sm font-semibold text-stone-500 mb-1 md:mb-2">Early Drop-off</span>
+                        <div class="text-lg md:text-3xl font-bold text-stone-900 mb-0 md:mb-1">£12</div>
+                        <div class="text-[9px] md:text-xs text-stone-500 mb-2 md:mb-6">07:30 — 08:30</div>
+                        <p class="text-[10px] md:text-sm text-stone-600 hidden md:block">Start the day early with calm activities.</p>
+                    </div>
+
+                    <div class="bg-emerald-900 rounded-xl md:rounded-3xl p-3 md:p-8 border border-emerald-800 shadow-xl flex flex-col items-center text-center relative md:scale-105 z-10">
+                        <span class="absolute top-0 -translate-y-1/2 bg-emerald-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Core Day</span>
+                        <span class="text-[10px] md:text-sm font-semibold text-emerald-200 mb-1 md:mb-2 mt-1 md:mt-0">Standard Day</span>
+                        <div class="text-lg md:text-3xl font-bold text-white mb-0 md:mb-1">Included</div>
+                        <div class="text-[9px] md:text-xs text-emerald-400 mb-2 md:mb-6">08:30 — 16:00</div>
+                        <p class="text-[10px] md:text-sm text-emerald-100 hidden md:block">The full Evergreen experience.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl md:rounded-3xl p-3 md:p-8 border border-stone-200 shadow-sm flex flex-col items-center text-center">
+                        <span class="text-[10px] md:text-sm font-semibold text-stone-500 mb-1 md:mb-2">Late Pick-up</span>
+                        <div class="text-lg md:text-3xl font-bold text-stone-900 mb-0 md:mb-1">£18</div>
+                        <div class="text-[9px] md:text-xs text-stone-500 mb-2 md:mb-6">16:00 — 17:30</div>
+                        <p class="text-[10px] md:text-sm text-stone-600 hidden md:block">Relaxing wind-down time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white w-full px-6 md:px-16 lg:px-20 py-10 md:py-20 border-t border-stone-100">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+
+                    <a href="https://www.instagram.com/evergreen.kids.dulwich/" target="_blank" class="relative group cursor-pointer block">
+                         <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] md:border-[14px] rounded-[2rem] md:rounded-[2.5rem] h-[380px] md:h-[600px] w-[190px] md:w-[300px] shadow-xl flex flex-col overflow-hidden">
+                            <div class="hidden md:block h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+                            <div class="hidden md:block h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                            <div class="hidden md:block h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                            <div class="hidden md:block h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                            <div class="rounded-[1.5rem] md:rounded-[2rem] overflow-hidden w-full h-full bg-white relative" style="transform: translateZ(0); will-change: transform;">
+                                <video id="pov-video" class="absolute inset-0 w-full h-full object-cover" style="transform: translateZ(0);" src="https://www.evergreenkids.co.uk/s/Evergreen-Website-POV-Final.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/e78e6fad-2ce8-499c-b799-b9c177f85f24/DSCF3502.JPG"></video>
+                                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 flex flex-col justify-between p-4">
+                                    <div class="flex items-center gap-2 pt-8">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-500 border border-white overflow-hidden">
+                                            <img src="https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/cc4c2398-8f38-4e9c-ae42-0a571806f372/DSCF3034.JPG" class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="text-white text-xs font-semibold shadow-sm">evergreen.kids.dulwich</span>
+                                    </div>
+                                    <div class="text-white">
+                                        <p class="text-xs font-medium mb-2">See exactly what they learn.</p>
+                                        <div class="bg-white/20 backdrop-blur-md rounded-lg p-2 flex items-center gap-2">
+                                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                                            <span class="text-[10px] font-bold">Follow for daily updates</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-100/50 rounded-full blur-3xl -z-10"></div>
+                    </a>
+
+                    <div>
+                        <span class="text-emerald-600 font-semibold tracking-wide text-xs uppercase mb-2 md:mb-3 block">Parent Trust</span>
+                        <h3 class="text-2xl md:text-3xl font-medium font-jakarta tracking-tight mb-4 md:mb-8 text-stone-900">What families say.</h3>
+
+                        <div class="space-y-3 md:space-y-6">
+                            <blockquote class="bg-stone-50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-stone-100">
+                                <p class="text-stone-700 italic font-medium text-sm md:text-base mb-2 md:mb-4">"I was greeted with a beaming smile followed by, 'I had the best day ever!' The staff are wonderful."</p>
+                                <div class="flex items-center gap-1 text-amber-400">
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                </div>
+                            </blockquote>
+                            <blockquote class="bg-stone-50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-stone-100">
+                                <p class="text-stone-700 italic font-medium text-sm md:text-base mb-2 md:mb-4">"Loved the daily Instagram videos showing us what the kids had done. Also love that there's some learning too!"</p>
+                                <div class="flex items-center gap-1 text-amber-400">
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                </div>
+                            </blockquote>
+                            <blockquote class="bg-stone-50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-stone-100">
+                                <p class="text-stone-700 italic font-medium text-sm md:text-base mb-2 md:mb-4">"The kids are learning while having fun all day! Couldn't recommend more."</p>
+                                <div class="flex items-center gap-1 text-amber-400">
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-3 md:w-4 h-3 md:h-4 fill-current"></i>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white w-full px-6 md:px-16 lg:px-20 py-10 md:py-24">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+                    <div class="lg:col-span-7">
+                        <h3 class="text-xl md:text-2xl font-medium font-jakarta tracking-tight mb-4 md:mb-8 text-stone-900">Common Questions</h3>
+                        <div class="space-y-2 md:space-y-4">
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>What ages do you accept?</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    Children currently in Reception to Year 3 (ages 4 to 8). Reception have their own group, while Years 1-3 are mixed for the best social fit.
+                                </div>
+                            </details>
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>Do you accept childcare vouchers?</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    Yes, we accept Tax-Free Childcare via a refund system. You pay to book your place, and we refund you once the voucher payment is received.
+                                </div>
+                            </details>
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>What should my child bring?</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    A packed lunch, extra snacks, and a water bottle. Please note we are a strictly nut and sesame-free site.
+                                </div>
+                            </details>
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>Cancellation Policy</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    Refunds are issued only if the place is repurchased by another family (minus a £5 admin fee). Extended care fees are non-refundable.
+                                </div>
+                            </details>
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>How are children grouped?</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    Reception children have their own group. Years 1 to 3 are mixed together for the best social fit.
+                                </div>
+                            </details>
+                            <details class="group bg-white border border-stone-200 rounded-lg md:rounded-xl overflow-hidden">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 md:p-5 text-sm md:text-base text-stone-900">
+                                    <span>Medication and sickness policy</span>
+                                    <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-stone-400"></i></span>
+                                </summary>
+                                <div class="text-stone-600 px-3 md:px-5 pb-3 md:pb-5 text-xs md:text-sm leading-relaxed">
+                                    All medications must be labelled with clear instructions. We follow the 48 hour rule for sickness and diarrhoea — children must be symptom free for 48 hours before returning to camp.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div id="newsletter" class="lg:col-span-5">
+                        <div class="bg-emerald-900 rounded-3xl p-8 text-white relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-48 h-48 bg-emerald-500/20 rounded-full blur-[60px] translate-x-1/2 -translate-y-1/2"></div>
+
+                            <div class="relative z-10">
+                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/10 mb-6">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-2xl font-medium tracking-tight mb-2">Join the list for 2026</h3>
+                                <p class="text-emerald-100 text-sm mb-6">Be the first to know when booking opens for February Half Term.</p>
+
+                                <iframe name="ml-submit-frame" id="ml-submit-frame" style="display:none;"></iframe>
+
+                                <form id="mailerlite-form" class="space-y-3" action="https://assets.mailerlite.com/jsonp/1985997/forms/174208491267818524/subscribe" method="POST" target="ml-submit-frame">
+                                    <input type="email" id="ml-email" name="fields[email]" placeholder="Parent's email address" class="w-full bg-emerald-950/50 border border-emerald-700/50 rounded-xl px-4 py-3 text-sm text-white placeholder-emerald-500/50 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" required="">
+
+                                    <input type="hidden" name="ml-submit" value="1">
+                                    <input type="hidden" name="anticsrf" value="true">
+
+                                    <label class="flex items-start gap-3 cursor-pointer group">
+                                        <div class="relative flex items-center">
+                                            <input type="checkbox" id="ml-consent" name="consent" class="peer h-4 w-4 cursor-pointer appearance-none rounded border border-emerald-600 bg-emerald-900/50 checked:bg-emerald-500 checked:border-emerald-500 transition-all">
+                                            <i data-lucide="check" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-white opacity-0 peer-checked:opacity-100 pointer-events-none"></i>
+                                        </div>
+                                        <span class="text-xs text-emerald-100 pt-0.5">I agree to receive booking news.</span>
+                                    </label>
+
+                                    <button type="submit" id="ml-submit" class="w-full bg-white text-emerald-900 font-semibold py-3 rounded-xl hover:bg-emerald-50 transition shadow-lg mt-2">
+                                        Subscribe
+                                    </button>
+
+                                    <div id="ml-message" class="text-sm text-center hidden mt-2"></div>
+                                </form>
+
+                                <script>
+                                document.getElementById('mailerlite-form').addEventListener('submit', function(e) {
+                                    const consent = document.getElementById('ml-consent').checked;
+                                    const email = document.getElementById('ml-email').value;
+                                    const submitBtn = document.getElementById('ml-submit');
+                                    const messageDiv = document.getElementById('ml-message');
+
+                                    if (!consent) {
+                                        e.preventDefault();
+                                        messageDiv.textContent = 'Please agree to receive booking news.';
+                                        messageDiv.className = 'text-sm text-center text-red-300 mt-2';
+                                        messageDiv.classList.remove('hidden');
+                                        return false;
+                                    }
+
+                                    if (!email || !email.includes('@')) {
+                                        e.preventDefault();
+                                        messageDiv.textContent = 'Please enter a valid email address.';
+                                        messageDiv.className = 'text-sm text-center text-red-300 mt-2';
+                                        messageDiv.classList.remove('hidden');
+                                        return false;
+                                    }
+
+                                    submitBtn.textContent = 'Subscribing...';
+                                    submitBtn.disabled = true;
+                                    messageDiv.classList.add('hidden');
+
+                                    setTimeout(function() {
+                                        messageDiv.textContent = 'Thank you! You\'re on the list.';
+                                        messageDiv.className = 'text-sm text-center text-emerald-300 mt-2';
+                                        messageDiv.classList.remove('hidden');
+                                        submitBtn.textContent = 'Subscribed ✓';
+                                        submitBtn.classList.add('bg-emerald-500', 'text-white');
+                                        submitBtn.classList.remove('bg-white', 'text-emerald-900', 'hover:bg-emerald-50');
+                                        document.getElementById('ml-email').value = '';
+                                        document.getElementById('ml-consent').checked = false;
+                                    }, 1500);
+
+                                    return true;
+                                });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-stone-50 px-6 md:px-16 lg:px-20 py-12 border-t border-stone-200 mt-auto">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <span class="text-lg font-bold text-emerald-900 block mb-4">Evergreen Kids Camp</span>
+                        <div class="text-sm text-stone-600 space-y-1">
+                            <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Herne Hill School, 127 Herne Hill, London SE24 9LY</p>
+                            <p class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 07411 625794 / 07903 415439</p>
+                            <p class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> info@evergreenkids.co.uk</p>
+                        </div>
+                        <div class="flex gap-4 mt-4">
+                            <a href="https://www.instagram.com/evergreen.kids.dulwich/" target="_blank" class="text-stone-500 hover:text-emerald-700 transition flex items-center gap-2 text-sm">
+                                <i data-lucide="instagram" class="w-5 h-5"></i> Follow us on Instagram
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-sm font-semibold text-stone-700 block mb-3">Find Us</span>
+                        <iframe title="Map" loading="lazy" class="w-full h-[200px] rounded-xl border border-stone-200" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2485.4947941328464!2d-0.09338892337851614!3d51.45137997180121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876046e7f8d6849%3A0x6d9f3b552b47000!2sHerne%20Hill%20School!5e0!3m2!1sen!2suk!4v1703600000000!5m2!1sen!2suk"></iframe>
+                    </div>
+                </div>
+                <div class="border-t border-stone-200 mt-8 pt-8 flex flex-col md:flex-row justify-between text-xs text-stone-500">
+                    <p>© 2024 Evergreen Kids Camp. All rights reserved.</p>
+                    <div class="flex gap-4 mt-2 md:mt-0">
+                        <span>Ofsted Registered</span>
+                        <span>DBS Checked Staff</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ChildCare",
+      "name": "Evergreen Kids Camp",
+      "image": "https://images.squarespace-cdn.com/content/6564f9debaf839246fc54c24/cc4c2398-8f38-4e9c-ae42-0a571806f372/DSCF3034.JPG",
+      "description": "Premium holiday camps for children in Reception to Year 3 in Herne Hill, South London.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "127 Herne Hill",
+        "addressLocality": "London",
+        "postalCode": "SE24 9LY",
+        "addressCountry": "UK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.4512,
+        "longitude": -0.0912
+      },
+      "url": "https://www.evergreenkids.co.uk",
+      "telephone": "+447411625794",
+      "priceRange": "£72",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:30"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "430"
+      }
+    }
+    </script>
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('pov-video');
+            if (video) {
+                video.play().catch(function(error) {
+                    console.log('Auto-play was prevented:', error);
+                });
+            }
+        });
+    </script>
+
+</body></html>
