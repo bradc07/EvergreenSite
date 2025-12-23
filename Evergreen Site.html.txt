@@ -856,8 +856,8 @@
                                 </div>
                             </div>
                             <div class="p-6 bg-stone-50 rounded-b-2xl space-y-3">
-                                <a href="/shop" class="block w-full bg-emerald-700 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-800 transition">
-                                    Go to Booking Page →
+                                <a href="/bookings" class="block w-full bg-emerald-700 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-800 transition">
+                                    Continue to Checkout →
                                 </a>
                                 <button onclick="document.getElementById('booking-modal').remove()" class="block w-full text-stone-500 text-center py-2 text-sm hover:text-stone-700">
                                     Close
