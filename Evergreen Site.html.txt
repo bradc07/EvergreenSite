@@ -627,12 +627,12 @@
         //
         // FIXES APPLIED:
         // 1. Fixed CSRF token handling - uses URL parameter (Squarespace standard)
-        // 2. Using correct Product IDs (not Variant IDs or SKUs)
-        // 3. Fixed payload format: {itemId: '694a6c...', quantity: 1}
-        // 4. Added comprehensive error messages for debugging
-        // 5. Added progress indicator showing X/Y items being added
-        // 6. Added diagnostic logging on page load
-        // 7. All 15 Product IDs verified from Squarespace Products dashboard
+        // 2. Using Variant IDs (the original IDs were correct!)
+        // 3. Fixed payload format: {itemId: 'UUID', quantity: 1}
+        // 4. The issue was payload format, not the IDs
+        // 5. Added comprehensive error messages for debugging
+        // 6. Added progress indicator showing X/Y items being added
+        // 7. All 15 Variant IDs verified from Squarespace Products dashboard
         //
         // DEBUGGING:
         // - Open browser console to see diagnostic messages
@@ -642,33 +642,33 @@
         // - 403 errors indicate CSRF/security issues
         //
         // ==========================================
-        // PRODUCT CONFIGURATION (Using Product IDs)
+        // PRODUCT CONFIGURATION (Using Variant IDs)
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   '694a6cbeb50bae40ae71ed7c6',  // Monday 16th February '26
-                early: '694a6cc69b26257598d27ca',    // Early Drop Off - Monday
-                late:  '694a6cbeb50bae40ae71ed7c6'   // Late Pick Up - Monday
+                day:   '52f2cb06-7f21-4d2e-8dba-604ebc173df5',  // Monday 16th February '26
+                early: '88dd6573-010e-4e7b-abf7-0788a29cd35d',  // Early Drop Off - Monday
+                late:  '7728f965-a8a0-405a-9ee7-2a76cd9cb98d'   // Late Pick Up - Monday
             },
             'tue': {
-                day:   '694a6c247d140728b1e3445',  // Tuesday 17th February '26
-                early: '694a6d32185517dce8ac8c00',  // Early Drop Off - Tuesday
-                late:  '694a6d11bd3e8ab13f660beec'   // Late Pick Up - Tuesday
+                day:   '1e866658-e824-4e92-857d-cfba6bac544b',  // Tuesday 17th February '26
+                early: '22086984-940f-4e6e-b156-951472c0c81e',  // Early Drop Off - Tuesday
+                late:  'c0bc4f15-0f5e-439a-92f3-cd7fd1012761'   // Late Pick Up - Tuesday
             },
             'wed': {
-                day:   '694a6c42275698f4fa8df43d',  // Wednesday 18th February '26
-                early: '694a6d68c6e4921388a40d1d',  // Early Drop Off - Wednesday
-                late:  '694a6d8958d03318c1e34fc7'   // Late Pick Up - Wednesday
+                day:   '532ae543-2216-468f-a1eb-cbd1935b82eb',  // Wednesday 18th February '26
+                early: '9b5f0586-d6ae-4460-980f-d38f5c075ba7',  // Early Drop Off - Wednesday
+                late:  '001b3c75-8c73-406b-8161-b543e4617e3c'   // Late Pick Up - Wednesday
             },
             'thu': {
-                day:   '694a6c20c212b91e8f6edbae49',  // Thursday 19th February '26
-                early: '694a6ca0f0fde7c5e7084ed7',   // Early Drop Off - Thursday
-                late:  '694a6dbb3650b20b77ed28ae'    // Late Pick Up - Thursday
+                day:   '4ec62765-c175-41b1-880a-a0492e69ab44',  // Thursday 19th February '26
+                early: '86958053-1e23-4052-ae76-9e6d6d34ba30',  // Early Drop Off - Thursday
+                late:  'b70451c7-6e6d-4277-b843-f5c61a2e3ac2'   // Late Pick Up - Thursday
             },
             'fri': {
-                day:   '694a6d7ba18548265e2bfd8a9',  // Friday 20th February '26
-                early: '694a6ded10dea5e91c11ef6',   // Early Drop Off - Friday
-                late:  '694a6cb3e695ed557896255'    // Late Pick Up - Friday
+                day:   '916b044c-a8e1-4506-91ef-340a31565eb6',  // Friday 20th February '26
+                early: '37a31455-2e42-4c6f-8cdc-04c55d2c3872',  // Early Drop Off - Friday
+                late:  '2b9bbb04-058a-494a-8004-a4cdb39579cd'   // Late Pick Up - Friday
             }
         };
 
@@ -766,7 +766,7 @@
                 return null;
             }
 
-            async function addOneItemToSquarespaceCart(productId) {
+            async function addOneItemToSquarespaceCart(variantId) {
                 const crumb = getSquarespaceCrumb();
 
                 // Build URL with crumb - required for Squarespace
@@ -775,9 +775,9 @@
                     url += `?crumb=${encodeURIComponent(crumb)}`;
                 }
 
-                // Using Product ID-based cart add
+                // Using Variant ID-based cart add (itemId expects Variant ID)
                 const payload = {
-                    itemId: productId,
+                    itemId: variantId,
                     quantity: 1
                 };
 
@@ -802,7 +802,7 @@
                     console.log('Status:', res.status, res.statusText);
                     console.log('URL:', url);
                     console.log('Payload sent:', payload);
-                    console.log('Product ID:', productId);
+                    console.log('Variant ID:', variantId);
                     console.log('Crumb available:', !!crumb);
                     console.log('Response:', data);
                     console.groupEnd();
@@ -813,7 +813,7 @@
                     throw err;
                 }
 
-                console.log('✓ Added item to cart (Product ID):', productId);
+                console.log('✓ Added item to cart (Variant ID):', variantId);
                 return data;
             }
 
@@ -849,12 +849,12 @@
                     return;
                 }
 
-                console.log('🛒 Adding items to cart (Product IDs):', itemsToAdd);
+                console.log('🛒 Adding items to cart (Variant IDs):', itemsToAdd);
 
                 try {
                     let successCount = 0;
-                    for (const productId of itemsToAdd) {
-                        await addOneItemToSquarespaceCart(productId);
+                    for (const variantId of itemsToAdd) {
+                        await addOneItemToSquarespaceCart(variantId);
                         successCount++;
                         addToCartBtn.innerHTML = `<span>Adding ${successCount}/${itemsToAdd.length}...</span>`;
                         await new Promise(r => setTimeout(r, 350));
@@ -870,7 +870,7 @@
 
                     let errorMessage = 'Unable to add to cart. ';
                     if (error.status === 404) {
-                        errorMessage += 'Product not found (404). Please check Product IDs in Squarespace.';
+                        errorMessage += 'Product not found (404). Please check Variant IDs in Squarespace.';
                     } else if (error.status === 403) {
                         errorMessage += 'Security error (403). CSRF token issue.';
                     } else if (error.code === 'NO_CRUMB') {
