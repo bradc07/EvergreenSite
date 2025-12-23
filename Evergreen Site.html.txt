@@ -627,29 +627,29 @@
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   { itemId: 'REPLACE_MON_DAY_ID',   sku: 'REPLACE_MON_DAY_SKU' },
-                early: { itemId: 'REPLACE_MON_EARLY_ID', sku: 'REPLACE_MON_EARLY_SKU' },
-                late:  { itemId: 'REPLACE_MON_LATE_ID',  sku: 'REPLACE_MON_LATE_SKU' }
+                day:   { itemId: '694a6beb50bae40ae71ed7c6', sku: 'SQ6231165' },
+                early: { itemId: '694a6cc65b2d2375984f27ca', sku: 'SQ3464636' },
+                late:  { itemId: '694a6cf9a6695e555789c525', sku: 'SQ8504567' }
             },
             'tue': {
-                day:   { itemId: 'REPLACE_TUE_DAY_ID',   sku: 'REPLACE_TUE_DAY_SKU' },
-                early: { itemId: 'REPLACE_TUE_EARLY_ID', sku: 'REPLACE_TUE_EARLY_SKU' },
-                late:  { itemId: 'REPLACE_TUE_LATE_ID',  sku: 'REPLACE_TUE_LATE_SKU' }
+                day:   { itemId: '694a6c247d1440728b1e3445', sku: 'SQ2208830' },
+                early: { itemId: '694a6d321855174ce4cac800', sku: 'SQ0787076' },
+                late:  { itemId: '694a6d1bd3e8ab13f660beec', sku: 'SQ8084671' }
             },
             'wed': {
-                day:   { itemId: 'REPLACE_WED_DAY_ID',   sku: 'REPLACE_WED_DAY_SKU' },
-                early: { itemId: 'REPLACE_WED_EARLY_ID', sku: 'REPLACE_WED_EARLY_SKU' },
-                late:  { itemId: 'REPLACE_WED_LATE_ID',  sku: 'REPLACE_WED_LATE_SKU' }
+                day:   { itemId: '694a6c4227568f4dfa8df43d', sku: 'SQ3018152' },
+                early: { itemId: '694a6d68c6e4921388a40d1d', sku: 'SQ0212251' },
+                late:  { itemId: '694a6d8938df3318c14241c7', sku: 'SQ2165772' }
             },
             'thu': {
-                day:   { itemId: 'REPLACE_THU_DAY_ID',   sku: 'REPLACE_THU_DAY_SKU' },
-                early: { itemId: 'REPLACE_THU_EARLY_ID', sku: 'REPLACE_THU_EARLY_SKU' },
-                late:  { itemId: 'REPLACE_THU_LATE_ID',  sku: 'REPLACE_THU_LATE_SKU' }
+                day:   { itemId: '694a6c62c12b9163f6cbea49', sku: 'SQ0256674' },
+                early: { itemId: '694a6dad0fde7c5e7084eef7', sku: 'SQ3611818' },
+                late:  { itemId: '694a6dbb365b820b77ed28ae', sku: 'SQ1072526' }
             },
             'fri': {
-                day:   { itemId: 'REPLACE_FRI_DAY_ID',   sku: 'REPLACE_FRI_DAY_SKU' },
-                early: { itemId: 'REPLACE_FRI_EARLY_ID', sku: 'REPLACE_FRI_EARLY_SKU' },
-                late:  { itemId: 'REPLACE_FRI_LATE_ID',  sku: 'REPLACE_FRI_LATE_SKU' }
+                day:   { itemId: '694a6c7ba185482cbd2fd430', sku: 'SQ0808587' },
+                early: { itemId: '694a6dce10b6ea6a91c11ef6', sku: 'SQ3758766' },
+                late:  { itemId: '694a6ddc5faf3b5f5ea148b6', sku: 'SQ5247453' }
             }
         };
 
