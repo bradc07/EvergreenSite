@@ -627,12 +627,12 @@
         //
         // FIXES APPLIED:
         // 1. Fixed CSRF token handling - uses URL parameter (Squarespace standard)
-        // 2. Using Variant IDs (the original IDs were correct!)
-        // 3. Fixed payload format: {itemId: 'UUID', quantity: 1}
-        // 4. The issue was payload format, not the IDs
+        // 2. Using Product IDs + SKUs (both required!)
+        // 3. Fixed payload format: {itemId: productId, sku: sku, quantity: 1, additionalFields: "null"}
+        // 4. The payload must match exact format from working Add to Cart button
         // 5. Added comprehensive error messages for debugging
         // 6. Added progress indicator showing X/Y items being added
-        // 7. All 15 Variant IDs verified from Squarespace Products dashboard
+        // 7. All 15 Product IDs and SKUs verified from Squarespace dashboard
         //
         // DEBUGGING:
         // - Open browser console to see diagnostic messages
@@ -642,33 +642,33 @@
         // - 403 errors indicate CSRF/security issues
         //
         // ==========================================
-        // PRODUCT CONFIGURATION (Using Variant IDs)
+        // PRODUCT CONFIGURATION (Product ID + SKU)
         // ==========================================
         const PRODUCTS = {
             'mon': {
-                day:   '52f2cb06-7f21-4d2e-8dba-604ebc173df5',  // Monday 16th February '26
-                early: '88dd6573-010e-4e7b-abf7-0788a29cd35d',  // Early Drop Off - Monday
-                late:  '7728f965-a8a0-405a-9ee7-2a76cd9cb98d'   // Late Pick Up - Monday
+                day:   { productId: '694a6beb50bae40ae71ed7c6', sku: 'SQ6231165' },  // Monday 16th
+                early: { productId: '694a6cc69b26257598d27ca', sku: 'SQ3465636' },    // Early Drop Off - Monday
+                late:  { productId: '694a6cf9a6695e555789c525', sku: 'SQ8505567' }    // Late Pick Up - Monday
             },
             'tue': {
-                day:   '1e866658-e824-4e92-857d-cfba6bac544b',  // Tuesday 17th February '26
-                early: '22086984-940f-4e6e-b156-951472c0c81e',  // Early Drop Off - Tuesday
-                late:  'c0bc4f15-0f5e-439a-92f3-cd7fd1012761'   // Late Pick Up - Tuesday
+                day:   { productId: '694a6c247d140728b1e3445', sku: 'SQ2208830' },  // Tuesday 17th
+                early: { productId: '694a6d32185517dce4cac800', sku: 'SQ0787076' },  // Early Drop Off - Tuesday
+                late:  { productId: '694a6d11bd3e8ab13f660beec', sku: 'SQ8084671' }  // Late Pick Up - Tuesday
             },
             'wed': {
-                day:   '532ae543-2216-468f-a1eb-cbd1935b82eb',  // Wednesday 18th February '26
-                early: '9b5f0586-d6ae-4460-980f-d38f5c075ba7',  // Early Drop Off - Wednesday
-                late:  '001b3c75-8c73-406b-8161-b543e4617e3c'   // Late Pick Up - Wednesday
+                day:   { productId: '694a6c42275698f4fa8df43d', sku: 'SQ3018152' },  // Wednesday 18th
+                early: { productId: '694a6d68c6e4921388a40d1d', sku: 'SQ0212251' },  // Early Drop Off - Wednesday
+                late:  { productId: '694a6d8958d03318c1e34fc7', sku: 'SQ2165772' }   // Late Pick Up - Wednesday
             },
             'thu': {
-                day:   '4ec62765-c175-41b1-880a-a0492e69ab44',  // Thursday 19th February '26
-                early: '86958053-1e23-4052-ae76-9e6d6d34ba30',  // Early Drop Off - Thursday
-                late:  'b70451c7-6e6d-4277-b843-f5c61a2e3ac2'   // Late Pick Up - Thursday
+                day:   { productId: '694a6c20c212b91e8f6edbae49', sku: 'SQ0256674' },  // Thursday 19th
+                early: { productId: '694a6dad0fde7c5e7084eef7', sku: 'SQ3611816' },    // Early Drop Off - Thursday
+                late:  { productId: '694a6dbb3650b20b77ed28ae', sku: 'SQ1072526' }     // Late Pick Up - Thursday
             },
             'fri': {
-                day:   '916b044c-a8e1-4506-91ef-340a31565eb6',  // Friday 20th February '26
-                early: '37a31455-2e42-4c6f-8cdc-04c55d2c3872',  // Early Drop Off - Friday
-                late:  '2b9bbb04-058a-494a-8004-a4cdb39579cd'   // Late Pick Up - Friday
+                day:   { productId: '694a6c7ba185482cbd2fd430', sku: 'SQ0808587' },  // Friday 20th
+                early: { productId: '694a6dce10b6ea6a91c11ef6', sku: 'SQ3758766' },  // Early Drop Off - Friday
+                late:  { productId: '694a6ddc5faf3b5f5ea148b6', sku: 'SQ5247453' }   // Late Pick Up - Friday
             }
         };
 
@@ -766,7 +766,7 @@
                 return null;
             }
 
-            async function addOneItemToSquarespaceCart(variantId) {
+            async function addOneItemToSquarespaceCart(product) {
                 const crumb = getSquarespaceCrumb();
 
                 // Build URL with crumb - required for Squarespace
@@ -775,10 +775,12 @@
                     url += `?crumb=${encodeURIComponent(crumb)}`;
                 }
 
-                // Using Variant ID-based cart add (itemId expects Variant ID)
+                // Match exact format from working Add to Cart button
                 const payload = {
-                    itemId: variantId,
-                    quantity: 1
+                    itemId: product.productId,
+                    sku: product.sku,
+                    quantity: 1,
+                    additionalFields: "null"  // String "null", not actual null
                 };
 
                 const headers = {
@@ -802,7 +804,8 @@
                     console.log('Status:', res.status, res.statusText);
                     console.log('URL:', url);
                     console.log('Payload sent:', payload);
-                    console.log('Variant ID:', variantId);
+                    console.log('Product ID:', product.productId);
+                    console.log('SKU:', product.sku);
                     console.log('Crumb available:', !!crumb);
                     console.log('Response:', data);
                     console.groupEnd();
@@ -813,7 +816,7 @@
                     throw err;
                 }
 
-                console.log('✓ Added item to cart (Variant ID):', variantId);
+                console.log('✓ Added item to cart:', product.sku, '(' + product.productId + ')');
                 return data;
             }
 
@@ -849,12 +852,12 @@
                     return;
                 }
 
-                console.log('🛒 Adding items to cart (Variant IDs):', itemsToAdd);
+                console.log('🛒 Adding items to cart:', itemsToAdd.map(p => p.sku));
 
                 try {
                     let successCount = 0;
-                    for (const variantId of itemsToAdd) {
-                        await addOneItemToSquarespaceCart(variantId);
+                    for (const product of itemsToAdd) {
+                        await addOneItemToSquarespaceCart(product);
                         successCount++;
                         addToCartBtn.innerHTML = `<span>Adding ${successCount}/${itemsToAdd.length}...</span>`;
                         await new Promise(r => setTimeout(r, 350));
@@ -870,7 +873,7 @@
 
                     let errorMessage = 'Unable to add to cart. ';
                     if (error.status === 404) {
-                        errorMessage += 'Product not found (404). Please check Variant IDs in Squarespace.';
+                        errorMessage += 'Product not found (404). Please check Product IDs in Squarespace.';
                     } else if (error.status === 403) {
                         errorMessage += 'Security error (403). CSRF token issue.';
                     } else if (error.code === 'NO_CRUMB') {
