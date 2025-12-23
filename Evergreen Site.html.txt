@@ -795,49 +795,91 @@
                 return data;
             }
 
-            // Day names for display
-            const DAY_NAMES = {
-                'mon': 'Monday 16th Feb',
-                'tue': 'Tuesday 17th Feb',
-                'wed': 'Wednesday 18th Feb',
-                'thu': 'Thursday 19th Feb',
-                'fri': 'Friday 20th Feb'
+            // Day names and product URLs
+            const DAY_CONFIG = {
+                'mon': {
+                    name: 'Monday 16th Feb',
+                    dayUrl: '/bookings/p/monday16thfebruary26',
+                    earlyUrl: '/bookings/p/early-drop-off-monday-16th-february-26',
+                    lateUrl: '/bookings/p/late-pick-up-monday-16th-february-26'
+                },
+                'tue': {
+                    name: 'Tuesday 17th Feb',
+                    dayUrl: '/bookings/p/tuesday17thfebruary26',
+                    earlyUrl: '/bookings/p/early-drop-off-tuesday-17th-february-26',
+                    lateUrl: '/bookings/p/late-pick-up-tuesday-17th-february-26'
+                },
+                'wed': {
+                    name: 'Wednesday 18th Feb',
+                    dayUrl: '/bookings/p/wednesday18thfebruary26',
+                    earlyUrl: '/bookings/p/early-drop-off-wednesday-18th-february-26',
+                    lateUrl: '/bookings/p/late-pick-up-wednesday-18th-february-26'
+                },
+                'thu': {
+                    name: 'Thursday 19th Feb',
+                    dayUrl: '/bookings/p/thursday19thfebruary26',
+                    earlyUrl: '/bookings/p/early-drop-off-thursday-19th-february-26',
+                    lateUrl: '/bookings/p/late-pick-up-thursday-19th-february-26'
+                },
+                'fri': {
+                    name: 'Friday 20th Feb',
+                    dayUrl: '/bookings/p/friday20thfebruary26',
+                    earlyUrl: '/bookings/p/early-drop-off-friday-20th-february-26',
+                    lateUrl: '/bookings/p/late-pick-up-friday-20th-february-26'
+                }
             };
 
             function handleAddToCart() {
-                // Build summary of selected items
+                // Build summary of selected items with URLs
                 const selectedItems = [];
 
                 dayCheckboxes.forEach(checkbox => {
                     if (!checkbox.checked) return;
 
                     const dayKey = checkbox.closest('[data-day]').dataset.day;
-                    const dayName = DAY_NAMES[dayKey];
+                    const config = DAY_CONFIG[dayKey];
 
                     // Add day
-                    selectedItems.push({ type: 'day', name: dayName, price: 72 });
+                    selectedItems.push({
+                        name: config.name,
+                        price: 72,
+                        url: config.dayUrl
+                    });
 
                     // Check for early
                     const earlyBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="early"]`);
                     if (earlyBox && earlyBox.checked) {
-                        selectedItems.push({ type: 'early', name: `Early Drop-off - ${dayName}`, price: 12 });
+                        selectedItems.push({
+                            name: `Early Drop-off - ${config.name}`,
+                            price: 12,
+                            url: config.earlyUrl
+                        });
                     }
 
                     // Check for late
                     const lateBox = document.querySelector(`.addon-checkbox[data-day="${dayKey}"][data-type="late"]`);
                     if (lateBox && lateBox.checked) {
-                        selectedItems.push({ type: 'late', name: `Late Pick-up - ${dayName}`, price: 18 });
+                        selectedItems.push({
+                            name: `Late Pick-up - ${config.name}`,
+                            price: 18,
+                            url: config.lateUrl
+                        });
                     }
                 });
 
                 if (selectedItems.length === 0) return;
 
-                // Build modal HTML
+                // Build modal HTML with clickable links
                 const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-                const itemsHTML = selectedItems.map(item =>
-                    `<li class="flex justify-between py-2 border-b border-stone-100">
-                        <span class="text-stone-700">${item.name}</span>
-                        <span class="font-medium">£${item.price}</span>
+                const itemsHTML = selectedItems.map((item, index) =>
+                    `<li class="flex items-center justify-between py-3 ${index < selectedItems.length - 1 ? 'border-b border-stone-100' : ''}">
+                        <div class="flex-1">
+                            <span class="text-stone-700 text-sm">${item.name}</span>
+                            <span class="text-stone-400 text-sm ml-2">£${item.price}</span>
+                        </div>
+                        <a href="${item.url}" target="_blank" class="bg-emerald-700 text-white text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-emerald-800 transition">
+                            Add to Cart
+                        </a>
                     </li>`
                 ).join('');
 
@@ -846,18 +888,18 @@
                         <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-auto shadow-2xl">
                             <div class="p-6 border-b border-stone-100">
                                 <h3 class="text-xl font-semibold text-stone-900">Your Selection</h3>
-                                <p class="text-stone-500 text-sm mt-1">Please add these items from our booking page</p>
+                                <p class="text-stone-500 text-sm mt-1">Click each item to add to your cart</p>
                             </div>
                             <div class="p-6">
-                                <ul class="space-y-1 mb-4">${itemsHTML}</ul>
-                                <div class="flex justify-between text-lg font-bold pt-4 border-t border-stone-200">
+                                <ul class="space-y-1">${itemsHTML}</ul>
+                                <div class="flex justify-between text-lg font-bold pt-4 mt-4 border-t border-stone-200">
                                     <span>Total</span>
                                     <span class="text-emerald-700">£${total}</span>
                                 </div>
                             </div>
                             <div class="p-6 bg-stone-50 rounded-b-2xl space-y-3">
-                                <a href="/bookings" class="block w-full bg-emerald-700 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-800 transition">
-                                    Continue to Checkout →
+                                <a href="/cart" class="block w-full bg-emerald-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-950 transition">
+                                    View Cart & Checkout →
                                 </a>
                                 <button onclick="document.getElementById('booking-modal').remove()" class="block w-full text-stone-500 text-center py-2 text-sm hover:text-stone-700">
                                     Close
